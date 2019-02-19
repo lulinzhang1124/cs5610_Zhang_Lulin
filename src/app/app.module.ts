@@ -4,8 +4,6 @@ import { FormsModule } from '@angular/forms';
 // import { HttpModule } from '@angular/http';
 
 
-
-// import { AppRouting } from './app.routing';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/user/login/login.component';
 import { ProfileComponent } from './components/user/profile/profile.component';
