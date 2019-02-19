@@ -12,6 +12,7 @@ import {User} from '../../../models/user.model.client';
 export class RegisterComponent implements OnInit {
   @ViewChild('f') ResigterForm: NgForm;
   user: User = new User(undefined, undefined, undefined);
+  v_password: string;
   errorFlag: boolean;
   errorMsg = 'Password mis-matching!';
 
