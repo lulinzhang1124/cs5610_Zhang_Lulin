@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Point static path to dist -- For building -- REMOVE
-// app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'dist')));
 
 // CORS
 app.use(function(req, res, next) {
@@ -20,7 +20,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-const port = process.env.PORT || '3200';
+const port = process.env.PORT || '8080';
 app.set('port', port);
 
 
