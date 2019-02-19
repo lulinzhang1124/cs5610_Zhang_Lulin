@@ -40,15 +40,15 @@
       <input [(ngModel)]="user.lastName" type="text" class="form-control" placeholder="Green">
     </div>
   <button class="btn btn-primary btn-block"
-     routerLink="{{root}}/user/{{user._id}}/website">Websites</button>
+     routerLink="/user/{{user._id}}/website">Websites</button>
   <button class="btn btn-danger  btn-block"
-          routerLink="{{root}}/login" routerLinkActive="active">Logout</button>
+          routerLink="/login" routerLinkActive="active">Logout</button>
 
 </div>
 
 <nav class="navbar fixed-bottom cl-blue-navbar">
   <div class="container-fluid justify-content-end">
-    <a href="#" routerLink="{{root}}/user/{{user._id}}" class="navbar-brand cl-text-white cl-icon-padding">
+    <a href="#" routerLink="/user/{{user._id}}" class="navbar-brand cl-text-white cl-icon-padding">
       <span class="fas fa-user"></span>
     </a>
   </div>
