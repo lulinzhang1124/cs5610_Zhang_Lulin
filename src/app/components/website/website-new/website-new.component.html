@@ -2,24 +2,24 @@
 <nav class="navbar fixed-top cl-blue-navbar">
   <div class="row container-fluid">
     <div class="col-sm-4 d-none d-sm-block">
-      <a routerLink="{{root}}/user/{{user._id}}/website" class="navbar-brand">
+      <a routerLink="/user/{{user._id}}/website" class="navbar-brand">
         <i class="fas fa-angle-left cl-text-white"></i>
       </a>
       <h1 class="cl-text-white navbar-brand cl-text-bold" href="#">
         Websites
       </h1>
-      <a  routerLink="{{root}}/user/{{user._id}}/website/new" class="navbar-brand float-right cl-icon-padding">
+      <a  routerLink="/user/{{user._id}}/website/new" class="navbar-brand float-right cl-icon-padding">
         <i class="fas fa-plus cl-text-white"></i>
       </a>
     </div>
     <div class="row col-sm-8">
-      <a routerLink="{{root}}/user/{{user._id}}/website" class="navbar-brand d-block d-sm-nonefloat-left">
+      <a routerLink="/user/{{user._id}}/website" class="navbar-brand d-block d-sm-nonefloat-left">
         <i class="fas fa-angle-left cl-text-white"></i>
       </a>
       <h1 class="cl-text-white navbar-brand cl-text-bold float-left">
         New Website
       </h1>
-      <a routerLink="{{root}}/user/{{user._id}}/website" (click)="newWebsite(newWeb)"
+      <a routerLink="/user/{{user._id}}/website" (click)="newWebsite(newWeb)"
          class="navbar-brand cl-text-white ml-auto">
         <i class="fas fa-check cl-text-white"></i>
       </a>
@@ -32,8 +32,8 @@
     <ul class="websites">
       <li *ngFor="let website of websites"
           class="list-group-item cl-list-item-borderless d-flex justify-content-between">
-        <a routerLink="{{root}}/user/{{user._id}}/website/{{website._id}}/page" class="cl-text-blue">{{website.name}}</a>
-        <a routerLink="{{root}}/user/{{user._id}}/website/{{website._id}}" class="cl-text-blue"><span class="fas fa-cog"></span></a>
+        <a routerLink="/user/{{user._id}}/website/{{website._id}}/page" class="cl-text-blue">{{website.name}}</a>
+        <a routerLink="/user/{{user._id}}/website/{{website._id}}" class="cl-text-blue"><span class="fas fa-cog"></span></a>
       </li>
     </ul>
   </div>
@@ -54,7 +54,7 @@
 
 <nav class="navbar fixed-bottom cl-blue-navbar">
   <div class="container-fluid justify-content-end">
-    <a routerLink="{{root}}/user/{{user._id}}" class="navbar-brand cl-icon-padding">
+    <a routerLink="/user/{{user._id}}" class="navbar-brand cl-icon-padding">
       <span class="fas fa-user cl-text-white"></span>
     </a>
   </div>

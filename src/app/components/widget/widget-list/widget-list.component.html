@@ -2,7 +2,7 @@
 <nav class="navbar fixed-top cl-grey-navbar">
   <div class="container-fluid">
     <div>
-      <a routerLink="{{root}}/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget"
+      <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget"
          class="navbar-brand cl-text-black cl-icon-padding">
         <i class="fas fa-angle-left"></i>
       </a>
@@ -10,7 +10,7 @@
         Widgets
       </h1>
     </div>
-    <a routerLink="{{root}}/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new"
+    <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new"
        class="navbar-brand cl-text-black float-right cl-icon-padding">
       <i class="fas fa-plus"></i>
     </a>
@@ -22,7 +22,7 @@
     <div *ngIf="widget.widgetType === 'HEADING'">
       <div class="float-right">
         <a class="float-right cl-text-blue fa fa-bars"></a>
-        <a routerLink="{{root}}/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}"
+        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}"
            class="fa fa-cog cl-text-blue"></a>
       </div>
       <font size="{{widget.size}}"> {{widget.text}}</font>
@@ -31,7 +31,7 @@
     <div *ngIf="widget.widgetType === 'IMAGE'">
       <div class="float-right">
         <a class="float-right cl-text-blue fa fa-bars"></a>
-        <a routerLink="{{root}}/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}"
+        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}"
            class="fa fa-cog cl-text-blue"></a>
       </div>
       <img class="img-responsive img-rounded cl-widget-images" src="{{widget.url}}">
@@ -41,7 +41,7 @@
       {{getSantizeUrl(widget.url)}}
       <div class="float-right">
         <a class="float-right cl-text-blue fa fa-bars"></a>
-        <a routerLink="{{root}}/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}"
+        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}"
            class="fa fa-cog cl-text-blue"></a>
       </div>
       <div class="embed-responsive embed-responsive-16by9">
@@ -62,7 +62,7 @@
           <i class="fas fa-eye cl-text-grey"></i>
         </a>
       </div>
-      <a routerLink="{{root}}/user/{{userId}}" class="navbar-brand cl-icon-padding cl-text-blue float-right">
+      <a routerLink="/user/{{userId}}" class="navbar-brand cl-icon-padding cl-text-blue float-right">
         <i class="fas fa-user cl-text-blue"></i>
       </a>
     </div>

@@ -3,19 +3,19 @@
   <div class="row container-fluid">
     <div class="col-sm-4 d-none d-sm-block">
 
-      <a  routerLink="{{root}}/user/{{user._id}}/website" class="navbar-brand">
+      <a  routerLink="/user/{{user._id}}/website" class="navbar-brand">
         <i class="fas fa-angle-left cl-text-white"></i>
       </a>
       <h1 class="cl-text-white navbar-brand cl-text-bold">
         Websites
       </h1>
-      <a routerLink="{{root}}/user/{{user._id}}/website/new" class="navbar-brand cl-text-white float-right cl-icon-padding">
+      <a routerLink="/user/{{user._id}}/website/new" class="navbar-brand cl-text-white float-right cl-icon-padding">
         <i class="fas fa-plus cl-text-white"></i>
       </a>
     </div>
 
     <div class="row col-sm-8">
-      <a  routerLink="{{root}}/user/{{user._id}}/website" class="navbar-brand d-block d-sm-none">
+      <a  routerLink="/user/{{user._id}}/website" class="navbar-brand d-block d-sm-none">
         <i class="fas fa-angle-left cl-text-white"></i>
       </a>
       <h1 class="cl-text-white navbar-brand cl-text-bold">
@@ -35,8 +35,8 @@
       <ul class="websites">
         <li *ngFor="let website of websites"
             class="list-group-item cl-list-item-borderless d-flex justify-content-between">
-          <a routerLink="{{root}}/user/{{user._id}}/website/{{website._id}}/page" class="cl-text-blue">{{website.name}}</a>
-          <a routerLink="{{root}}/user/{{user._id}}/website/{{website._id}}" class="cl-text-blue"><span class="fas fa-cog"></span></a>
+          <a routerLink="/user/{{user._id}}/website/{{website._id}}/page" class="cl-text-blue">{{website.name}}</a>
+          <a routerLink="/user/{{user._id}}/website/{{website._id}}" class="cl-text-blue"><span class="fas fa-cog"></span></a>
         </li>
       </ul>
     </ul>
@@ -60,7 +60,7 @@
 
 <nav class="navbar fixed-bottom cl-blue-navbar">
   <div class="container-fluid justify-content-end">
-    <a  routerLink="{{root}}/user/{{user._id}}" class="navbar-brand cl-text-white cl-icon-padding">
+    <a  routerLink="/user/{{user._id}}" class="navbar-brand cl-text-white cl-icon-padding">
       <span class="fas fa-user"></span>
     </a>
   </div>

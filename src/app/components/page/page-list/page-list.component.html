@@ -2,7 +2,7 @@
 <nav class="navbar fixed-top cl-grey-navbar">
   <div class="container-fluid">
     <div>
-      <a routerLink="{{root}}/user/{{user._id}}/website/{{website._id}}"
+      <a routerLink="/user/{{user._id}}/website/{{website._id}}"
          class="navbar-brand cl-text-black cl-icon-padding">
         <i class="fas fa-angle-left"></i>
       </a>
@@ -10,7 +10,7 @@
         Pages
       </h1>
     </div>
-    <a routerLink="{{root}}/user/{{user._id}}/website/{{website._id}}/page/new"
+    <a routerLink="/user/{{user._id}}/website/{{website._id}}/page/new"
        class="navbar-brand cl-text-black float-right cl-icon-padding">
       <i class="fas fa-plus"></i>
     </a>
@@ -22,9 +22,9 @@
   <ul class="pages">
     <li *ngFor="let page of pages"
         class="list-group-item cl-list-item-borderless d-flex justify-content-between">
-      <a routerLink="{{root}}/user/{{user._id}}/website/{{website._id}}/page/{{page._id}}/widget"
+      <a routerLink="/user/{{user._id}}/website/{{website._id}}/page/{{page._id}}/widget"
          class="cl-text-blue">{{page.name}}</a>
-      <a routerLink="{{root}}/user/{{user._id}}/website/{{website._id}}/page/{{page._id}}"
+      <a routerLink="/user/{{user._id}}/website/{{website._id}}/page/{{page._id}}"
          class="cl-text-blue"><span class="fas fa-cog cl-text-blue"></span></a>
     </li>
   </ul>
@@ -32,7 +32,7 @@
 
 <nav class="navbar fixed-bottom cl-grey-navbar">
   <div class="container-fluid justify-content-end">
-    <a routerLink="{{root}}/user/{{user._id}}" class="navbar-brand cl-icon-padding">
+    <a routerLink="/user/{{user._id}}" class="navbar-brand cl-icon-padding">
       <span class="fas fa-user cl-text-blue"></span>
     </a>
   </div>
