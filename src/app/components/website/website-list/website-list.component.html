@@ -1,0 +1,32 @@
+<body>
+<nav class="navbar fixed-top cl-blue-navbar">
+  <div class="container-fluid">
+    <div class="float-left">
+      <a routerLink="{{root}}/user/{{user._id}}" class="navbar-brand cl-icon-padding cl-text-white">
+        <a  class="fas fa-angle-left cl-text-white"></a>
+      </a>
+      <h1 class="cl-text-white navbar-brand cl-text-bold" href="#">
+        Websites
+      </h1>
+    </div>
+    <a routerLink="{{root}}/user/{{user._id}}/website/new" class="navbar-brand float-right">
+      <i class="fas fa-plus cl-text-white"></i>
+    </a>
+  </div>
+</nav>
+<ul class="websites">
+  <li *ngFor="let website of websites"
+      class="list-group-item cl-list-item-borderless d-flex justify-content-between">
+    <a routerLink="{{root}}/user/{{user._id}}/website/{{website._id}}/page" class="cl-text-blue">{{website.name}}</a>
+    <a routerLink="{{root}}/user/{{user._id}}/website/{{website._id}}" class="cl-text-blue"><span class="fas fa-cog cl-text-blue"></span></a>
+  </li>
+</ul>
+
+<nav class="navbar fixed-bottom cl-blue-navbar">
+  <div class="container-fluid justify-content-end">
+    <a routerLink="{{root}}/user/{{user._id}}" class="navbar-brand cl-icon-padding">
+      <span class="fas fa-user cl-text-white"></span>
+    </a>
+  </div>
+</nav>
+</body>

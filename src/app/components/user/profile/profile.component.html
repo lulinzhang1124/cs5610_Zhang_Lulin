@@ -1,0 +1,57 @@
+<!--<div *ngIf="errorFlag"-->
+     <!--class="alert alert-danger">-->
+  <!--{{errorMsg}}-->
+<!--</div>-->
+
+<body>
+<nav class="navbar fixed-top cl-blue-navbar">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="cl-text-white navbar-brand cl-text-bold" href="#">
+        Profile
+      </a>
+    </div>
+
+    <div class="navibar-header">
+      <a href="#" class="navbar-brand cl-text-white ml-auto">
+        <i (click)="updateUser(user)" class="fas fa-check"></i>
+      </a>
+    </div>
+
+  </div>
+</nav>
+
+<div class="container">
+
+    <div class="form-group cl-text-bold">
+      <label>Username</label>
+      <input [ngModel]="user.username" type="text" class="form-control" placeholder="alice">
+    </div>
+    <div class="form-group cl-text-bold">
+      <label>Email address</label>
+      <input type="email" class="form-control" placeholder="abc@gmail.com">
+    </div>
+    <div class="form-group cl-text-bold">
+      <label>First Name</label>
+      <input [ngModel]="user.firstName" type="text" class="form-control" placeholder="Jose">
+    </div>
+    <div class="form-group cl-text-bold">
+      <label>Last Name</label>
+      <input [(ngModel)]="user.lastName" type="text" class="form-control" placeholder="Green">
+    </div>
+  <button class="btn btn-primary btn-block"
+     routerLink="{{root}}/user/{{user._id}}/website">Websites</button>
+  <button class="btn btn-danger  btn-block"
+          routerLink="{{root}}/login" routerLinkActive="active">Logout</button>
+
+</div>
+
+<nav class="navbar fixed-bottom cl-blue-navbar">
+  <div class="container-fluid justify-content-end">
+    <a href="#" routerLink="{{root}}/user/{{user._id}}" class="navbar-brand cl-text-white cl-icon-padding">
+      <span class="fas fa-user"></span>
+    </a>
+  </div>
+</nav>
+
+</body>

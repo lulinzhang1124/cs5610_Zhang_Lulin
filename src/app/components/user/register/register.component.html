@@ -1,0 +1,28 @@
+<script src="../../../services/user.service.client.ts"></script>
+<div *ngIf="errorFlag"
+     class="alert alert-danger">
+  {{errorMsg}}
+</div>
+
+<body>
+<div class="container">
+  <h1>Register</h1>
+  <!--<form (ngSubmit)="register(v_password)" #f="ngForm">-->
+  <input [value]="user?.username" name="username" type="text" class="form-control" placeholder="username"/>
+    <!--<span class="help-block" *ngIf="!user.username.valid && user.username.touched">-->
+    <!--Please enter username!-->
+    <!--</span>-->
+  <input [value]="user?.password" name="password" type="password"
+         class="form-control" placeholder="password"/>
+  <input [ngModel]="v_password" name="v_password" type="password" class="form-control"
+         placeholder="verify password"
+         />
+    <!--<span class="help-block" *ngIf="v_password.touched && password!== v_password">-->
+      <!--Password does not match-->
+      <!--</span>-->
+  <button (click)="register(v_password)" class="btn btn-primary btn-block"
+          >Register</button>
+
+    <button routerLink="{{root}}/login" class="btn btn-danger  btn-block">Cancel</button>
+</div>
+</body>
