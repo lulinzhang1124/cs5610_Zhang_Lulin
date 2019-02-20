@@ -14,6 +14,8 @@ export class WebsiteNewComponent implements OnInit {
   user: User;
   websites: Website[];
   newWeb: Website;
+  newWebsiteName: string;
+  newWebsiteDescription: string;
   errorFlag: boolean;
   errorMsg = 'Cannot create website !';
 
@@ -29,16 +31,10 @@ export class WebsiteNewComponent implements OnInit {
       console.log('website-new, user_id =' + this.user._id);
     });
   }
-  newWebsite(web: Website) {
-    console.log(web);
-    const website = this.websiteService.createWebsite(this.user._id, this.newWeb);
-    // this.route.url([['/user/', user._id]]);
-    if (website) {
-      this.errorFlag = false;
-      this.router.navigate((['/user', this.user._id, 'website']));
-    } else {
-      this.errorFlag = true;
-    }
+  newWebsite() {
+    this.newWeb = {_id: '', name: this.newWebsiteName, developerId: this.user._id, description: this.newWebsiteDescription};
+    this.websiteService.createWebsite(this.user._id, this.newWeb);
+    this.router.navigate((['/user', this.user._id, 'website']));
   }
 
 }

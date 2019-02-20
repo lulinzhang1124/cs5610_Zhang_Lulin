@@ -19,7 +19,7 @@
       <h1 class="cl-text-white navbar-brand cl-text-bold float-left">
         New Website
       </h1>
-      <a routerLink="/user/{{user._id}}/website" (click)="newWebsite(newWeb)"
+      <a routerLink="/user/{{user._id}}/website" (click)="newWebsite()"
          class="navbar-brand cl-text-white ml-auto">
         <i class="fas fa-check cl-text-white"></i>
       </a>
@@ -42,11 +42,11 @@
     <form class="cl-text-padding">
       <div class="form-group cl-text-bold">
         <label for="website-name">Name</label>
-        <input [ngModel]="newWeb?.name" name="name" type="text" id="website-name" class="form-control" placeholder="Name">
+        <input [(ngModel)]="newWebsiteName" name="name" type="text" id="website-name" class="form-control" placeholder="Name">
       </div>
       <div class="form-group cl-text-bold">
         <label for="description">Description</label>
-        <textarea [ngModel]="newWeb?.description" name="description" id="description" class="form-control" rows="5" placeholder="Description"></textarea>
+        <textarea [(ngModel)]="newWebsiteDescription" name="description" id="description" class="form-control" rows="5" placeholder="Description"></textarea>
       </div>
     </form>
   </div>

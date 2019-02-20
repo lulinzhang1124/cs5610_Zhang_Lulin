@@ -2,7 +2,7 @@
 <nav class="navbar fixed-top cl-grey-navbar">
   <div class="container-fluid">
     <div>
-      <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget"
+      <a routerLink="/user/{{userId}}/website/{{websiteId}}/page"
          class="navbar-brand cl-text-black cl-icon-padding">
         <i class="fas fa-angle-left"></i>
       </a>
@@ -22,7 +22,7 @@
     <div *ngIf="widget.widgetType === 'HEADING'">
       <div class="float-right">
         <a class="float-right cl-text-blue fa fa-bars"></a>
-        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}"
+        <a routerLink="{{widget._id}}"
            class="fa fa-cog cl-text-blue"></a>
       </div>
       <font size="{{widget.size}}"> {{widget.text}}</font>
@@ -31,7 +31,7 @@
     <div *ngIf="widget.widgetType === 'IMAGE'">
       <div class="float-right">
         <a class="float-right cl-text-blue fa fa-bars"></a>
-        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}"
+        <a routerLink="{{widget._id}}"
            class="fa fa-cog cl-text-blue"></a>
       </div>
       <img class="img-responsive img-rounded cl-widget-images" src="{{widget.url}}">

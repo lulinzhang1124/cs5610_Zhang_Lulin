@@ -9,9 +9,11 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./page-new.component.css']
 })
 export class PageNewComponent implements OnInit {
-  page: Page;
+  newpage: Page;
   userId: string;
   websiteId: string;
+  newPageName: string;
+  newPageDescrption: string;
 
   constructor(private  pageService: PageService,
               private route: ActivatedRoute,
@@ -19,18 +21,15 @@ export class PageNewComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      // this.user = this.userService.findUserById(params['uid']);
-      // this.website = this.websiteService.findWebsiteById(params['wid']);
       this.userId = params['uid'];
       this.websiteId = params['wid'];
       console.log('page-new, user_id = ' + this.userId + ', website id = ' + this.websiteId);
     });
   }
-  createPage(newpage: Page) {
-    // newpage._id = '1111';
-    // this.page._id = '1111';
-    this.pageService.createPage(this.websiteId, newpage);
-    this.router.navigate((['user', this.userId, 'website', this.websiteId, 'page']));
+  createPage() {
+   this.newpage = new Page('', this.newPageName, this.websiteId, this.newPageDescrption);
+    this.pageService.createPage(this.websiteId, this.newpage);
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
 
 }

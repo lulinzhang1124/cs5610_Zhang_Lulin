@@ -1,4 +1,32 @@
-<app-widget-header *ngIf="widget.widgetType === 'HEADING'"></app-widget-header>
-<app-widget-image *ngIf="widget.widgetType === 'IMAGE'"></app-widget-image>
-<app-widget-youtube *ngIf="widget.widgetType === 'YOUTUBE'"></app-widget-youtube>
+<!--<app-widget-header *ngIf="widget.widgetType === 'HEADING'"></app-widget-header>-->
+<!--<app-widget-image *ngIf="widget.widgetType === 'IMAGE'"></app-widget-image>-->
+<!--<app-widget-youtube *ngIf="widget.widgetType === 'YOUTUBE'"></app-widget-youtube>-->
+
+<div *ngIf="widget !== undefined" [ngSwitch]="widget.widgetType">
+
+  <div *ngSwitchCase="'HEADING'">
+    <app-widget-header></app-widget-header>
+  </div>
+
+  <div *ngSwitchCase="'IMAGE'">
+    <app-widget-image></app-widget-image>
+  </div>
+
+  <div *ngSwitchCase="'YOUTUBE'">
+    <app-widget-youtube></app-widget-youtube>
+  </div>
+
+</div>
+
+<div *ngIf="widget === undefined" [ngSwitch]="widgetChosen">
+  <div *ngSwitchCase="'HEADING'">
+    <app-widget-header></app-widget-header>
+  </div>
+  <div *ngSwitchCase="'IMAGE'">
+    <app-widget-image></app-widget-image>
+  </div>
+  <div *ngSwitchCase="'YOUTUBE'">
+    <app-widget-youtube></app-widget-youtube>
+  </div>
+</div>
 

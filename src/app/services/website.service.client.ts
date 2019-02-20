@@ -17,18 +17,18 @@ export class WebsiteService {
   ];
 
 
-  api = {
-    createWebsite: this.createWebsite,
-    findWebsiteByUser: this.findWebsitesByUser,
-    findWebsiteById: this.findWebsiteById,
-    updateWebsite: this.updateWebsite,
-    deleteWebsite: this.deleteWebsite
-  };
+  // api = {
+  //   createWebsite: this.createWebsite,
+  //   findWebsiteByUser: this.findWebsitesByUser,
+  //   findWebsiteById: this.findWebsiteById,
+  //   updateWebsite: this.updateWebsite,
+  //   deleteWebsite: this.deleteWebsite
+  // };
 
   createWebsite(userId, website: Website) {
     website._id = (new Date()).getTime() + '';
     website.developerId = userId;
-    this.websites.push(new Website(website._id, website.name, website.developerId, website.description));
+    this.websites.push(new Website(website._id, website.name, userId, website.description));
     return website;
   }
 
@@ -45,7 +45,7 @@ export class WebsiteService {
   }
 
   updateWebsite(websiteId, website) {
-    for (const i in this.websites) {
+    for (let i = 0; i < this.websites.length; i++) {
       if (this.websites[i]._id === websiteId) {
         this.websites[i].name = website.name;
         this.websites[i].description = website.description;

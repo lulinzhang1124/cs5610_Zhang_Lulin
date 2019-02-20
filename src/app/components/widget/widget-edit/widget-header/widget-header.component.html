@@ -2,15 +2,14 @@
 <nav class="navbar fixed-top cl-grey-navbar">
   <div class="container-fluid">
     <div>
-      <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget"
-         class="navbar-brand cl-text-black cl-icon-padding">
+      <a [routerLink]="['../']" class="navbar-brand cl-text-black cl-icon-padding">
         <i class="fas fa-angle-left"></i>
       </a>
       <h1 class="navbar-brand cl-text-black cl-text-bold cl-text-grey">
         Widgets Edit
       </h1>
     </div>
-    <a (click)="updateWidget(widget)" class="navbar-brand cl-text-black float-right cl-icon-padding">
+    <a (click)="updateWidget()" class="navbar-brand cl-text-black float-right cl-icon-padding">
       <i class="fas fa-check"></i>
     </a>
   </div>
@@ -18,16 +17,16 @@
 <div class="container">
   <form>
     <div class="form-group">
-      <label for="heading-name">Name</label>
-      <input [ngModel]="widget?._id" name="id" type="text" class="form-control" id="heading-name" placeholder="Name">
+      <label>Name</label>
+      <input [(ngModel)]="name" name="name" type="text" class="form-control" placeholder="Name">
     </div>
     <div class="form-group">
-      <label for="heading-text">Text</label>
-      <input [ngModel]="widget?.text" name="text" type="text" class="form-control" id="heading-text" placeholder="Us Senate Reaches Compromise on Emergency">
+      <label>Text</label>
+      <input [(ngModel)]="widget.text" name="text" type="text" class="form-control" placeholder="Us Senate Reaches Compromise on Emergency">
     </div>
     <div class="form-group">
-      <label for="heading-size">Size</label>
-      <input [ngModel]="widget?.size" name="size" type="number" class="form-control" id="heading-size" placeholder="3">
+      <label>Size</label>
+      <input [(ngModel)]="widget.size" name="size" type="number" class="form-control" placeholder="3">
     </div>
   </form>
   <a class="btn btn-danger  btn-block" (click)="deleteWidget()">Delete</a>

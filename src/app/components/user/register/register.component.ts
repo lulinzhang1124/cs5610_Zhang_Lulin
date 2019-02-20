@@ -10,25 +10,27 @@ import {User} from '../../../models/user.model.client';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  @ViewChild('f') ResigterForm: NgForm;
-  user: User = new User(undefined, undefined, undefined);
-  v_password: string;
-  errorFlag: boolean;
-  errorMsg = 'Password mis-matching!';
+
+  @ViewChild('form') signupForm: NgForm;
+  newUsername: string;
+  newPassword: string;
+  regVerifiedPassword: string;
+  user: User = {_id: '', username: '', password: '', firstName: '', lastName: ''};
 
   constructor(private userService: UserService, private router: Router) { }
-
-  register( v_password: String ) {
-    if (v_password === this.user.password) {
-      this.errorFlag = false;
-      this.userService.createUser(this.user);
-      this.router.navigate((['/user/', this.user._id]));
-    } else {
-      this.errorFlag = true;
-    }
-  }
 
   ngOnInit() {
   }
 
+  register() {
+    this.user.username = this.newUsername;
+    this.user.password = this.newPassword;
+    this.userService.createUser(this.user);
+    const loginUser = this.userService.findUserByCredentials(this.newUsername, this.newPassword);
+    this.router.navigate(['/user', loginUser._id])
+  }
+
+  onCancel() {
+    this.signupForm.reset();
+  }
 }

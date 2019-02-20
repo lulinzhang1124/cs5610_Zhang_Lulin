@@ -1,28 +1,92 @@
-<script src="../../../services/user.service.client.ts"></script>
-<div *ngIf="errorFlag"
-     class="alert alert-danger">
-  {{errorMsg}}
-</div>
+<!--<script src="../../../services/user.service.client.ts"></script>-->
+<!--<div *ngIf="errorFlag"-->
+<!--class="alert alert-danger">-->
+<!--{{errorMsg}}-->
+<!--</div>-->
 
-<body>
+<!--<body>-->
+<!--<div class="container">-->
+<!--<h1>Register</h1>-->
+<!--&lt;!&ndash;<form (ngSubmit)="register(v_password)" #f="ngForm">&ndash;&gt;-->
+<!--<input [ngModel]="username" name="username" type="text" class="form-control" placeholder="username"/>-->
+<!--&lt;!&ndash;<span class="help-block" *ngIf="!user.username.valid && user.username.touched">&ndash;&gt;-->
+<!--&lt;!&ndash;Please enter username!&ndash;&gt;-->
+<!--&lt;!&ndash;</span>&ndash;&gt;-->
+<!--<input [ngModel]="password" name="password" type="password"-->
+<!--class="form-control" placeholder="password"/>-->
+<!--<input [ngModel]="v_password" name="v_password" type="password" class="form-control"-->
+<!--placeholder="verify password"/>-->
+<!--&lt;!&ndash;<span class="alert" *ngIf="v_password.touched && user.password!== v_password">&ndash;&gt;-->
+<!--&lt;!&ndash;Password does not match&ndash;&gt;-->
+<!--&lt;!&ndash;</span>&ndash;&gt;-->
+<!--<button (click)="register(v_password)" class="btn btn-primary btn-block"-->
+<!--&gt;Register</button>-->
+
+<!--<button routerLink="/login" class="btn btn-danger  btn-block">Cancel</button>-->
+<!--</div>-->
+<!--</body>-->
+
+
 <div class="container">
   <h1>Register</h1>
-  <!--<form (ngSubmit)="register(v_password)" #f="ngForm">-->
-  <input [value]="user?.username" name="username" type="text" class="form-control" placeholder="username"/>
-    <!--<span class="help-block" *ngIf="!user.username.valid && user.username.touched">-->
-    <!--Please enter username!-->
-    <!--</span>-->
-  <input [value]="user?.password" name="password" type="password"
-         class="form-control" placeholder="password"/>
-  <input [ngModel]="v_password" name="v_password" type="password" class="form-control"
-         placeholder="verify password"
-         />
-    <!--<span class="help-block" *ngIf="v_password.touched && password!== v_password">-->
-      <!--Password does not match-->
-      <!--</span>-->
-  <button (click)="register(v_password)" class="btn btn-primary btn-block"
-          >Register</button>
-
-    <button routerLink="/login" class="btn btn-danger  btn-block">Cancel</button>
+  <form
+    (ngSubmit)="register()"
+    #form='ngForm'>
+    <div class="form-group">
+      <input
+        type="text"
+        name="username"
+        class="form-control"
+        placeholder="username"
+        [(ngModel)]="newUsername"
+        required
+        #username="ngModel">
+      <span
+        class="help-block"
+        *ngIf="!username.valid && username.touched">
+        Please enter a valid username
+      </span>
+    </div>
+    <div class="form-group">
+      <input
+        type="password"
+        name="password"
+        class="form-control"
+        placeholder="password"
+        [(ngModel)]="newPassword"
+        required
+        #password="ngModel">
+      <span
+        class="help-block"
+        *ngIf="!password.valid && password.touched">
+        Please enter a valid password
+      </span>
+    </div>
+    <div class="form-group">
+      <input
+        type="password"
+        name="verifiedPassword"
+        class="form-control"
+        placeholder="verify password"
+        [(ngModel)]="regVerifiedPassword"
+        required
+        #verifiedPassword="ngModel">
+      <span
+        class="help-block"
+        *ngIf="(newPassword !== regVerifiedPassword || !verifiedPassword.valid) && verifiedPassword.touched">
+        Please enter the same password
+      </span>
+    </div>
+    <div class="form-group">
+      <button
+        class="btn btn-primary btn-block"
+        type="submit"
+        [disabled]="!form.valid || newPassword !== regVerifiedPassword">
+        Register
+      </button>
+    </div>
+    <div class="form-group">
+      <a class="btn btn-danger btn-block" (click)="onCancel()">Cancel</a>
+    </div>
+  </form>
 </div>
-</body>

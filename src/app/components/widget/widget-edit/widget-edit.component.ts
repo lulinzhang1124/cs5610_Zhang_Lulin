@@ -16,6 +16,7 @@ export class WidgetEditComponent implements OnInit {
   websiteId: string;
   pageId: string;
   widgetId: string;
+  widgetChosen: string;
   constructor(private  widgetService: WidgetService,
               private route: ActivatedRoute,
               private router: Router) { }
@@ -25,10 +26,20 @@ export class WidgetEditComponent implements OnInit {
       this.userId = params['uid'];
       this.websiteId = params['wid'];
       this.pageId = params['pid'];
-      this.widget = this.widgetService.findWidgetById(params['wgid']);
-      console.log('widget-edit, user_id = ' + this.userId + ', website id = ' + this.websiteId
-        + ', page id = ' + this.pageId + '.widget id = ' + this.widgetId);
+      this.widgetId = params['wgid'];
+      console.log('widget-edit, user_id = ' + this.userId
+        + ', website id = ' + this.websiteId + ', page id = ' + this.pageId + '.widget id = ' + this.widgetId);
     });
+    this.widgetService.currentWidgetType
+      .subscribe(
+        (widgetChosen: string) => {
+          this.widgetChosen = widgetChosen;
+        }
+      );
+    console.log(this.widgetId);
+    if (this.widgetId !== 'undefined') {
+      this.widget = this.widgetService.findWidgetById(this.widgetId);
+    }
   }
 
 }

@@ -19,14 +19,14 @@ export class UserService {
     {_id: '456', username: 'jannunzi', password: 'jannunzi', firstName: 'Jose',   lastName: 'Annunzi' }
   ];
 
-  api = {
-    'createUser'   : this.createUser,
-    'findUserById' : this.findUserById,
-    'findUserByUsername': this.findUserByUsername,
-    'updateUser': this.updateUser,
-    'deleteUser': this.deleteUser,
-    'findUserByCredentials': this.findUserByCredentials,
-  };
+  // api = {
+  //   'createUser'   : this.createUser,
+  //   'findUserById' : this.findUserById,
+  //   'findUserByUsername': this.findUserByUsername,
+  //   'updateUser': this.updateUser,
+  //   'deleteUser': this.deleteUser,
+  //   'findUserByCredentials': this.findUserByCredentials,
+  // };
 
   createUser(user: User) {
     user._id = Math.random().toString();
@@ -58,6 +58,7 @@ export class UserService {
       if (this.users[i]._id === userId) {
         this.users[i].firstName = user.firstName;
         this.users[i].lastName = user.lastName;
+        this.users[i].username = user.username;
         return this.users[i];
       }
     }

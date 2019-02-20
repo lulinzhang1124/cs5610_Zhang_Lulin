@@ -11,34 +11,33 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./website-edit.component.css']
 })
 export class WebsiteEditComponent implements OnInit {
-  user: User;
+  userId: User;
   websites: Website[];
   web: Website;
   errorFlag: boolean;
   errorMsg = 'Cannot create website !';
 
-  constructor(private userService: UserService,
-              private websiteService: WebsiteService,
+  constructor(private websiteService: WebsiteService,
               private route: ActivatedRoute,
               private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.user = this.userService.findUserById(params['uid']);
+      this.userId = params['uid'];
       this.websites = this.websiteService.findWebsitesByUser(params['uid']);
-      this.web = this.websiteService.findWebsiteById(params['wid'])
-      console.log('website-edit, user_id =' + this.user._id, ', webstie id =', + this.web._id);
+      this.web = this.websiteService.findWebsiteById(params['wid']);
+      console.log('website-edit, user_id =' + this.userId, ', webstie id =', + this.web._id);
     });
   }
   updateWeb(website: Website) {
     console.log(this.web);
-    this.websiteService.updateWebsite(this.web._id, website);
-    this.router.navigate((['/user', this.user._id, 'website']));
+    this.websiteService.updateWebsite(this.web._id, this.web);
+    this.router.navigate((['/user', this.userId, 'website']));
   }
   deleteWeb() {
     console.log(this.web);
     this.websiteService.deleteWebsite(this.web._id);
-    this.router.navigate((['/user', this.user._id, 'website']));
+    this.router.navigate((['/user', this.userId, 'website']));
   }
 
 }

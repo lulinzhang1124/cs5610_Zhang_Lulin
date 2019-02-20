@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Widget} from '../../../../models/widget.model.client';
+import {Widget, WidgetHeading, WidgetImage} from '../../../../models/widget.model.client';
 import {WidgetService} from '../../../../services/widget.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 
@@ -9,10 +9,13 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./widget-image.component.css']
 })
 export class WidgetImageComponent implements OnInit {
-  widget: Widget;
+  widget = new WidgetImage('', '', '', '', '');
   userId: string;
-  websiteId: string;
   pageId: string;
+  widgetId: string;
+  newWidget: Widget;
+  name: string;
+  newWidgetText: string;
 
   constructor(private  widgetService: WidgetService,
               private route: ActivatedRoute,
@@ -21,24 +24,27 @@ export class WidgetImageComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.userId = params['uid'];
-      this.websiteId = params['wid'];
       this.pageId = params['pid'];
-      this.widget = this.widgetService.findWidgetById(params['wgid']);
-      console.log('widget-header, user_id = ' + this.userId + ', website id = ' + this.websiteId
-        + ', page id = ' + this.pageId + '.widget id = ' + this.widget._id);
+      this.widgetId = params['wgid'];
     });
+    if (this.widgetId !== 'undefined') {
+      // @ts-ignore
+      this.widget = this.widgetService.findWidgetById(this.widgetId);
+    }
   }
-  createWidget(wig: Widget) {
-    this.widgetService.createWidget(this.pageId, wig);
-    this.router.navigate((['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']));
-  }
-  updateWidget(wig: Widget) {
-    this.widgetService.updateWidget(this.widget._id, wig);
-    this.router.navigate((['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']));
+  updateWidget() {
+    if (this.widgetId === 'undefined') {
+      this.newWidget = new WidgetImage('', 'IMAGE', this.pageId, this.widget.width, this.widget.url);
+      this.widgetService.createWidget(this.pageId, this.newWidget);
+    } else {
+      this.newWidget = new WidgetImage(this.widget._id, 'IMAGE', this.pageId, this.widget.width, this.widget.url);
+      this.widgetService.updateWidget(this.widget._id, this.newWidget);
+    }
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
   deleteWidget() {
     this.widgetService.deleteWidget(this.widget._id);
-    this.router.navigate((['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget' ]));
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
 
 }

@@ -10,7 +10,7 @@
         New Page
       </h1>
     </div>
-    <a (click)="createPage(page)" class="navbar-brand cl-text-black float-right cl-icon-padding">
+    <a (click)="createPage()" class="navbar-brand cl-text-black float-right cl-icon-padding">
       <i class="fas fa-check"></i>
     </a>
   </div>
@@ -19,11 +19,11 @@
   <form class="cl-text-padding">
     <div class="form-group">
       <label>Name</label>
-      <input [ngModel]="page?.name" name="name" type="text" class="form-control" placeholder="Name">
+      <input [(ngModel)]="newPageName" name="name" type="text" class="form-control" placeholder="Name">
     </div>
     <div class="form-group">
       <label>Description</label>
-      <input [ngModel]="page?.description" name="description" type="text" class="form-control" placeholder="Description">
+      <input [(ngModel)]="newPageDescrption" name="description" type="text" class="form-control" placeholder="Description">
     </div>
   </form>
 </div>

@@ -12,29 +12,31 @@ import {User} from '../../../models/user.model.client';
 export class ProfileComponent implements OnInit {
   errorMsg = 'Invalid email address !';
 
-  constructor(private userService: UserService, private router: ActivatedRoute) { }
+  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router ) { }
+  userId: string;
   user: User;
-  // firstName: string;
-  // lastName: string;
-
   updateUser(user: User) {
-    console.log(this.user);
-    this.userService.updateUser(this.user._id, user);
+    // console.log(this.userId);
+    // if (this.newusername === '') {
+    //   this.newusername = this.user.username;
+    // }
+    // if (this.newfirstName === '') {
+    //   this.newfirstName = this.user.firstName;
+    // }
+    // if (this.newlastName === '') {
+    //   this.newlastName = this.user.lastName;
+    // }
+    // this.newUser = new User(this.userId, this.newusername, this.user.password);
+    // this.newUser.firstName = this.newfirstName;
+    // this.newUser.lastName  = this.newlastName;
+    this.userService.updateUser(this.userId, this.user);
+    this.router.navigate((['/user', this.userId]));
   }
   ngOnInit() {
-    this.router.params.subscribe(params => {
+    this.route.params.subscribe(params => {
+      this.userId = params['uid'];
       this.user = this.userService.findUserById(params['uid']);
-      // this.user._id = params['_id'];
-      console.log('user_id =' + this.user._id);
+      console.log('user_id =' + this.userId);
     });
   }
-
-  buttonClicked(event: any) {
-    console.log(event); // your custom code on button click
-  }
-
-  // clickCancel() {
-  //   this.router.navigate((['/login']));
-  // }
-
 }

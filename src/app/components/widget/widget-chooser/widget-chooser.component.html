@@ -2,8 +2,7 @@
 <nav class="navbar fixed-top cl-grey-navbar">
   <div class="container-fluid">
     <div>
-      <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget"
-         class="navbar-brand cl-text-black cl-icon-padding">
+      <a routerLink="../" class="navbar-brand cl-text-black cl-icon-padding">
         <i class="fas fa-angle-left"></i>
       </a>
       <h1 class="navbar-brand cl-text-black cl-text-bold cl-text-grey">
@@ -16,7 +15,7 @@
 <div class="container">
   <ul class="list-group cl-list-group-borderless">
     <li class="list-group-item cl-list-item-borderless">
-      <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new/header"
+      <a [routerLink]="['../', widgetId]" (click)="createWidget('HEADING')"
          class="cl-text-blue">Header</a>
     </li>
     <li class="list-group-item cl-list-item-borderless">
@@ -35,12 +34,11 @@
       <a  class="cl-text-blue">Button</a>
     </li>
     <li class="list-group-item cl-list-item-borderless">
-      <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new/image"
+      <a [routerLink]="['../', widgetId]" (click)="createWidget('IMAGE')"
          class="cl-text-blue">Image</a>
     </li>
     <li class="list-group-item cl-list-item-borderless">
-      <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new/youtube"
-         class="cl-text-blue">YouTube</a>
+      <a [routerLink]="['../', widgetId]" (click)="createWidget('YOUTUBE')" class="cl-text-blue">YouTube</a>
     </li>
     <li class="list-group-item cl-list-item-borderless">
       <a class="cl-text-blue">Data Table</a>

@@ -10,11 +10,9 @@ import {DomSanitizer} from '@angular/platform-browser';
   styleUrls: ['./widget-chooser.component.css']
 })
 export class WidgetChooserComponent implements OnInit {
-  widgets: Widget[];
   userId: string;
-  websiteId: string;
-  pageId: string;
-
+  widgetId: string;
+  widgetType: string;
   constructor(private  widgetService: WidgetService,
               private route: ActivatedRoute,
               private router: Router,
@@ -23,12 +21,19 @@ export class WidgetChooserComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.userId = params['uid'];
-      this.websiteId = params['wid'];
-      this.pageId = params['pid'];
-      this.widgets = this.widgetService.findWidgetsByPageId(this.pageId);
-      console.log('widget-chooser, user_id = ' + this.userId + ', website id = ' + this.websiteId
-        + ', page id = ' + this.pageId);
+      this.widgetId = params['wgid'];
     });
+    this.widgetService.currentWidgetType
+      .subscribe(
+        (widgetType: string) => {
+          this.widgetType = widgetType;
+        }
+      );
   }
+  createWidget(widgetType: string) {
+    this.widgetService.chooseNewType(widgetType);
+  }
+
+
 
 }

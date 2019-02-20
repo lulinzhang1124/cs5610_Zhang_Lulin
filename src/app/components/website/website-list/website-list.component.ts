@@ -15,6 +15,7 @@ export class WebsiteListComponent implements OnInit {
   user: User;
   websites: Website[];
 
+
   constructor(private userService: UserService,
               private websiteService: WebsiteService,
               private router: ActivatedRoute) { }
