@@ -3,7 +3,7 @@ import {Widget, WidgetHeading, WidgetHtml, WidgetImage, WidgetYoutube} from '../
 import {BehaviorSubject} from 'rxjs';
 
 @Injectable()
-export  class WidgetService {
+export class WidgetService {
   private widgetChosen = new BehaviorSubject('DEFAULT');
   currentWidgetType = this.widgetChosen.asObservable();
   widgets: Widget[] = [
@@ -14,7 +14,7 @@ export  class WidgetService {
     new WidgetHeading('567', 'HEADING', '321', 4, 'Lorem ipsum'),
     new WidgetYoutube('678', 'YOUTUBE', '321', '100%', 'https://www.youtube.com//embed/eSLe4HuKuK0'),
     new WidgetHtml('789', 'HTML', '321', '<p>Lorem ipsum</p>')
-    ];
+  ];
 
   createWidget(pageId, widget) {
     widget._id = String(Math.floor(Math.random() * 1000) + 1);
@@ -35,8 +35,8 @@ export  class WidgetService {
   }
 
   updateWidget(widgetId, widget: any) {
-    for ( const i in this.widgets ) {
-      if ( this.widgets[i]._id === widgetId ) {
+    for (const i in this.widgets) {
+      if (this.widgets[i]._id === widgetId) {
         switch (widget.widgetType) {
           case 'HEADING':
             // @ts-ignore
