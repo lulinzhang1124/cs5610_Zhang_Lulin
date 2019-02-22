@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {Widget} from '../../../models/widget.model.client';
+import {Component, OnInit} from '@angular/core';
 import {WidgetService} from '../../../services/widget.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DomSanitizer} from '@angular/platform-browser';
@@ -13,10 +12,12 @@ export class WidgetChooserComponent implements OnInit {
   userId: string;
   widgetId: string;
   widgetType: string;
+
   constructor(private  widgetService: WidgetService,
               private route: ActivatedRoute,
               private router: Router,
-              private sanitizer: DomSanitizer) { }
+              private sanitizer: DomSanitizer) {
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -30,10 +31,10 @@ export class WidgetChooserComponent implements OnInit {
         }
       );
   }
+
   createWidget(widgetType: string) {
     this.widgetService.chooseNewType(widgetType);
   }
-
 
 
 }

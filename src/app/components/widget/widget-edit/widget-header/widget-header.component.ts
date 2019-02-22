@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Widget, WidgetHeading} from '../../../../models/widget.model.client';
 import {WidgetService} from '../../../../services/widget.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
-import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-widget-header',
@@ -19,7 +18,8 @@ export class WidgetHeaderComponent implements OnInit {
 
   constructor(private  widgetService: WidgetService,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router) {
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -32,6 +32,7 @@ export class WidgetHeaderComponent implements OnInit {
       this.widget = this.widgetService.findWidgetById(this.widgetId);
     }
   }
+
   updateWidget() {
     if (this.widgetId === 'undefined') {
       this.newWidget = new WidgetHeading('', 'HEADING', this.pageId, this.widget.size, this.widget.text);
@@ -42,6 +43,7 @@ export class WidgetHeaderComponent implements OnInit {
     }
     this.router.navigate(['../'], {relativeTo: this.route});
   }
+
   deleteWidget() {
     this.widgetService.deleteWidget(this.widget._id);
     this.router.navigate(['../'], {relativeTo: this.route});

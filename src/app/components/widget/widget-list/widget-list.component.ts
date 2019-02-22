@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {Widget} from '../../../models/widget.model.client';
 import {WidgetService} from '../../../services/widget.service.client';
 import {DomSanitizer} from '@angular/platform-browser';
@@ -17,7 +17,8 @@ export class WidgetListComponent implements OnInit {
 
   constructor(private  widgetService: WidgetService,
               private route: ActivatedRoute,
-              private sanitizer: DomSanitizer) { }
+              private sanitizer: DomSanitizer) {
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -26,11 +27,12 @@ export class WidgetListComponent implements OnInit {
       this.pageId = params['pid'];
       this.widgets = this.widgetService.findWidgetsByPageId(this.pageId);
       console.log('widget-list, user_id = ' + this.userId + ', website id = ' + this.websiteId
-      + ', page id = ' + this.pageId);
+        + ', page id = ' + this.pageId);
     });
   }
+
   getSantizeUrl(url: string) {
-     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
 }

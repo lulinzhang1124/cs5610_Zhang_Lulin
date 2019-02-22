@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { WidgetHeaderComponent } from './widget-header.component';
+import {WidgetHeaderComponent} from './widget-header.component';
 
 describe('WidgetHeaderComponent', () => {
   let component: WidgetHeaderComponent;
@@ -8,9 +8,9 @@ describe('WidgetHeaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WidgetHeaderComponent ]
+      declarations: [WidgetHeaderComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

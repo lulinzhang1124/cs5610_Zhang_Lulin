@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../../services/user.service.client';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {User} from '../../../models/user.model.client';
-import {Page} from '../../../models/page.model.client';
 import {Website} from '../../../models/website.model.client';
 import {WebsiteService} from '../../../services/website.service.client';
 
@@ -18,7 +17,8 @@ export class WebsiteListComponent implements OnInit {
 
   constructor(private userService: UserService,
               private websiteService: WebsiteService,
-              private router: ActivatedRoute) { }
+              private router: ActivatedRoute) {
+  }
 
   ngOnInit() {
     this.router.params.subscribe(params => {

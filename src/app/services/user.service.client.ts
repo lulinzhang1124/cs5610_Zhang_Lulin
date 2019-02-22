@@ -1,8 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 // import { Http, RequestOptions, Response } from '@angular/http';
 import 'rxjs';
-import { environment } from '../../environments/environment';
-import { Router } from '@angular/router';
 import {User} from '../models/user.model.client';
 
 // injecting service into module
@@ -10,13 +8,14 @@ import {User} from '../models/user.model.client';
 @Injectable()
 export class UserService {
 
-  constructor() { }
+  constructor() {
+  }
 
   users: User[] = [
     {_id: '123', username: 'alice', password: 'alice', firstName: 'Alice', lastName: 'Wonder'},
     {_id: '234', username: 'bob', password: 'bob', firstName: 'Bob', lastName: 'Marley'},
-    {_id: '345', username: 'charly',   password: 'charly',   firstName: 'Charly', lastName: 'Garcia'  },
-    {_id: '456', username: 'jannunzi', password: 'jannunzi', firstName: 'Jose',   lastName: 'Annunzi' }
+    {_id: '345', username: 'charly', password: 'charly', firstName: 'Charly', lastName: 'Garcia'},
+    {_id: '456', username: 'jannunzi', password: 'jannunzi', firstName: 'Jose', lastName: 'Annunzi'}
   ];
 
   // api = {
@@ -36,7 +35,9 @@ export class UserService {
 
   findUserById(userId: string) {
     for (let x = 0; x < this.users.length; x++) {
-      if (this.users[x]._id === userId) {  return this.users[x]; }
+      if (this.users[x]._id === userId) {
+        return this.users[x];
+      }
     }
   }
 
@@ -49,11 +50,12 @@ export class UserService {
   }
 
   findUserByCredentials(username: string, password: string) {
-    return this.users.find( function (user) {
+    return this.users.find(function (user) {
       return user.username === username && user.password === password;
     });
   }
-  updateUser(userId: string,  user: User) {
+
+  updateUser(userId: string, user: User) {
     for (let i = 0; i < this.users.length; i++) {
       if (this.users[i]._id === userId) {
         this.users[i].firstName = user.firstName;
@@ -63,7 +65,8 @@ export class UserService {
       }
     }
   }
-  deleteUser(userId: string ) {
+
+  deleteUser(userId: string) {
     for (const i in this.users) {
       if (this.users[i]._id === userId) {
         const j = +i;

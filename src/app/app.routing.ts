@@ -1,4 +1,4 @@
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {ModuleWithProviders} from '@angular/core';
 import {LoginComponent} from './components/user/login/login.component';
 import {RegisterComponent} from './components/user/register/register.component';
@@ -12,15 +12,12 @@ import {PageEditComponent} from './components/page/page-edit/page-edit.component
 import {WidgetListComponent} from './components/widget/widget-list/widget-list.component';
 import {WidgetChooserComponent} from './components/widget/widget-chooser/widget-chooser.component';
 import {WidgetEditComponent} from './components/widget/widget-edit/widget-edit.component';
-import {WidgetHeaderComponent} from './components/widget/widget-edit/widget-header/widget-header.component';
-import {WidgetImageComponent} from './components/widget/widget-edit/widget-image/widget-image.component';
-import {WidgetYoutubeComponent} from './components/widget/widget-edit/widget-youtube/widget-youtube.component';
 // Import all other components here
 const APP_ROUTES: Routes = [
-  {path: 'login' , component: LoginComponent},
-  {path: 'register' , component: RegisterComponent },
-  {path: 'user/:uid' , component: ProfileComponent},
-  {path: 'user/:uid/website' , component: WebsiteListComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
+  {path: 'user/:uid', component: ProfileComponent},
+  {path: 'user/:uid/website', component: WebsiteListComponent},
   {path: 'user/:uid/website/new', component: WebsiteNewComponent},
   {path: 'user/:uid/website/:wid', component: WebsiteEditComponent},
   {path: 'user/:uid/website/:wid/page', component: PageListComponent},
@@ -30,6 +27,6 @@ const APP_ROUTES: Routes = [
   {path: 'user/:uid/website/:wid/page/:pid/widget/new', component: WidgetChooserComponent},
   {path: 'user/:uid/website/:wid/page/:pid/widget/:wgid', component: WidgetEditComponent},
   // so on
-  ];
+];
 // Export the routes as module providers
 export const Routing: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);

@@ -19,7 +19,8 @@
   <form>
     <div class="form-group">
       <label for="youtube-name">Name</label>
-      <input [(ngModel)]="name" name="name" type="text" class="form-control" id="youtube-name" placeholder="Colyplay-Scientist">
+      <input [(ngModel)]="name" name="name" type="text" class="form-control" id="youtube-name"
+             placeholder="Colyplay-Scientist">
     </div>
     <div class="form-group">
       <label for="youtube-text">Text</label>
@@ -27,17 +28,20 @@
     </div>
     <div class="form-group">
       <label for="youtube-URL">URL</label>
-      <input [(ngModel)]="widget.url" name="url" type="text" class="form-control" id="youtube-URL" placeholder="https://www.youtube.com/watch?v=-w4VyQLjw3Y">
+      <input [(ngModel)]="widget.url" name="url" type="text" class="form-control" id="youtube-URL"
+             placeholder="https://www.youtube.com/watch?v=-w4VyQLjw3Y">
     </div>
     <div class="form-group">
       <label for="youtube-width">Width</label>
-      <input [(ngModel)]="widget.width" name="width" type="text" class="form-control" id="youtube-width" placeholder="100%">
+      <input [(ngModel)]="widget.width" name="width" type="text" class="form-control" id="youtube-width"
+             placeholder="100%">
     </div>
   </form>
   <a class="btn btn-danger btn-block" (click)="deleteWidget()">Delete</a>
 </div>
 
-<<nav class="navbar fixed-bottom cl-grey-navbar">
+<
+<nav class="navbar fixed-bottom cl-grey-navbar">
   <div class="container-fluid justify-content-end">
     <a routerLink="/user/{{userId}}" class="navbar-brand cl-icon-padding cl-text-blue">
       <span class="fas fa-user"></span>

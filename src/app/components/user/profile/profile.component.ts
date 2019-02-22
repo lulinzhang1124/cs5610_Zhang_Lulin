@@ -1,6 +1,5 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {NgForm} from '@angular/forms';
 import {UserService} from '../../../services/user.service.client';
 import {User} from '../../../models/user.model.client';
 
@@ -12,9 +11,12 @@ import {User} from '../../../models/user.model.client';
 export class ProfileComponent implements OnInit {
   errorMsg = 'Invalid email address !';
 
-  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router ) { }
+  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router) {
+  }
+
   userId: string;
   user: User;
+
   updateUser(user: User) {
     // console.log(this.userId);
     // if (this.newusername === '') {
@@ -32,6 +34,7 @@ export class ProfileComponent implements OnInit {
     this.userService.updateUser(this.userId, this.user);
     this.router.navigate((['/user', this.userId]));
   }
+
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.userId = params['uid'];
