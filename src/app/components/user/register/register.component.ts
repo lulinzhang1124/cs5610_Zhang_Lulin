@@ -16,19 +16,32 @@ export class RegisterComponent implements OnInit {
   newPassword: string;
   regVerifiedPassword: string;
   user: User = {_id: '', username: '', password: '', firstName: '', lastName: ''};
+  userErrorMsg: string;
+  userErrorFlag: boolean;
 
   constructor(private userService: UserService, private router: Router) {
   }
 
   ngOnInit() {
+    this.userErrorFlag = false;
+    this.userErrorMsg = 'The username already exists! Please use a different name.';
   }
 
   register() {
     this.user.username = this.newUsername;
     this.user.password = this.newPassword;
-    this.userService.createUser(this.user);
-    const loginUser = this.userService.findUserByCredentials(this.newUsername, this.newPassword);
-    this.router.navigate(['/user', loginUser._id]);
+    this.userService.findUserByUsername(this.newUsername).subscribe(
+      (user: User) => {
+        if (typeof user._id !== 'undefined') {
+          this.userErrorFlag = true;
+        } else {
+          return this.userService.createUser(this.user).subscribe(
+            (loginUser: User) => {
+              this.router.navigate(['/user', loginUser._id]);
+            }
+          );
+        }
+      });
   }
 
   onCancel() {

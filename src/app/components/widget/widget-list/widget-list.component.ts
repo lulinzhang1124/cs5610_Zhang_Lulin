@@ -25,10 +25,12 @@ export class WidgetListComponent implements OnInit {
       this.userId = params['uid'];
       this.websiteId = params['wid'];
       this.pageId = params['pid'];
-      this.widgets = this.widgetService.findWidgetsByPageId(this.pageId);
-      console.log('widget-list, user_id = ' + this.userId + ', website id = ' + this.websiteId
-        + ', page id = ' + this.pageId);
     });
+    this.widgetService.findAllWidgetsForPage(this.pageId).subscribe(
+      (widgets: any) => this.widgets = widgets
+    );
+    console.log('widget-list, user_id = ' + this.userId + ', website id = ' + this.websiteId
+      + ', page id = ' + this.pageId);
   }
 
   getSantizeUrl(url: string) {

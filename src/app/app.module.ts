@@ -23,8 +23,7 @@ import {UserService} from './services/user.service.client';
 import {WebsiteService} from './services/website.service.client';
 import {PageService} from './services/page.service.client';
 import {WidgetService} from './services/widget.service.client';
-
-// import { HttpModule } from '@angular/http';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -48,7 +47,7 @@ import {WidgetService} from './services/widget.service.client';
   ],
   imports: [
     BrowserModule,
-    // HttpModule,
+    HttpClientModule,
     Routing,
     FormsModule
   ],

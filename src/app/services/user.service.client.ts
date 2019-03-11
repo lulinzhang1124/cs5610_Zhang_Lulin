@@ -1,78 +1,48 @@
 import {Injectable} from '@angular/core';
-// import { Http, RequestOptions, Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import 'rxjs';
 import {User} from '../models/user.model.client';
+import {map} from 'rxjs/operators';
+import {environment} from '../../environments/environment';
+
 
 // injecting service into module
 
 @Injectable()
 export class UserService {
 
-  constructor() {
-  }
+  constructor(private _http: HttpClient) {}
+   baseUrl = environment.baseUrl;
 
-  users: User[] = [
-    {_id: '123', username: 'alice', password: 'alice', firstName: 'Alice', lastName: 'Wonder'},
-    {_id: '234', username: 'bob', password: 'bob', firstName: 'Bob', lastName: 'Marley'},
-    {_id: '345', username: 'charly', password: 'charly', firstName: 'Charly', lastName: 'Garcia'},
-    {_id: '456', username: 'jannunzi', password: 'jannunzi', firstName: 'Jose', lastName: 'Annunzi'}
-  ];
-
-  // api = {
-  //   'createUser'   : this.createUser,
-  //   'findUserById' : this.findUserById,
-  //   'findUserByUsername': this.findUserByUsername,
-  //   'updateUser': this.updateUser,
-  //   'deleteUser': this.deleteUser,
-  //   'findUserByCredentials': this.findUserByCredentials,
-  // };
+  // users: User[] = [
+  //   {_id: '123', username: 'alice', password: 'alice', firstName: 'Alice', lastName: 'Wonder'},
+  //   {_id: '234', username: 'bob', password: 'bob', firstName: 'Bob', lastName: 'Marley'},
+  //   {_id: '345', username: 'charly', password: 'charly', firstName: 'Charly', lastName: 'Garcia'},
+  //   {_id: '456', username: 'jannunzi', password: 'jannunzi', firstName: 'Jose', lastName: 'Annunzi'}
+  // ];
 
   createUser(user: User) {
-    user._id = Math.random().toString();
-    this.users.push(user);
-    return user;
+    return this._http.post(this.baseUrl + '/api/user', user);
   }
 
   findUserById(userId: string) {
-    for (let x = 0; x < this.users.length; x++) {
-      if (this.users[x]._id === userId) {
-        return this.users[x];
-      }
-    }
+    return this._http.get(this.baseUrl + '/api/user/' + userId);
   }
 
   findUserByUsername(username: string) {
-    for (let i = 0; i < this.users.length; i++) {
-      if (this.users[i].username === username) {
-        return this.users[i];
-      }
-    }
+    return this._http.get(this.baseUrl + '/api/user?username=' + username);
   }
 
   findUserByCredentials(username: string, password: string) {
-    return this.users.find(function (user) {
-      return user.username === username && user.password === password;
-    });
+    return this._http.get<User>(this.baseUrl + '/api/user?username=' + username + '&password=' + password);
   }
 
   updateUser(userId: string, user: User) {
-    for (let i = 0; i < this.users.length; i++) {
-      if (this.users[i]._id === userId) {
-        this.users[i].firstName = user.firstName;
-        this.users[i].lastName = user.lastName;
-        this.users[i].username = user.username;
-        return this.users[i];
-      }
-    }
+    return this._http.put(this.baseUrl + '/api/user/' + userId, user);
   }
 
   deleteUser(userId: string) {
-    for (const i in this.users) {
-      if (this.users[i]._id === userId) {
-        const j = +i;
-        this.users.splice(j, 1);
-      }
-    }
+    return this._http.delete(this.baseUrl + '/api/user/' + userId);
   }
 }
 

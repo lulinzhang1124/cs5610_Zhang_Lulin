@@ -39,17 +39,17 @@ export class WidgetYoutubeComponent implements OnInit {
   updateWidget() {
     if (this.widgetId === 'undefined') {
       this.newWidget = new WidgetYoutube('', 'YOUTUBE', this.pageId, this.widget.width, this.widget.url);
-      this.widgetService.createWidget(this.pageId, this.newWidget);
+      this.widgetService.createWidget(this.pageId, this.newWidget).subscribe();
     } else {
       this.newWidget = new WidgetYoutube(this.widgetId, 'YOUTUBE', this.pageId, this.widget.width, this.widget.url);
-      this.widgetService.updateWidget(this.widget._id, this.newWidget);
+      this.widgetService.updateWidget(this.widget._id, this.newWidget).subscribe();
     }
-    this.router.navigate(['../'], {relativeTo: this.route});
+    // this.router.navigate(['../'], {relativeTo: this.route});
   }
 
   deleteWidget() {
-    this.widgetService.deleteWidget(this.widget._id);
-    this.router.navigate(['../'], {relativeTo: this.route});
+    this.widgetService.deleteWidget(this.widget._id).subscribe();
+    // this.router.navigate(['../'], {relativeTo: this.route});
   }
 
 }

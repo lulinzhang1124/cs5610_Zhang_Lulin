@@ -11,7 +11,7 @@ import {WebsiteService} from '../../../services/website.service.client';
   styleUrls: ['./website-list.component.css']
 })
 export class WebsiteListComponent implements OnInit {
-  user: User;
+  userId: string;
   websites: Website[];
 
 
@@ -22,9 +22,12 @@ export class WebsiteListComponent implements OnInit {
 
   ngOnInit() {
     this.router.params.subscribe(params => {
-      this.user = this.userService.findUserById(params['uid']);
-      this.websites = this.websiteService.findWebsitesByUser(params['uid']);
-      console.log('website-list-length:' + this.websites.length + ', user_id =' + this.user._id);
+      this.userId = params['uid'];
+      this.websiteService.findAllWebsitesForUser(params['uid']).subscribe(
+        (websites: any) => {
+          this.websites = websites;
+        }
+      );
     });
   }
 

@@ -1,9 +1,15 @@
 import {Injectable} from '@angular/core';
 import {Widget, WidgetHeading, WidgetHtml, WidgetImage, WidgetYoutube} from '../models/widget.model.client';
 import {BehaviorSubject} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class WidgetService {
+  constructor(private _http: HttpClient) {}
+  baseUrl = environment.baseUrl;
+
+
   private widgetChosen = new BehaviorSubject('DEFAULT');
   currentWidgetType = this.widgetChosen.asObservable();
   widgets: Widget[] = [
@@ -17,66 +23,23 @@ export class WidgetService {
   ];
 
   createWidget(pageId, widget) {
-    widget._id = String(Math.floor(Math.random() * 1000) + 1);
-    widget.pageId = pageId;
-    this.widgets.push(widget);
+    return this._http.post(this.baseUrl + '/api/page/' + pageId + '/widget', widget);
   }
 
-  findWidgetsByPageId(pageId) {
-    return this.widgets.filter((widget) => {
-      return widget.pageId === pageId;
-    });
+  findAllWidgetsForPage(pageId) {
+    return this._http.get(this.baseUrl + '/api/page/' + pageId + '/widget');
   }
 
   findWidgetById(widgetId) {
-    return this.widgets.find((widget) => {
-      return widget._id === widgetId;
-    });
+    return this._http.get(this.baseUrl + '/api/widget/' + widgetId);
   }
 
   updateWidget(widgetId, widget: any) {
-    for (const i in this.widgets) {
-      if (this.widgets[i]._id === widgetId) {
-        switch (widget.widgetType) {
-          case 'HEADING':
-            // @ts-ignore
-            this.widgets[i].text = widget.text;
-            // @ts-ignore
-            this.widgets[i].size = widget.size;
-            return true;
-
-          case 'IMAGE':
-            // @ts-ignore
-            this.widgets[i].text = widget.text;
-            // @ts-ignore
-            this.widgets[i].url = widget.url;
-            // @ts-ignore
-            this.widgets[i].width = widget.width;
-            return true;
-
-          case 'YOUTUBE':
-            // @ts-ignore
-            this.widgets[i].text = widget.text;
-            // @ts-ignore
-            this.widgets[i].url = widget.url;
-            // @ts-ignore
-            this.widgets[i].width = widget.width;
-            return true;
-        }
-
-      }
-    }
-    return false;
+    return this._http.put(this.baseUrl + '/api/widget/' + widgetId, widget);
   }
 
   deleteWidget(widgetId) {
-    for (const i in this.widgets) {
-      if (this.widgets[i]._id === widgetId) {
-        const j = +i;
-        this.widgets.splice(j, 1);
-        break;
-      }
-    }
+    return this._http.delete(this.baseUrl + '/api/widget/' + widgetId);
   }
 
   chooseNewType(widgetType: string) {

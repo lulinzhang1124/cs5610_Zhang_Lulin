@@ -13,23 +13,20 @@ import {PageService} from '../../../services/page.service.client';
   styleUrls: ['./page-list.component.css']
 })
 export class PageListComponent implements OnInit {
-  user: User;
-  website: Website;
-  pages: Page[];
+  websiteId: string;
+  pages: Page[] = [];
 
-  constructor(private userService: UserService,
-              private websiteService: WebsiteService,
-              private  pageService: PageService,
+  constructor(private  pageService: PageService,
               private router: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.router.params.subscribe(params => {
-      this.user = this.userService.findUserById(params['uid']);
-      this.website = this.websiteService.findWebsiteById(params['wid']);
-      this.pages = this.pageService.findPageByWebsiteId(params['wid']);
-      console.log('page-list-length:' + this.pages.length + ', user_id = '
-        + this.user._id + ', website id = ' + this.website._id);
+      this.websiteId = params['wid'];
+      this.pageService.findAllPagesForWebsite(params['wid']).subscribe(
+        (pages: any) => {
+          this.pages = pages;
+        });
     });
   }
 

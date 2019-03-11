@@ -1,9 +1,14 @@
 import {Injectable} from '@angular/core';
 import {Page} from '../models/page.model.client';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../environments/environment';
 
 
 @Injectable()
 export class PageService {
+
+  constructor(private _http: HttpClient) {}
+  baseUrl = environment.baseUrl;
 
   pages: Page[] = [
     {'_id': '321', 'name': 'Post 1', 'websiteId': '456', 'description': 'Lorem'},
@@ -14,40 +19,22 @@ export class PageService {
   api = {};
 
   createPage(websiteId: string, page: Page) {
-    // page._id = '1111';
-    // page.websiteId = websiteId;
-    this.pages.push(new Page('1111', page.name, websiteId, page.description));
-    // this.pages.push(page);
+    return this._http.post(this.baseUrl + 'api/website/' + websiteId + '/page', page);
   }
 
-  findPageByWebsiteId(websiteId) {
-    return this.pages.filter((page) => {
-      return page.websiteId === websiteId;
-    });
+  findAllPagesForWebsite(websiteId) {
+    return this._http.get(this.baseUrl + 'api/website/' + websiteId + '/page');
   }
 
   findPageById(pageId) {
-    return this.pages.find((page) => {
-      return page._id === pageId;
-    });
+    return this._http.get(this.baseUrl + 'api/page/' + pageId);
   }
 
-  updatePage(pageId, page) {
-    for (const i in this.pages) {
-      if (this.pages[i]._id === pageId) {
-        this.pages[i].name = page.name;
-        this.pages[i].description = page.description;
-      }
-    }
+  updatePage(pageId, page: Page) {
+    return this._http.put(this.baseUrl + 'api/page/' + pageId, page);
   }
 
   deletePage(pageId) {
-    for (const i in this.pages) {
-      if (this.pages[i]._id === pageId) {
-        const j = +i;
-        this.pages.splice(j, 1);
-        break;
-      }
-    }
+    return this._http.delete(this.baseUrl + 'api/page/' + pageId);
   }
 }

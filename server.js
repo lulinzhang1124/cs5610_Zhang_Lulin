@@ -28,8 +28,5 @@ app.set('port', port);
 const server = http.createServer(app);
 server.listen( port , () => console.log('Running on port 3200'));
 
-// app.get('/*', function (req, res) {
-//   res.sendFile(path.join(__dirname, 'dist/web5610/index.html'));
-// });
+require("./assignment/app")(app);
 
-//require('./src/app')(app);

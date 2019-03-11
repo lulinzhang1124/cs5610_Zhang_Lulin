@@ -41,10 +41,13 @@
     <input [(ngModel)]="user.lastName" name="lastname" type="text" class="form-control" placeholder="Wander">
   </div>
   <button class="btn btn-primary btn-block"
-          routerLink="/user/{{user._id}}/website">Websites
+          routerLink="./website">Websites
   </button>
   <button class="btn btn-danger  btn-block"
           routerLink="/login" routerLinkActive="active">Logout
+  </button>
+  <button class="btn btn-danger  btn-block"
+          (click)="deleteUser()" routerLinkActive="active">Delete
   </button>
 
 </div>
