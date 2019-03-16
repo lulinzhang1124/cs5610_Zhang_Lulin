@@ -50,7 +50,7 @@ export class WidgetImageComponent implements OnInit {
     this.router.navigate(['../'], {relativeTo: this.activatedRoute});
   }
 
-  delete() {
+  deleteWidget() {
     this.widgetService.deleteWidget(this.wgid).subscribe(
       () => this.router.navigate(['../'], {relativeTo: this.activatedRoute})
     );
