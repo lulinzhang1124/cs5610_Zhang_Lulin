@@ -11,7 +11,7 @@ import {Website} from '../../../models/website.model.client';
   styleUrls: ['./website-new.component.css']
 })
 export class WebsiteNewComponent implements OnInit {
-  user: User;
+  userId: string;
   websites: Website[];
   newWeb: Website;
   newWebsiteName: string;
@@ -27,16 +27,21 @@ export class WebsiteNewComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.user = this.userService.findUserById(params['uid']);
-      this.websites = this.websiteService.findWebsitesByUser(params['uid']);
-      console.log('website-new, user_id =' + this.user._id);
+      this.userId = params['uid'];
+      this.websiteService.findAllWebsitesForUser(params['uid']).subscribe(
+        (websites: any) => {
+          this.websites = websites;
+        });
     });
   }
 
   newWebsite() {
-    this.newWeb = {_id: '', name: this.newWebsiteName, developerId: this.user._id, description: this.newWebsiteDescription};
-    this.websiteService.createWebsite(this.user._id, this.newWeb);
-    this.router.navigate((['/user', this.user._id, 'website']));
+    this.newWeb = {_id: '', name: this.newWebsiteName, developerId: this.userId, description: this.newWebsiteDescription};
+    this.websiteService.createWebsite(this.userId, this.newWeb).subscribe(
+      (website: Website) => {
+        this.newWeb = website;
+        console.log('created website: ' + this.newWeb._id + ', name: ' + this.newWeb.name);
+      });
   }
 
 }

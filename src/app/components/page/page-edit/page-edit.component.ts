@@ -16,30 +16,38 @@ export class PageEditComponent implements OnInit {
   constructor(private  pageService: PageService,
               private route: ActivatedRoute,
               private router: Router) {
+    this.page = new Page();
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      // this.user = this.userService.findUserById(params['uid']);
-      // this.website = this.websiteService.findWebsiteById(params['wid']);
       this.userId = params['uid'];
       this.websiteId = params['wid'];
-      this.page = this.pageService.findPageById(params['pid']);
-      console.log('page-edit: page id = ' + this.page._id + ', user_id = '
-        + this.userId + ', website id = ' + this.websiteId);
+      this.pageService.findPageById(params['pid']).subscribe(
+        (page: Page) => {
+          this.page = page;
+          console.log('page-edit: page id = ' + this.page._id);
+        }
+      );
     });
   }
 
   updatePage(page: Page) {
-    this.pageService.updatePage(this.page._id, page);
-    console.log(this.page);
-    this.router.navigate((['/user', this.userId, 'website', this.websiteId, 'page']));
+    this.pageService.updatePage(this.page._id, page).subscribe(
+      (u_page: Page) => {
+        this.router.navigate(['../'], {relativeTo: this.route});
+        console.log('page-update success: page id = ' + this.page._id);
+      }
+    );
   }
 
   deletePage() {
-    console.log(this.page);
-    this.pageService.deletePage(this.page._id);
-    this.router.navigate((['/user', this.userId, 'website', this.websiteId, 'page']));
+    this.pageService.deletePage(this.page._id).subscribe(
+      (d_page: Page) => {
+        this.router.navigate(['../'], {relativeTo: this.route});
+        console.log('page-delete success: page id = ' + this.page._id);
+      }
+    );
   }
 
 }

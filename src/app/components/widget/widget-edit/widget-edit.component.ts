@@ -39,7 +39,11 @@ export class WidgetEditComponent implements OnInit {
       );
     console.log(this.widgetId);
     if (this.widgetId !== 'undefined') {
-      this.widget = this.widgetService.findWidgetById(this.widgetId);
+      this.widgetService.findWidgetById(this.widgetId).subscribe(
+        (widget: Widget) => {
+          this.widget = widget;
+        }
+      );
     }
   }
 

@@ -12,34 +12,73 @@ export class ProfileComponent implements OnInit {
   errorMsg = 'Invalid email address !';
 
   constructor(private userService: UserService, private route: ActivatedRoute, private router: Router) {
+    this.user = new User('', '', '');
   }
 
   userId: string;
   user: User;
+  username: string;
+  updateFlag: boolean;
+  updateMsg: string;
+  userErrorFlag: boolean;
+  userErrorMsg: string;
 
   updateUser(user: User) {
-    // console.log(this.userId);
-    // if (this.newusername === '') {
-    //   this.newusername = this.user.username;
-    // }
-    // if (this.newfirstName === '') {
-    //   this.newfirstName = this.user.firstName;
-    // }
-    // if (this.newlastName === '') {
-    //   this.newlastName = this.user.lastName;
-    // }
-    // this.newUser = new User(this.userId, this.newusername, this.user.password);
-    // this.newUser.firstName = this.newfirstName;
-    // this.newUser.lastName  = this.newlastName;
-    this.userService.updateUser(this.userId, this.user);
-    this.router.navigate((['/user', this.userId]));
+    this.updateFlag = false;
+    this.userErrorFlag = false;
+    if (this.username !== this.user.username) {
+      this.userService.findUserByUsername(this.username).subscribe(
+        (user: User) => {
+          if (typeof user._id !== 'undefined') {
+            this.userErrorFlag = true;
+          } else {
+            this.user.username = this.username;
+            this.updateProfile();
+          }
+        },
+        (error: any) => console.log(error)
+      );
+    } else {
+      this.updateProfile();
+    }
+  }
+  updateProfile() {
+    this.userService.updateUser(this.user._id, this.user).subscribe(
+      (user: User) => {
+        this.user = user;
+        this.updateFlag = true;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
+      this.updateFlag = false;
+      this.userErrorFlag = false;
+      this.updateMsg = 'Profile updated!';
+      this.userErrorMsg = 'The username already exists! Please use a different name.';
+
       this.userId = params['uid'];
-      this.user = this.userService.findUserById(params['uid']);
-      console.log('user_id =' + this.userId);
+      this.userService.findUserById(params['uid']).subscribe(
+        (user: User) => {
+          this.user = user;
+          this.username = this.user.username;
+        },
+        (error: any) => console.log(error)
+      );
     });
+  }
+
+  deleteUser() {
+    this.userService.deleteUser(this.user._id).subscribe(
+      (user: User) => {
+        console.log('delete user: ' + this.user._id);
+        this.router.navigate(['/login']);
+      },
+      (error: any) => console.log(error)
+    );
   }
 }

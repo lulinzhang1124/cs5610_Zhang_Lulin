@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {UserService} from '../../../services/user.service.client';
 import {Router} from '@angular/router';
+import {User} from '../../../models/user.model.client';
 
 @Component({
   selector: 'app-login',
@@ -23,22 +24,22 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     console.log('Login page!' + this.username);
   }
-
-  // binding click event
-  buttonClicked(event: any) {
-    console.log(event); // your custom code on button click
-  }
-
   login() {
     this.username = this.loginForm.value.username;
     this.password = this.loginForm.value.password;
-    const user = this.userService.findUserByCredentials(this.username, this.password);
-    if (user) {
-      this.router.navigate((['/user/', user._id]));
-    } else {
-      this.errorFlag = true;
-      return this.errorMsg;
-    }
+    this.userService.findUserByCredentials(this.username, this.password).subscribe(
+      (user: User) => {
+        if (typeof user._id !== 'undefined') {
+          console.log(user);
+          this.router.navigate(['/user', user._id]);
+        } else {
+          this.errorFlag = true;
+        }
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
 
 

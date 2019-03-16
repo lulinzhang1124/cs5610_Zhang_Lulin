@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Widget, WidgetYoutube} from '../../../../models/widget.model.client';
+import {Widget, WidgetHeading, WidgetYoutube} from '../../../../models/widget.model.client';
 import {WidgetService} from '../../../../services/widget.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 
@@ -32,24 +32,42 @@ export class WidgetYoutubeComponent implements OnInit {
     });
     if (this.widgetId !== 'undefined') {
       // @ts-ignore
-      this.widget = this.widgetService.findWidgetById(this.widgetId);
+      this.widget = this.widgetService.findWidgetById(this.widgetId).subscribe(
+        (widget: WidgetYoutube) => {
+          this.widget = widget;
+          console.log('loading widget-youtube success!');
+        }
+      );
     }
   }
 
   updateWidget() {
     if (this.widgetId === 'undefined') {
       this.newWidget = new WidgetYoutube('', 'YOUTUBE', this.pageId, this.widget.width, this.widget.url);
-      this.widgetService.createWidget(this.pageId, this.newWidget);
+      this.widgetService.createWidget(this.pageId, this.newWidget).subscribe(
+        (new_wgt: WidgetYoutube) => {
+          this.widget = new_wgt;
+          console.log('create widget-youtube success!');
+        }
+      );
     } else {
       this.newWidget = new WidgetYoutube(this.widgetId, 'YOUTUBE', this.pageId, this.widget.width, this.widget.url);
-      this.widgetService.updateWidget(this.widget._id, this.newWidget);
+      this.widgetService.updateWidget(this.widget._id, this.newWidget).subscribe(
+        (new_wgt: WidgetHeading) => {
+          console.log('update widget-youtube success!');
+        }
+      );
     }
     this.router.navigate(['../'], {relativeTo: this.route});
   }
 
   deleteWidget() {
-    this.widgetService.deleteWidget(this.widget._id);
-    this.router.navigate(['../'], {relativeTo: this.route});
+    this.widgetService.deleteWidget(this.widget._id).subscribe(
+      (d_widget: any) => {
+        console.log('delete widget-heading success!');
+        this.router.navigate(['../'], {relativeTo: this.route});
+      }
+    );
   }
 
 }

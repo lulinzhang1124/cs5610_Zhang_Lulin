@@ -4,7 +4,7 @@ export class Page {
   websiteId: string;
   description: string;
 
-  constructor(pageId, name, websiteId, description) {
+  constructor(pageId = '', name = '', websiteId = '', description = '') {
     this._id = pageId;
     this.name = name;
     this.websiteId = websiteId;

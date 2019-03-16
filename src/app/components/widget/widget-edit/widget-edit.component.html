@@ -2,6 +2,8 @@
 <!--<app-widget-image *ngIf="widget.widgetType === 'IMAGE'"></app-widget-image>-->
 <!--<app-widget-youtube *ngIf="widget.widgetType === 'YOUTUBE'"></app-widget-youtube>-->
 
+<script src="../../../services/user.service.client.ts"></script>
+<script src="../../../../../assignment/services/widget.service.server.js"></script>
 <div *ngIf="widget !== undefined" [ngSwitch]="widget.widgetType">
 
   <div *ngSwitchCase="'HEADING'">

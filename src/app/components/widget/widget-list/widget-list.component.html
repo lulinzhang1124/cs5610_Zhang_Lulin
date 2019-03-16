@@ -2,7 +2,7 @@
 <nav class="navbar fixed-top cl-grey-navbar">
   <div class="container-fluid">
     <div>
-      <a routerLink="/user/{{userId}}/website/{{websiteId}}/page"
+      <a routerLink="../"
          class="navbar-brand cl-text-black cl-icon-padding">
         <i class="fas fa-angle-left"></i>
       </a>
@@ -10,7 +10,7 @@
         Widgets
       </h1>
     </div>
-    <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new"
+    <a routerLink="./new"
        class="navbar-brand cl-text-black float-right cl-icon-padding">
       <i class="fas fa-plus"></i>
     </a>
@@ -18,34 +18,36 @@
 </nav>
 
 <div class="container cl-container-padding-more">
-  <div *ngFor="let widget of widgets">
-    <div *ngIf="widget.widgetType === 'HEADING'">
-      <div class="float-right">
-        <a class="float-right cl-text-blue fa fa-bars"></a>
-        <a routerLink="{{widget._id}}"
-           class="fa fa-cog cl-text-blue"></a>
+  <div appSortable (newIndexes) = "onNewIndexes($event)">
+    <div *ngFor="let widget of widgets">
+      <div *ngIf="widget.widgetType === 'HEADING'">
+        <div class="float-right">
+          <a class="float-right cl-text-blue fa fa-bars"></a>
+          <a routerLink="{{widget._id}}"
+             class="fa fa-cog cl-text-blue"></a>
+        </div>
+        <font size="{{widget.size}}"> {{widget.text}}</font>
       </div>
-      <font size="{{widget.size}}"> {{widget.text}}</font>
-    </div>
 
-    <div *ngIf="widget.widgetType === 'IMAGE'">
-      <div class="float-right">
-        <a class="float-right cl-text-blue fa fa-bars"></a>
-        <a routerLink="{{widget._id}}"
-           class="fa fa-cog cl-text-blue"></a>
+      <div *ngIf="widget.widgetType === 'IMAGE'">
+        <div class="float-right">
+          <a class="float-right cl-text-blue fa fa-bars"></a>
+          <a routerLink="{{widget._id}}"
+             class="fa fa-cog cl-text-blue"></a>
+        </div>
+        <img class="img-responsive img-rounded cl-widget-images" src="{{widget.url}}">
       </div>
-      <img class="img-responsive img-rounded cl-widget-images" src="{{widget.url}}">
-    </div>
 
-    <div *ngIf="widget.widgetType === 'YOUTUBE'">
-      {{getSantizeUrl(widget.url)}}
-      <div class="float-right">
-        <a class="float-right cl-text-blue fa fa-bars"></a>
-        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}"
-           class="fa fa-cog cl-text-blue"></a>
-      </div>
-      <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item" [src]="getSantizeUrl(widget.url)" frameborder="0"></iframe>
+      <div *ngIf="widget.widgetType === 'YOUTUBE'">
+        {{getSantizeUrl(widget.url)}}
+        <div class="float-right">
+          <a class="float-right cl-text-blue fa fa-bars"></a>
+          <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}"
+             class="fa fa-cog cl-text-blue"></a>
+        </div>
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="e2e-iframe-trusted-src" [src]="getSantizeUrl(widget.url)" frameborder="0"></iframe>
+        </div>
       </div>
     </div>
   </div>

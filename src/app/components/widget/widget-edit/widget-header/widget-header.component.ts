@@ -29,24 +29,42 @@ export class WidgetHeaderComponent implements OnInit {
     });
     if (this.widgetId !== 'undefined') {
       // @ts-ignore
-      this.widget = this.widgetService.findWidgetById(this.widgetId);
+      this.widget = this.widgetService.findWidgetById(this.widgetId).subscribe(
+        (widget: WidgetHeading) => {
+          this.widget = widget;
+          console.log('loading widget-heading success!');
+        }
+      );
     }
   }
 
   updateWidget() {
     if (this.widgetId === 'undefined') {
       this.newWidget = new WidgetHeading('', 'HEADING', this.pageId, this.widget.size, this.widget.text);
-      this.widgetService.createWidget(this.pageId, this.newWidget);
+      this.widgetService.createWidget(this.pageId, this.newWidget).subscribe(
+        (new_wgt: WidgetHeading) => {
+          this.widget = new_wgt;
+          console.log('create widget-heading success!');
+        }
+      );
     } else {
       this.newWidget = new WidgetHeading(this.widgetId, 'HEADING', this.pageId, this.widget.size, this.widget.text);
-      this.widgetService.updateWidget(this.widget._id, this.newWidget);
+      this.widgetService.updateWidget(this.widget._id, this.newWidget).subscribe(
+        (new_wgt: WidgetHeading) => {
+          console.log('update widget-heading success!');
+        }
+      );
     }
     this.router.navigate(['../'], {relativeTo: this.route});
   }
 
   deleteWidget() {
-    this.widgetService.deleteWidget(this.widget._id);
-    this.router.navigate(['../'], {relativeTo: this.route});
+    this.widgetService.deleteWidget(this.widget._id).subscribe(
+      (d_widget: any) => {
+        console.log('delete widget-heading success!');
+        this.router.navigate(['../'], {relativeTo: this.route});
+      }
+    );
   }
 
 }

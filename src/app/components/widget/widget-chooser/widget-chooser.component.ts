@@ -14,9 +14,7 @@ export class WidgetChooserComponent implements OnInit {
   widgetType: string;
 
   constructor(private  widgetService: WidgetService,
-              private route: ActivatedRoute,
-              private router: Router,
-              private sanitizer: DomSanitizer) {
+              private route: ActivatedRoute) {
   }
 
   ngOnInit() {
