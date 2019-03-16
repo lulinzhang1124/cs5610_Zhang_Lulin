@@ -17,7 +17,7 @@ export class WebsiteEditComponent implements OnInit {
   errorMsg = 'Cannot create website !';
 
   constructor(private websiteService: WebsiteService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
@@ -36,7 +36,10 @@ export class WebsiteEditComponent implements OnInit {
   updateWeb(website: Website) {
     console.log(this.web);
     this.websiteService.updateWebsite(this.web._id, this.web).subscribe(
-      (u_website: Website) => console.log('update web,' + u_website)
+      (u_website: Website) => {
+        console.log('update web,' + u_website);
+        this.router.navigate((['/user', this.userId, 'website']));
+      }
     );
   }
 
@@ -45,7 +48,8 @@ export class WebsiteEditComponent implements OnInit {
     this.websiteService.deleteWebsite(this.web._id).subscribe(
       (data: Website) => {
         console.log('deleted website: ' + data._id);
-      },
+        this.router.navigate((['/user', this.userId, 'website']));
+      }
     );
   }
 

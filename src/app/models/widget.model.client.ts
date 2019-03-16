@@ -24,12 +24,15 @@ export class WidgetImage implements Widget {
   _id: string;
   pageId: string;
   widgetType: string;
+  name: string;
+  text: string;
   width: string;
   url: string;
 
-  constructor(_id: string, widgetType: string, pageId: string, width: string, url: string) {
+  constructor(_id: string, widgetType: string, name: string, pageId: string, width: string, url: string) {
     this._id = _id;
     this.widgetType = widgetType;
+    this.name = name;
     this.pageId = pageId;
     this.width = width;
     this.url = url;

@@ -13,6 +13,7 @@ import {PageService} from '../../../services/page.service.client';
   styleUrls: ['./page-list.component.css']
 })
 export class PageListComponent implements OnInit {
+  userId: string;
   websiteId: string;
   pages: Page[] = [];
 
@@ -22,10 +23,12 @@ export class PageListComponent implements OnInit {
 
   ngOnInit() {
     this.router.params.subscribe(params => {
+      this.userId = params['uid']
       this.websiteId = params['wid'];
       this.pageService.findAllPagesForWebsite(params['wid']).subscribe(
         (pages: any) => {
           this.pages = pages;
+          console.log('load pages: success');
         });
     });
   }

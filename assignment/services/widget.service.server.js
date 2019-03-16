@@ -1,7 +1,9 @@
+
 module.exports = function (app) {
+  var path = require('path');
   const multer = require('multer'); // npm install multer --save
   const upload = multer({dest: __dirname + '/../../src/assets/uploads'});
-  const baseUrl = "";
+  const baseUrl = "http://localhost:3200";
 
   app.post("/api/page/:pageId/widget", createWidget);
   app.get("/api/page/:pageId/widget", findAllWidgetsForPage);
@@ -13,18 +15,69 @@ module.exports = function (app) {
 
   //UPLOAD
   app.post ("/api/upload", upload.single('myFile'), uploadImage);
+  app.get("/api/image/:imageName", findImage);
 
-  const widgets = [
-    {_id: '1', type: 'HEADER', pageId: '321', size: '2', text: 'GIZMODO'},
-    {_id: '2', type: 'HEADER', pageId: '321', size: '4', text: 'Lorem ipsum'},
-    {_id: '3', type: 'IMAGE', pageId: '321', size: '2', text: 'text', width: '100%',
+  var widgets = [
+    {_id: '123', widgetType: 'HEADING', pageId: '321', size: '2', text: 'GIZMODO'},
+    {_id: '234', widgetType: 'HEADING', pageId: '321', size: '4', text: 'Lorem ipsum'},
+    {_id: '345', widgetType: 'IMAGE', pageId: '321', size: '2', text: 'text', width: '100%',
       url: 'http://lorempixel.com/400/200/'},
-    {_id: '4', type: 'IMAGE', pageId: '321', size: '2', text: 'my image', width: '100%',
-      url: 'http://food.fnr.sndimg.com/content/dam/images/food/fullset/2009/11/4/2/FNM_120109-Sugar-Fix-006_s4x3.jpg'
-        + '.rend.hgtvcom.616.462.suffix/1382539033745.jpeg'},
-    {_id: '5', type: 'YOUTUBE', pageId: '321', size: '2', text: 'text', width: '100%',
-      url: 'https://www.youtube.com/embed/d5nCbSNS9mA'}
+    {_id: '456', widgetType: 'HTML', pageId: '321', size: '2', text: '<p>Lorem ipsum</p>'},
+    {_id: '678', widgetType: 'YOUTUBE', pageId: '321', size: '2', text: 'text', width: '100%',
+      url: 'https://www.youtube.com//embed/eSLe4HuKuK0'}
   ];
+
+  function findImage(req, res) {
+    var imageName = req.params.imageName;
+    res.sendFile(path.resolve("/../../src/assets/uploads/" + imageName));
+  }
+
+  function uploadImage(req, res) {
+    var widgetId = req.body.widgetId;
+    var width = req.body.width;
+    var myFile = req.file;
+    var name = req.body.name;
+    var userId = req.body.userId;
+    var websiteId = req.body.websiteId;
+    var pageId = req.body.pageId;
+
+    // condition when myFile is null
+    const callbackUrl = baseUrl + '/user/' + userId + "/website/" + websiteId
+      + "/page/" + pageId + "/widget";
+    if (myFile == null) {
+      res.redirect(callbackUrl + '/' + widgetId);
+      return;
+    }
+
+    var originalname = myFile.originalname; // file name on user's computer
+    var filename = myFile.filename; // new file name in upload folder
+    var path = myFile.path; // full path of uploaded file
+    var destination = myFile.destination; // folder where file is saved to
+    var size = myFile.size;
+    var mimetype = myFile.mimetype;
+
+    if (widgetId === '') {
+      var widget = {_id: '', widgetType: 'IMAGE', pageId: pageId, size: '', text: '', width: '', url: '', name: ''};
+      widget._id = (new Date()).getTime().toString();
+      widget.url = 'uploads/' + filename;
+      console.log('create widget image: ' + widget._id);
+      widgets.push(widget);
+      res.redirect(callbackUrl + '/' + widget._id);
+      return;
+    }
+
+    // find widget by id
+    var widget;
+    for (var i = 0; i < widgets.length; i++) {
+      if (widgets[i]._id === widgetId) {
+        widget = widgets[i];
+        break;
+      }
+    }
+
+    widget.url = 'uploads/' + filename;
+    res.redirect(callbackUrl+ '/' + widgetId);
+  }
 
   function createWidget(req, res) {
     const widget = req.body;
@@ -70,8 +123,8 @@ module.exports = function (app) {
       if (widgets[i]._id === widgetId) {
         console.log(req.body);
         console.log("update widget: " + widgetId);
-        switch (widgets[i].type) {
-          case 'HEADER':
+        switch (widgets[i].widgetType) {
+          case 'HEADING':
             widgets[i].name = widget.name;
             widgets[i].text = widget.text;
             widgets[i].size = widget.size;
@@ -147,88 +200,31 @@ module.exports = function (app) {
   }
 
   function reorderWidgets(req, res) {
-    const startIndex = parseInt(req.query.initial);
-    const endIndex = parseInt(req.query.final);
-    const widgets_in_page = req.body;
+    console.log(req.query);
+    // var pageId = req.params.pageId;
+    var startIndex = parseInt(req.query["initial"]);
+    var endIndex = parseInt(req.query["final"]);
 
-    if (startIndex === endIndex) {
-      res.json(widgets_in_page);
-      return;
-    }
+    array_move(widgets, startIndex, endIndex);
 
-    const widget_to_reorder = widgets_in_page[startIndex];
-    const widget_endIndex = widgets_in_page[endIndex];
-
-    const index_start_main = findIndex(widget_to_reorder);
-    widgets.splice(index_start_main, 1);
-    console.log('start index in main widgets: ' + index_start_main);
-
-    const index_end_main = parseInt(findIndex(widget_endIndex)) + (startIndex < endIndex ? 1 : 0);
-    widgets.splice(index_end_main, 0, widget_to_reorder);
-    console.log('end index in main widgets: ' + index_end_main);
-
-    res.json({});
+    res.send({});
   }
 
-  function findIndex(widget) {
-    for (const i in widgets) {
-      if (widgets[i]._id === widget._id) {
-        return i;
+  function array_move(arr, old_index, new_index) {
+    while (old_index < 0) {
+      old_index += arr.length;
+    }
+    while (new_index < 0) {
+      new_index += arr.length;
+    }
+    if (new_index >= arr.length) {
+      var k = new_index - arr.length + 1;
+      while (k--) {
+        arr.push(undefined);
       }
     }
-  }
+    arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+  };
 
-  function uploadImage(req, res) {
-    const userId = req.body.userId;
-    const websiteId = req.body.websiteId;
-    const pageId = req.body.pageId;
-    const widgetId = req.body.widgetId;
-    const width = req.body.width;
-    const name = req.body.name;
-    const text = req.body.text;
 
-    const myFile = req.file;
-
-    console.log(req.file);
-
-    const callbackUrl = baseUrl + '/user/' + userId + "/website/" + websiteId
-      + "/page/" + pageId + "/widget";
-    if(myFile == null) {
-      res.redirect(callbackUrl + '/' + widgetId);
-      return;
-    }
-
-    const originalname = myFile.originalname; // file name on user's computer
-    const filename = myFile.filename;     // new file name in upload folder
-    const path = myFile.path;         // full path of uploaded file
-    const destination = myFile.destination;  // folder where file is saved to
-    const size = myFile.size;
-    const mimetype = myFile.mimetype;
-
-    if (widgetId === '') {
-      const widget =
-        {_id: '', type: 'IMAGE', pageId: pageId, size: '', text: '', width: '', url: '', name: ''};
-      widget._id = (new Date()).getTime().toString();
-      widget.url = 'uploads/' + filename;
-      /*      widget.name = name;
-            widget.text = text;
-            widget.width = width;*/
-      console.log('create widget image: ' + widget._id);
-      widgets.push(widget);
-      res.redirect(callbackUrl + '/' + widget._id);
-      return;
-    }
-
-    for (let i = 0; i < widgets.length; i++) {
-      if (widgets[i]._id === widgetId) {
-        widgets[i].url = 'uploads/' + filename;
-        /*        widgets[i].name = name;
-                widgets[i].text = text;
-                widgets[i].width = width;*/
-        break;
-      }
-    }
-
-    res.redirect(callbackUrl + '/' + widgetId);
-  }
 };

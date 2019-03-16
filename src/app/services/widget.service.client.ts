@@ -15,7 +15,7 @@ export class WidgetService {
   widgets: Widget[] = [
     new WidgetHeading('123', 'HEADING', '321', 2, 'GIZMODO'),
     new WidgetHeading('234', 'HEADING', '321', 4, 'Lorem ipsum'),
-    new WidgetImage('345', 'IMAGE', '321', '100%', 'http://lorempixel.com/400/200'),
+    new WidgetImage('345', 'IMAGE', 'Photo', '321', '100%', 'http://lorempixel.com/400/200'),
     new WidgetHtml('456', 'HTML', '321', '<p>Lorem ipsum</p>'),
     new WidgetHeading('567', 'HEADING', '321', 4, 'Lorem ipsum'),
     new WidgetYoutube('678', 'YOUTUBE', '321', '100%', 'https://www.youtube.com//embed/eSLe4HuKuK0'),
@@ -44,5 +44,10 @@ export class WidgetService {
 
   chooseNewType(widgetType: string) {
     this.widgetChosen.next(widgetType);
+  }
+
+  reorderWidgets(pageId: String, startIndex: Number, endIndex: Number, widgets: Widget[]) {
+    return this._http.put(this.baseUrl + '/api/page/' + pageId
+      + '/widget?initial=' + startIndex + '&final=' + endIndex, widgets);
   }
 }

@@ -12,6 +12,7 @@ export class ProfileComponent implements OnInit {
   errorMsg = 'Invalid email address !';
 
   constructor(private userService: UserService, private route: ActivatedRoute, private router: Router) {
+    this.user = new User('', '', '');
   }
 
   userId: string;

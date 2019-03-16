@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Widget} from '../../../models/widget.model.client';
 import {WidgetService} from '../../../services/widget.service.client';
 import {DomSanitizer} from '@angular/platform-browser';
@@ -10,14 +10,20 @@ import {DomSanitizer} from '@angular/platform-browser';
   styleUrls: ['./widget-list.component.css']
 })
 export class WidgetListComponent implements OnInit {
-  widgets: Widget[];
   userId: string;
   websiteId: string;
   pageId: string;
+  widgets: Widget[];
+  startIndex: Number;
+  endIndex: Number;
+
 
   constructor(private  widgetService: WidgetService,
+              private router: Router,
               private route: ActivatedRoute,
               private sanitizer: DomSanitizer) {
+    this.startIndex = 0;
+    this.endIndex = 0;
   }
 
   ngOnInit() {
@@ -35,6 +41,18 @@ export class WidgetListComponent implements OnInit {
 
   getSantizeUrl(url: string) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+
+  onNewIndexes(newIndexes) {
+    this.startIndex = newIndexes.startIndex;
+    this.endIndex = newIndexes.endIndex;
+    this.widgetService.reorderWidgets(this.pageId, this.startIndex, this.endIndex, this.widgets)
+      .subscribe();
+  }
+
+  refresh() {
+    this.router.navigate(['user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+
   }
 
 }

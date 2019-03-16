@@ -16,7 +16,8 @@ export class PageNewComponent implements OnInit {
   newPageDescrption: string;
 
   constructor(private  pageService: PageService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -32,10 +33,10 @@ export class PageNewComponent implements OnInit {
     this.pageService.createPage(this.websiteId, this.newpage).subscribe(
       (page: Page) => {
         this.newpage = page;
+        // this.router.navigate(['../'], {relativeTo: this.route});
         console.log('create new page', this.newpage._id);
       }
     );
-    // this.router.navigate(['../'], {relativeTo: this.route});
   }
 
 }
