@@ -4,7 +4,8 @@ module.exports = function (app) {
   const multer = require('multer'); // npm install multer --save
   //const upload = multer({destination: __dirname + '/../../src/assets/uploads'});
   const baseUrl = 'https://luckyhusky.herokuapp.com';
-  //"http://localhost:3200";
+  //'https://luckyhusky.herokuapp.com'
+  //"http://localhost:3200"
 
   app.post("/api/page/:pageId/widget", createWidget);
   app.get("/api/page/:pageId/widget", findAllWidgetsForPage);
@@ -17,7 +18,7 @@ module.exports = function (app) {
   var storage = multer.diskStorage({
     destination: __dirname + '/../../dist/web5610/assets/uploads/',
     filename: function (req, file, cb) {
-      cb(null,  file.originalname);
+      cb(null,  file.fieldname + '-' + Date.now()+ path.extname(file.originalname));
     }
   });
   const upload = multer({
@@ -69,7 +70,7 @@ module.exports = function (app) {
     if (widgetId === '') {
       var widget = {_id: '', widgetType: 'IMAGE', pageId: pageId, size: '', text: '', width: '', url: '', name: ''};
       widget._id = (new Date()).getTime().toString();
-      widget.url = baseUrl + '/uploads/' + filename;
+      widget.url = baseUrl + '/assets/uploads/' + filename;
 
       console.log('create widget image: ' + widget._id);
       widgets.push(widget);
