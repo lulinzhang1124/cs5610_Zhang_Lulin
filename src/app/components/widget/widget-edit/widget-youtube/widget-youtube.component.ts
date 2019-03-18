@@ -9,15 +9,15 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./widget-youtube.component.css']
 })
 export class WidgetYoutubeComponent implements OnInit {
-  widget = new WidgetYoutube('', '', '', '', '');
+  widget = new WidgetYoutube('', '', '', '', '', '', '');
   userId: string;
   pageId: string;
   widgetId: string;
-  newWidget: Widget;
+  newWidget: WidgetYoutube;
   newWidgetWidth: string;
   newWidgetURL: string;
-  name: string;
-  text: string;
+  // name: string;
+  // text: string;
 
   constructor(private  widgetService: WidgetService,
               private route: ActivatedRoute,
@@ -43,7 +43,8 @@ export class WidgetYoutubeComponent implements OnInit {
 
   updateWidget() {
     if (this.widgetId === 'undefined') {
-      this.newWidget = new WidgetYoutube('', 'YOUTUBE', this.pageId, this.widget.width, this.widget.url);
+      this.newWidget = new WidgetYoutube('', 'YOUTUBE', this.widget.name, this.pageId, this.widget.text, this.widget.width,
+        this.widget.url);
       this.widgetService.createWidget(this.pageId, this.newWidget).subscribe(
         (new_wgt: WidgetYoutube) => {
           this.widget = new_wgt;
@@ -51,7 +52,8 @@ export class WidgetYoutubeComponent implements OnInit {
         }
       );
     } else {
-      this.newWidget = new WidgetYoutube(this.widgetId, 'YOUTUBE', this.pageId, this.widget.width, this.widget.url);
+      this.newWidget = new WidgetYoutube(this.widgetId, 'YOUTUBE', this.widget.name, this.pageId, this.widget.text,
+        this.widget.width, this.widget.url);
       this.widgetService.updateWidget(this.widget._id, this.newWidget).subscribe(
         (new_wgt: WidgetHeading) => {
           console.log('update widget-youtube success!');

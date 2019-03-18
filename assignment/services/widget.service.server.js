@@ -3,7 +3,7 @@ module.exports = function (app) {
   var path = require('path');
   const multer = require('multer'); // npm install multer --save
   //const upload = multer({destination: __dirname + '/../../src/assets/uploads'});
-  const baseUrl = 'https://luckyhusky.herokuapp.com';
+  const baseUrl = 'http://localhost:3200';
   //'https://luckyhusky.herokuapp.com'
   //"http://localhost:3200"
 
@@ -140,11 +140,8 @@ module.exports = function (app) {
             widgets[i].name = widget.name;
             widgets[i].text = widget.text;
             widgets[i].size = widget.size;
-            widgets[i].url = "";
             widgets[i].width = "";
-            widgets[i].rows = "";
             widgets[i].placeholder = "";
-            widgets[i].formatted = "";
             res.status(200).send(widgets[i]);
             return;
           case 'IMAGE':

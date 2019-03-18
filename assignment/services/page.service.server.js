@@ -16,7 +16,7 @@ module.exports = function (app) {
       _id: (new Date()).getTime().toString(),
       name: req.body.name,
       websiteId: req.params['websiteId'],
-      title: req.body.title
+      description: req.body.description
     };
 
     console.log('create new page: ' + new_page._id + ' ' + new_page.name);
@@ -62,7 +62,7 @@ module.exports = function (app) {
         console.log("update page: " + pageId + " " + page.name);
 
         pages[i].name = page.name;
-        pages[i].title = page.title;
+        pages[i].description = page.description;
         res.status(200).send(page);
         return;
       }

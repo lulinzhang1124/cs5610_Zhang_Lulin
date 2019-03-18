@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
   newUsername: string;
   newPassword: string;
   regVerifiedPassword: string;
-  user: User = {_id: '', username: '', password: '', firstName: '', lastName: ''};
+  user: User = {_id: '', username: '', password: '', firstName: '', lastName: '', email: ''};
   userErrorMsg: string;
   userErrorFlag: boolean;
 

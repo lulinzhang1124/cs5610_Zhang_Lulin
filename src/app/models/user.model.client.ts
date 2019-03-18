@@ -5,6 +5,7 @@ export class User {
 
   firstName: string;
   lastName: string;
+  email: string;
 
   constructor(_id, username, password) {
     this._id = _id;

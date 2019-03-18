@@ -9,12 +9,12 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./widget-header.component.css']
 })
 export class WidgetHeaderComponent implements OnInit {
-  widget = new WidgetHeading('', '', '', null, '');
+  widget = new WidgetHeading('', '', '', '', null, '');
   userId: string;
   pageId: string;
   widgetId: string;
   newWidget: Widget;
-  name: string;
+  // name: string;
 
   constructor(private  widgetService: WidgetService,
               private route: ActivatedRoute,
@@ -40,7 +40,7 @@ export class WidgetHeaderComponent implements OnInit {
 
   updateWidget() {
     if (this.widgetId === 'undefined') {
-      this.newWidget = new WidgetHeading('', 'HEADING', this.pageId, this.widget.size, this.widget.text);
+      this.newWidget = new WidgetHeading('', 'HEADING', this.widget.name, this.pageId, this.widget.size, this.widget.text);
       this.widgetService.createWidget(this.pageId, this.newWidget).subscribe(
         (new_wgt: WidgetHeading) => {
           this.widget = new_wgt;
@@ -48,7 +48,7 @@ export class WidgetHeaderComponent implements OnInit {
         }
       );
     } else {
-      this.newWidget = new WidgetHeading(this.widgetId, 'HEADING', this.pageId, this.widget.size, this.widget.text);
+      this.newWidget = new WidgetHeading(this.widgetId, 'HEADING', this.widget.name, this.pageId, this.widget.size, this.widget.text);
       this.widgetService.updateWidget(this.widget._id, this.newWidget).subscribe(
         (new_wgt: WidgetHeading) => {
           console.log('update widget-heading success!');

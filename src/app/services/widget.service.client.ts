@@ -13,13 +13,13 @@ export class WidgetService {
   private widgetChosen = new BehaviorSubject('DEFAULT');
   currentWidgetType = this.widgetChosen.asObservable();
   widgets: Widget[] = [
-    new WidgetHeading('123', 'HEADING', '321', 2, 'GIZMODO'),
-    new WidgetHeading('234', 'HEADING', '321', 4, 'Lorem ipsum'),
+    new WidgetHeading('123', 'HEADING', 'heading1', '321', 2, 'GIZMODO'),
+    new WidgetHeading('234', 'HEADING',  'heading2', '321', 4, 'Lorem ipsum'),
     new WidgetImage('345', 'IMAGE', 'Photo', '321', '100%', 'http://lorempixel.com/400/200'),
-    new WidgetHtml('456', 'HTML', '321', '<p>Lorem ipsum</p>'),
-    new WidgetHeading('567', 'HEADING', '321', 4, 'Lorem ipsum'),
-    new WidgetYoutube('678', 'YOUTUBE', '321', '100%', 'https://www.youtube.com//embed/eSLe4HuKuK0'),
-    new WidgetHtml('789', 'HTML', '321', '<p>Lorem ipsum</p>')
+    new WidgetHtml('456', 'HTML', 'html1', '321', '<p>Lorem ipsum</p>'),
+    new WidgetHeading('567', 'HEADING', 'heading3', '321', 4, 'Lorem ipsum'),
+    new WidgetYoutube('678', 'YOUTUBE', 'frozen', '321', 'frozen', '100%', 'https://www.youtube.com//embed/eSLe4HuKuK0'),
+    new WidgetHtml('789', 'HTML', 'html1', '321', '<p>Lorem ipsum</p>')
   ];
 
   createWidget(pageId, widget) {

@@ -591,7 +591,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--<div *ngIf=\"errorFlag\"-->\n<!--class=\"alert alert-danger\">-->\n<!--{{errorMsg}}-->\n<!--</div>-->\n\n<script src=\"../register/register.component.ts\"></script>\n<body>\n<nav class=\"navbar fixed-top cl-blue-navbar\">\n  <div class=\"container-fluid\">\n    <div class=\"navbar-header\">\n      <h1 class=\"cl-text-white navbar-brand cl-text-bold\">\n        Profile\n      </h1>\n    </div>\n\n    <div class=\"navibar-header\">\n      <a (click)=\"updateUser(user)\" style=\"cursor:pointer\" class=\"navbar-brand ml-auto\">\n        <i class=\"fas fa-check cl-text-white\"></i>\n      </a>\n    </div>\n\n  </div>\n</nav>\n\n<div class=\"container\">\n\n  <div class=\"form-group cl-text-bold\">\n    <label>Username</label>\n    <input [(ngModel)]=\"user.username\" name=\"username\" type=\"text\" class=\"form-control\" placeholder=\"alice\">\n  </div>\n  <div class=\"form-group cl-text-bold\">\n    <label>Email address</label>\n    <input type=\"email\" class=\"form-control\" placeholder=\"abc@gmail.com\">\n  </div>\n  <div class=\"form-group cl-text-bold\">\n    <label>First Name</label>\n    <input [(ngModel)]=\"user.firstName\" name=\"firstname\" type=\"text\" class=\"form-control\" placeholder=\"Alice\">\n  </div>\n  <div class=\"form-group cl-text-bold\">\n    <label>Last Name</label>\n    <input [(ngModel)]=\"user.lastName\" name=\"lastname\" type=\"text\" class=\"form-control\" placeholder=\"Wander\">\n  </div>\n  <button class=\"btn btn-primary btn-block\"\n          routerLink=\"./website\">Websites\n  </button>\n  <button class=\"btn btn-danger  btn-block\"\n          routerLink=\"/login\" routerLinkActive=\"active\">Logout\n  </button>\n  <button class=\"btn btn-danger  btn-block\"\n          (click)=\"deleteUser()\" routerLinkActive=\"active\">Delete\n  </button>\n\n</div>\n\n<nav class=\"navbar fixed-bottom cl-blue-navbar\">\n  <div class=\"container-fluid justify-content-end\">\n    <a href=\"#\" routerLink=\"/user/{{user._id}}\" class=\"navbar-brand cl-text-white cl-icon-padding\">\n      <span class=\"fas fa-user\"></span>\n    </a>\n  </div>\n</nav>\n\n</body>\n"
+module.exports = "<!--<div *ngIf=\"errorFlag\"-->\n<!--class=\"alert alert-danger\">-->\n<!--{{errorMsg}}-->\n<!--</div>-->\n\n<script src=\"../register/register.component.ts\"></script>\n<body>\n<nav class=\"navbar fixed-top cl-blue-navbar\">\n  <div class=\"container-fluid\">\n    <div class=\"navbar-header\">\n      <h1 class=\"cl-text-white navbar-brand cl-text-bold\">\n        Profile\n      </h1>\n    </div>\n\n    <div class=\"navibar-header\">\n      <a (click)=\"updateUser(user)\" style=\"cursor:pointer\" class=\"navbar-brand ml-auto\">\n        <i class=\"fas fa-check cl-text-white\"></i>\n      </a>\n    </div>\n\n  </div>\n</nav>\n\n<div class=\"container\">\n\n  <div class=\"form-group cl-text-bold\">\n    <label>Username</label>\n    <input [(ngModel)]=\"user.username\" name=\"username\" type=\"text\" class=\"form-control\" placeholder=\"alice\">\n  </div>\n  <div class=\"form-group cl-text-bold\">\n    <label>Email address</label>\n    <input [(ngModel)]=\"user.email\" name=\"username\" type = \"email\" class=\"form-control\" placeholder=\"abc@gmail.com\">\n  </div>\n  <div class=\"form-group cl-text-bold\">\n    <label>First Name</label>\n    <input [(ngModel)]=\"user.firstName\" name=\"firstname\" type=\"text\" class=\"form-control\" placeholder=\"Alice\">\n  </div>\n  <div class=\"form-group cl-text-bold\">\n    <label>Last Name</label>\n    <input [(ngModel)]=\"user.lastName\" name=\"lastname\" type=\"text\" class=\"form-control\" placeholder=\"Wander\">\n  </div>\n  <button class=\"btn btn-primary btn-block\"\n          routerLink=\"./website\">Websites\n  </button>\n  <button class=\"btn btn-danger  btn-block\"\n          routerLink=\"/login\" routerLinkActive=\"active\">Logout\n  </button>\n  <button class=\"btn btn-danger  btn-block\"\n          (click)=\"deleteUser()\" routerLinkActive=\"active\">Delete\n  </button>\n\n</div>\n\n<nav class=\"navbar fixed-bottom cl-blue-navbar\">\n  <div class=\"container-fluid justify-content-end\">\n    <a href=\"#\" routerLink=\"/user/{{user._id}}\" class=\"navbar-brand cl-text-white cl-icon-padding\">\n      <span class=\"fas fa-user\"></span>\n    </a>\n  </div>\n</nav>\n\n</body>\n"
 
 /***/ }),
 
@@ -733,7 +733,7 @@ var RegisterComponent = /** @class */ (function () {
     function RegisterComponent(userService, router) {
         this.userService = userService;
         this.router = router;
-        this.user = { _id: '', username: '', password: '', firstName: '', lastName: '' };
+        this.user = { _id: '', username: '', password: '', firstName: '', lastName: '', email: '' };
     }
     RegisterComponent.prototype.ngOnInit = function () {
         this.userErrorFlag = false;
@@ -1201,7 +1201,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<body>\n<nav class=\"navbar fixed-top cl-grey-navbar\">\n  <div class=\"container-fluid\">\n    <div>\n      <a [routerLink]=\"['../']\" class=\"navbar-brand cl-text-black cl-icon-padding\">\n        <i class=\"fas fa-angle-left\"></i>\n      </a>\n      <h1 class=\"navbar-brand cl-text-black cl-text-bold cl-text-grey\">\n        Widgets Edit\n      </h1>\n    </div>\n    <a (click)=\"updateWidget()\" class=\"navbar-brand cl-text-black float-right cl-icon-padding\">\n      <i class=\"fas fa-check\"></i>\n    </a>\n  </div>\n</nav>\n<div class=\"container\">\n  <form>\n    <div class=\"form-group\">\n      <label>Name</label>\n      <input [(ngModel)]=\"name\" name=\"name\" type=\"text\" class=\"form-control\" placeholder=\"Name\">\n    </div>\n    <div class=\"form-group\">\n      <label>Text</label>\n      <input [(ngModel)]=\"widget.text\" name=\"text\" type=\"text\" class=\"form-control\"\n             placeholder=\"Us Senate Reaches Compromise on Emergency\">\n    </div>\n    <div class=\"form-group\">\n      <label>Size</label>\n      <input [(ngModel)]=\"widget.size\" name=\"size\" type=\"number\" class=\"form-control\" placeholder=\"3\">\n    </div>\n  </form>\n  <a class=\"btn btn-danger  btn-block\" (click)=\"deleteWidget()\">Delete</a>\n</div>\n\n<nav class=\"navbar fixed-bottom cl-grey-navbar\">\n  <div class=\"container-fluid justify-content-end\">\n    <a routerLink=\"/user/{{userId}}\" class=\"navbar-brand cl-icon-padding cl-text-blue\">\n      <span class=\"fas fa-user\"></span>\n    </a>\n  </div>\n</nav>\n</body>\n"
+module.exports = "<body>\n<nav class=\"navbar fixed-top cl-grey-navbar\">\n  <div class=\"container-fluid\">\n    <div>\n      <a [routerLink]=\"['../..']\" class=\"navbar-brand cl-text-black cl-icon-padding\">\n        <i class=\"fas fa-angle-left\"></i>\n      </a>\n      <h1 class=\"navbar-brand cl-text-black cl-text-bold cl-text-grey\">\n        Widgets Edit\n      </h1>\n    </div>\n    <a (click)=\"updateWidget()\" class=\"navbar-brand cl-text-black float-right cl-icon-padding\">\n      <i class=\"fas fa-check\"></i>\n    </a>\n  </div>\n</nav>\n<div class=\"container\">\n  <form>\n    <div class=\"form-group\">\n      <label>Name</label>\n      <input [(ngModel)]=\"widget.name\" name=\"name\" type=\"text\" class=\"form-control\" placeholder=\"Name\">\n    </div>\n    <div class=\"form-group\">\n      <label>Text</label>\n      <input [(ngModel)]=\"widget.text\" name=\"text\" type=\"text\" class=\"form-control\"\n             placeholder=\"Us Senate Reaches Compromise on Emergency\">\n    </div>\n    <div class=\"form-group\">\n      <label>Size</label>\n      <input [(ngModel)]=\"widget.size\" name=\"size\" type=\"number\" class=\"form-control\" placeholder=\"3\">\n    </div>\n  </form>\n  <a class=\"btn btn-danger  btn-block\" (click)=\"deleteWidget()\">Delete</a>\n</div>\n\n<nav class=\"navbar fixed-bottom cl-grey-navbar\">\n  <div class=\"container-fluid justify-content-end\">\n    <a routerLink=\"/user/{{userId}}\" class=\"navbar-brand cl-icon-padding cl-text-blue\">\n      <span class=\"fas fa-user\"></span>\n    </a>\n  </div>\n</nav>\n</body>\n"
 
 /***/ }),
 
@@ -1226,11 +1226,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var WidgetHeaderComponent = /** @class */ (function () {
+    // name: string;
     function WidgetHeaderComponent(widgetService, route, router) {
         this.widgetService = widgetService;
         this.route = route;
         this.router = router;
-        this.widget = new _models_widget_model_client__WEBPACK_IMPORTED_MODULE_2__["WidgetHeading"]('', '', '', null, '');
+        this.widget = new _models_widget_model_client__WEBPACK_IMPORTED_MODULE_2__["WidgetHeading"]('', '', '', '', null, '');
     }
     WidgetHeaderComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1250,14 +1251,14 @@ var WidgetHeaderComponent = /** @class */ (function () {
     WidgetHeaderComponent.prototype.updateWidget = function () {
         var _this = this;
         if (this.widgetId === 'undefined') {
-            this.newWidget = new _models_widget_model_client__WEBPACK_IMPORTED_MODULE_2__["WidgetHeading"]('', 'HEADING', this.pageId, this.widget.size, this.widget.text);
+            this.newWidget = new _models_widget_model_client__WEBPACK_IMPORTED_MODULE_2__["WidgetHeading"]('', 'HEADING', this.widget.name, this.pageId, this.widget.size, this.widget.text);
             this.widgetService.createWidget(this.pageId, this.newWidget).subscribe(function (new_wgt) {
                 _this.widget = new_wgt;
                 console.log('create widget-heading success!');
             });
         }
         else {
-            this.newWidget = new _models_widget_model_client__WEBPACK_IMPORTED_MODULE_2__["WidgetHeading"](this.widgetId, 'HEADING', this.pageId, this.widget.size, this.widget.text);
+            this.newWidget = new _models_widget_model_client__WEBPACK_IMPORTED_MODULE_2__["WidgetHeading"](this.widgetId, 'HEADING', this.widget.name, this.pageId, this.widget.size, this.widget.text);
             this.widgetService.updateWidget(this.widget._id, this.newWidget).subscribe(function (new_wgt) {
                 console.log('update widget-heading success!');
             });
@@ -1306,7 +1307,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<body>\n<nav class=\"navbar fixed-top cl-grey-navbar\">\n  <div class=\"container-fluid\">\n    <div>\n      <a routerLink='..' class=\"navbar-brand cl-text-black cl-icon-padding\">\n        <i class=\"fas fa-angle-left\"></i>\n      </a>\n      <h1 class=\"navbar-brand cl-text-black cl-text-bold cl-text-grey\" href=\"#\">\n        Widgets Edit\n      </h1>\n    </div>\n    <a (click)=\"updateWidget()\" class=\"navbar-brand cl-text-black float-right cl-icon-padding\">\n      <i class=\"fas fa-check\"></i>\n    </a>\n  </div>\n</nav>\n\n<div class=\"container\">\n  <!--<form>-->\n    <!--<div class=\"form-group\">-->\n      <!--<label for=\"image-name\">Name</label>-->\n      <!--<input [(ngModel)]=\"name\" name=\"name\" type=\"text\" class=\"form-control\" id=\"image-name\" placeholder=\"Name\">-->\n    <!--</div>-->\n    <!--<div class=\"form-group\">-->\n      <!--<label for=\"image-text\">Text</label>-->\n      <!--<input [(ngModel)]=\"newWidgetText\" name=\"text\" type=\"text\" class=\"form-control\" id=\"image-text\"-->\n             <!--placeholder=\"Text\">-->\n    <!--</div>-->\n    <!--<div class=\"form-group\">-->\n      <!--<label for=\"image-URL\">URL</label>-->\n      <!--<input [(ngModel)]=\"widget.url\" name=\"url\" type=\"text\" class=\"form-control\" id=\"image-URL\" placeholder=\"URL\">-->\n    <!--</div>-->\n    <!--<div class=\"form-group\">-->\n      <!--<label for=\"image-width\">Width</label>-->\n      <!--<input [(ngModel)]=\"widget.width\" name=\"width\" type=\"text\" class=\"form-control\" id=\"image-width\"-->\n             <!--placeholder=\"100%\">-->\n    <!--</div>-->\n    <!--<div class=\"form-group\">-->\n      <!--<label for=\"exampleInputFile\">Upload</label>-->\n      <!--<input type=\"file\" class=\"form-control\" id=\"exampleInputFile\">-->\n    <!--</div>-->\n  <!--</form>-->\n  <!--<a class=\"btn btn-primary btn-block cl-blue-navbar\" href=\"#\">Upload Image</a>-->\n  <div *ngIf=\"errorFlag\" class=\"alert alert-danger\">\n    {{errorMsg}}\n  </div>\n\n  <form>\n    <div class=\"form-group\" *ngIf=\"widget\">\n      <label for=\"image-name\">Name</label>\n      <input [(ngModel)]=\"widget.name\"\n             name=\"name\"\n             type=\"text\"\n             class=\"form-control\"\n             id=\"image-name\"\n             placeholder=\"name\"/>\n    </div>\n\n    <div class=\"form-group\" *ngIf=\"widget\">\n      <label for=\"image-text\">Text</label>\n      <input [(ngModel)]=\"widget.text\"\n             name=\"text\"\n             type=\"text\"\n             class=\"form-control\"\n             id=\"image-text\"\n             placeholder=\"Text\"/>\n    </div>\n\n    <div class=\"form-group\" *ngIf=\"widget\">\n      <label for=\"image-URL\">URL</label>\n      <input type=\"text\"\n             name=\"url\"\n             class=\"form-control\"\n             id=\"image-URL\"\n             placeholder=\"{{widget.url}}\"\n             ngModel required\n             #url=\"ngModel\"/>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"image-width\">Width</label>\n      <input [(ngModel)]=\"widget.width\"\n             name=\"width\"\n             type=\"text\"\n             class=\"form-control\"\n             id=\"image-width\"\n             placeholder=\"100%\"/>\n    </div>\n\n    <div class=\"form-group\">\n      <label>Upload</label>\n    <form ngNoForm action=\"{{baseUrl}}/api/upload\" method=\"post\" enctype=\"multipart/form-data\">\n      <input  name=\"myFile\"   type=\"file\" accept=\"image/*\" class=\"form-control\"/>\n      <input  name=\"widgetId\" value=\"{{wgid ? '' : wgid}}\"   style=\"display: none\"/>\n      <input  name=\"websiteId\" value=\"{{websiteId}}\"   style=\"display: none\"/>\n      <input  name=\"pageId\" value=\"{{pageId}}\"   style=\"display: none\"/>\n      <input  name=\"userId\" value=\"{{userId}}\"   style=\"display: none\"/>\n      <input  name=\"width\" value=\"{{widget?.width}}\"   style=\"display: none\"/>\n      <input  name=\"name\" value=\"{{widget?.name}}\"   style=\"display: none\"/>\n      <input  name=\"text\" value=\"{{widget?.text}}\"   style=\"display: none\"/>\n      <button type=\"submit\" class=\"btn btn-block btn-primary\">Upload Image</button>\n    </form>\n    </div>\n  </form>\n  <a class=\"btn btn-danger  btn-block\" (click)=\"deleteWidget()\">Delete</a>\n</div>\n\n<nav class=\"navbar fixed-bottom cl-grey-navbar\">\n  <div class=\"container-fluid justify-content-end\">\n    <a routerLink=\"/user/{{userId}}\" class=\"navbar-brand cl-icon-padding cl-text-blue\">\n      <span class=\"fas fa-user\"></span>\n    </a>\n  </div>\n</nav>\n</body>\n"
+module.exports = "<body>\n<nav class=\"navbar fixed-top cl-grey-navbar\">\n  <div class=\"container-fluid\">\n    <div>\n      <a routerLink='../..' class=\"navbar-brand cl-text-black cl-icon-padding\">\n        <i class=\"fas fa-angle-left\"></i>\n      </a>\n      <h1 class=\"navbar-brand cl-text-black cl-text-bold cl-text-grey\" href=\"#\">\n        Widgets Edit\n      </h1>\n    </div>\n    <a (click)=\"updateWidget()\" class=\"navbar-brand cl-text-black float-right cl-icon-padding\">\n      <i class=\"fas fa-check\"></i>\n    </a>\n  </div>\n</nav>\n\n<div class=\"container\">\n  <!--<form>-->\n    <!--<div class=\"form-group\">-->\n      <!--<label for=\"image-name\">Name</label>-->\n      <!--<input [(ngModel)]=\"name\" name=\"name\" type=\"text\" class=\"form-control\" id=\"image-name\" placeholder=\"Name\">-->\n    <!--</div>-->\n    <!--<div class=\"form-group\">-->\n      <!--<label for=\"image-text\">Text</label>-->\n      <!--<input [(ngModel)]=\"newWidgetText\" name=\"text\" type=\"text\" class=\"form-control\" id=\"image-text\"-->\n             <!--placeholder=\"Text\">-->\n    <!--</div>-->\n    <!--<div class=\"form-group\">-->\n      <!--<label for=\"image-URL\">URL</label>-->\n      <!--<input [(ngModel)]=\"widget.url\" name=\"url\" type=\"text\" class=\"form-control\" id=\"image-URL\" placeholder=\"URL\">-->\n    <!--</div>-->\n    <!--<div class=\"form-group\">-->\n      <!--<label for=\"image-width\">Width</label>-->\n      <!--<input [(ngModel)]=\"widget.width\" name=\"width\" type=\"text\" class=\"form-control\" id=\"image-width\"-->\n             <!--placeholder=\"100%\">-->\n    <!--</div>-->\n    <!--<div class=\"form-group\">-->\n      <!--<label for=\"exampleInputFile\">Upload</label>-->\n      <!--<input type=\"file\" class=\"form-control\" id=\"exampleInputFile\">-->\n    <!--</div>-->\n  <!--</form>-->\n  <!--<a class=\"btn btn-primary btn-block cl-blue-navbar\" href=\"#\">Upload Image</a>-->\n  <div *ngIf=\"errorFlag\" class=\"alert alert-danger\">\n    {{errorMsg}}\n  </div>\n\n  <form>\n    <div class=\"form-group\" *ngIf=\"widget\">\n      <label for=\"image-name\">Name</label>\n      <input [(ngModel)]=\"widget.name\"\n             name=\"name\"\n             type=\"text\"\n             class=\"form-control\"\n             id=\"image-name\"\n             placeholder=\"name\"/>\n    </div>\n\n    <div class=\"form-group\" *ngIf=\"widget\">\n      <label for=\"image-text\">Text</label>\n      <input [(ngModel)]=\"widget.text\"\n             name=\"text\"\n             type=\"text\"\n             class=\"form-control\"\n             id=\"image-text\"\n             placeholder=\"Text\"/>\n    </div>\n\n    <div class=\"form-group\" *ngIf=\"widget\">\n      <label for=\"image-URL\">URL</label>\n      <input type=\"text\"\n             name=\"url\"\n             class=\"form-control\"\n             id=\"image-URL\"\n             placeholder=\"{{widget.url}}\"\n             ngModel required\n             #url=\"ngModel\"/>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"image-width\">Width</label>\n      <input [(ngModel)]=\"widget.width\"\n             name=\"width\"\n             type=\"text\"\n             class=\"form-control\"\n             id=\"image-width\"\n             placeholder=\"100%\"/>\n    </div>\n\n    <div class=\"form-group\">\n      <label>Upload</label>\n    <form ngNoForm action=\"{{baseUrl}}/api/upload\" method=\"post\" enctype=\"multipart/form-data\">\n      <input  name=\"myFile\"   type=\"file\" accept=\"image/*\" class=\"form-control\"/>\n      <input  name=\"widgetId\" value=\"{{wgid ? '' : wgid}}\"   style=\"display: none\"/>\n      <input  name=\"websiteId\" value=\"{{websiteId}}\"   style=\"display: none\"/>\n      <input  name=\"pageId\" value=\"{{pageId}}\"   style=\"display: none\"/>\n      <input  name=\"userId\" value=\"{{userId}}\"   style=\"display: none\"/>\n      <input  name=\"width\" value=\"{{widget?.width}}\"   style=\"display: none\"/>\n      <input  name=\"name\" value=\"{{widget?.name}}\"   style=\"display: none\"/>\n      <input  name=\"text\" value=\"{{widget?.text}}\"   style=\"display: none\"/>\n      <button type=\"submit\" class=\"btn btn-block btn-primary\">Upload Image</button>\n    </form>\n    </div>\n  </form>\n  <a class=\"btn btn-danger  btn-block\" (click)=\"deleteWidget()\">Delete</a>\n</div>\n\n<nav class=\"navbar fixed-bottom cl-grey-navbar\">\n  <div class=\"container-fluid justify-content-end\">\n    <a routerLink=\"/user/{{userId}}\" class=\"navbar-brand cl-icon-padding cl-text-blue\">\n      <span class=\"fas fa-user\"></span>\n    </a>\n  </div>\n</nav>\n</body>\n"
 
 /***/ }),
 
@@ -1422,7 +1423,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<body>\n<nav class=\"navbar fixed-top cl-grey-navbar\">\n  <div class=\"container-fluid\">\n    <div>\n      <a [routerLink]=\"['../']\" class=\"navbar-brand cl-text-black cl-icon-padding\">\n        <i class=\"fas fa-angle-left\"></i>\n      </a>\n      <h1 class=\"navbar-brand cl-text-black cl-text-bold cl-text-grey\">\n        Widgets Edit\n      </h1>\n    </div>\n    <a (click)=\"updateWidget()\" class=\"navbar-brand cl-text-black float-right cl-icon-padding\">\n      <i class=\"fas fa-check\"></i>\n    </a>\n  </div>\n</nav>\n\n<div class=\"container\">\n  <form>\n    <div class=\"form-group\">\n      <label for=\"youtube-name\">Name</label>\n      <input [(ngModel)]=\"name\" name=\"name\" type=\"text\" class=\"form-control\" id=\"youtube-name\"\n             placeholder=\"Colyplay-Scientist\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"youtube-text\">Text</label>\n      <input [(ngModel)]=\"text\" name=\"text\" type=\"text\" class=\"form-control\" id=\"youtube-text\" placeholder=\"Text\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"youtube-URL\">URL</label>\n      <input [(ngModel)]=\"widget.url\" name=\"url\" type=\"text\" class=\"form-control\" id=\"youtube-URL\"\n             placeholder=\"https://www.youtube.com/watch?v=-w4VyQLjw3Y\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"youtube-width\">Width</label>\n      <input [(ngModel)]=\"widget.width\" name=\"width\" type=\"text\" class=\"form-control\" id=\"youtube-width\"\n             placeholder=\"100%\">\n    </div>\n  </form>\n  <a class=\"btn btn-danger btn-block\" (click)=\"deleteWidget()\">Delete</a>\n</div>\n\n<\n<nav class=\"navbar fixed-bottom cl-grey-navbar\">\n  <div class=\"container-fluid justify-content-end\">\n    <a routerLink=\"/user/{{userId}}\" class=\"navbar-brand cl-icon-padding cl-text-blue\">\n      <span class=\"fas fa-user\"></span>\n    </a>\n  </div>\n</nav>\n</body>\n"
+module.exports = "<body>\n<nav class=\"navbar fixed-top cl-grey-navbar\">\n  <div class=\"container-fluid\">\n    <div>\n      <a [routerLink]=\"['../..']\" class=\"navbar-brand cl-text-black cl-icon-padding\">\n        <i class=\"fas fa-angle-left\"></i>\n      </a>\n      <h1 class=\"navbar-brand cl-text-black cl-text-bold cl-text-grey\">\n        Widgets Edit\n      </h1>\n    </div>\n    <a (click)=\"updateWidget()\" class=\"navbar-brand cl-text-black float-right cl-icon-padding\">\n      <i class=\"fas fa-check\"></i>\n    </a>\n  </div>\n</nav>\n\n<div class=\"container\">\n  <form>\n    <div class=\"form-group\">\n      <label for=\"youtube-name\">Name</label>\n      <input [(ngModel)]=\"widget.name\" name=\"name\" type=\"text\" class=\"form-control\" id=\"youtube-name\"\n             placeholder=\"Colyplay-Scientist\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"youtube-text\">Text</label>\n      <input [(ngModel)]=\"widget.text\" name=\"text\" type=\"text\" class=\"form-control\" id=\"youtube-text\" placeholder=\"Text\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"youtube-URL\">URL</label>\n      <input [(ngModel)]=\"widget.url\" name=\"url\" type=\"text\" class=\"form-control\" id=\"youtube-URL\"\n             placeholder=\"https://www.youtube.com/watch?v=-w4VyQLjw3Y\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"youtube-width\">Width</label>\n      <input [(ngModel)]=\"widget.width\" name=\"width\" type=\"text\" class=\"form-control\" id=\"youtube-width\"\n             placeholder=\"100%\">\n    </div>\n  </form>\n  <a class=\"btn btn-danger btn-block\" (click)=\"deleteWidget()\">Delete</a>\n</div>\n\n<\n<nav class=\"navbar fixed-bottom cl-grey-navbar\">\n  <div class=\"container-fluid justify-content-end\">\n    <a routerLink=\"/user/{{userId}}\" class=\"navbar-brand cl-icon-padding cl-text-blue\">\n      <span class=\"fas fa-user\"></span>\n    </a>\n  </div>\n</nav>\n</body>\n"
 
 /***/ }),
 
@@ -1447,11 +1448,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var WidgetYoutubeComponent = /** @class */ (function () {
+    // name: string;
+    // text: string;
     function WidgetYoutubeComponent(widgetService, route, router) {
         this.widgetService = widgetService;
         this.route = route;
         this.router = router;
-        this.widget = new _models_widget_model_client__WEBPACK_IMPORTED_MODULE_2__["WidgetYoutube"]('', '', '', '', '');
+        this.widget = new _models_widget_model_client__WEBPACK_IMPORTED_MODULE_2__["WidgetYoutube"]('', '', '', '', '', '', '');
     }
     WidgetYoutubeComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1471,14 +1474,14 @@ var WidgetYoutubeComponent = /** @class */ (function () {
     WidgetYoutubeComponent.prototype.updateWidget = function () {
         var _this = this;
         if (this.widgetId === 'undefined') {
-            this.newWidget = new _models_widget_model_client__WEBPACK_IMPORTED_MODULE_2__["WidgetYoutube"]('', 'YOUTUBE', this.pageId, this.widget.width, this.widget.url);
+            this.newWidget = new _models_widget_model_client__WEBPACK_IMPORTED_MODULE_2__["WidgetYoutube"]('', 'YOUTUBE', this.widget.name, this.pageId, this.widget.text, this.widget.width, this.widget.url);
             this.widgetService.createWidget(this.pageId, this.newWidget).subscribe(function (new_wgt) {
                 _this.widget = new_wgt;
                 console.log('create widget-youtube success!');
             });
         }
         else {
-            this.newWidget = new _models_widget_model_client__WEBPACK_IMPORTED_MODULE_2__["WidgetYoutube"](this.widgetId, 'YOUTUBE', this.pageId, this.widget.width, this.widget.url);
+            this.newWidget = new _models_widget_model_client__WEBPACK_IMPORTED_MODULE_2__["WidgetYoutube"](this.widgetId, 'YOUTUBE', this.widget.name, this.pageId, this.widget.text, this.widget.width, this.widget.url);
             this.widgetService.updateWidget(this.widget._id, this.newWidget).subscribe(function (new_wgt) {
                 console.log('update widget-youtube success!');
             });
@@ -1666,9 +1669,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WidgetHtml", function() { return WidgetHtml; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WidgetYoutube", function() { return WidgetYoutube; });
 var WidgetHeading = /** @class */ (function () {
-    function WidgetHeading(_id, widgetType, pageId, size, text) {
+    function WidgetHeading(_id, widgetType, name, pageId, size, text) {
         this._id = _id;
         this.widgetType = widgetType;
+        this.name = name;
         this.pageId = pageId;
         this.size = size;
         this.text = text;
@@ -1689,9 +1693,10 @@ var WidgetImage = /** @class */ (function () {
 }());
 
 var WidgetHtml = /** @class */ (function () {
-    function WidgetHtml(_id, widgetType, pageId, text) {
+    function WidgetHtml(_id, widgetType, name, pageId, text) {
         this._id = _id;
         this.widgetType = widgetType;
+        this.name = name;
         this.pageId = pageId;
         this.text = text;
     }
@@ -1699,10 +1704,12 @@ var WidgetHtml = /** @class */ (function () {
 }());
 
 var WidgetYoutube = /** @class */ (function () {
-    function WidgetYoutube(_id, widgetType, pageId, width, url) {
+    function WidgetYoutube(_id, widgetType, name, pageId, text, width, url) {
         this._id = _id;
         this.widgetType = widgetType;
+        this.name = name;
         this.pageId = pageId;
+        this.text = text;
         this.width = width;
         this.url = url;
     }
@@ -1916,13 +1923,13 @@ var WidgetService = /** @class */ (function () {
         this.widgetChosen = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"]('DEFAULT');
         this.currentWidgetType = this.widgetChosen.asObservable();
         this.widgets = [
-            new _models_widget_model_client__WEBPACK_IMPORTED_MODULE_2__["WidgetHeading"]('123', 'HEADING', '321', 2, 'GIZMODO'),
-            new _models_widget_model_client__WEBPACK_IMPORTED_MODULE_2__["WidgetHeading"]('234', 'HEADING', '321', 4, 'Lorem ipsum'),
+            new _models_widget_model_client__WEBPACK_IMPORTED_MODULE_2__["WidgetHeading"]('123', 'HEADING', 'heading1', '321', 2, 'GIZMODO'),
+            new _models_widget_model_client__WEBPACK_IMPORTED_MODULE_2__["WidgetHeading"]('234', 'HEADING', 'heading2', '321', 4, 'Lorem ipsum'),
             new _models_widget_model_client__WEBPACK_IMPORTED_MODULE_2__["WidgetImage"]('345', 'IMAGE', 'Photo', '321', '100%', 'http://lorempixel.com/400/200'),
-            new _models_widget_model_client__WEBPACK_IMPORTED_MODULE_2__["WidgetHtml"]('456', 'HTML', '321', '<p>Lorem ipsum</p>'),
-            new _models_widget_model_client__WEBPACK_IMPORTED_MODULE_2__["WidgetHeading"]('567', 'HEADING', '321', 4, 'Lorem ipsum'),
-            new _models_widget_model_client__WEBPACK_IMPORTED_MODULE_2__["WidgetYoutube"]('678', 'YOUTUBE', '321', '100%', 'https://www.youtube.com//embed/eSLe4HuKuK0'),
-            new _models_widget_model_client__WEBPACK_IMPORTED_MODULE_2__["WidgetHtml"]('789', 'HTML', '321', '<p>Lorem ipsum</p>')
+            new _models_widget_model_client__WEBPACK_IMPORTED_MODULE_2__["WidgetHtml"]('456', 'HTML', 'html1', '321', '<p>Lorem ipsum</p>'),
+            new _models_widget_model_client__WEBPACK_IMPORTED_MODULE_2__["WidgetHeading"]('567', 'HEADING', 'heading3', '321', 4, 'Lorem ipsum'),
+            new _models_widget_model_client__WEBPACK_IMPORTED_MODULE_2__["WidgetYoutube"]('678', 'YOUTUBE', 'frozen', '321', 'frozen', '100%', 'https://www.youtube.com//embed/eSLe4HuKuK0'),
+            new _models_widget_model_client__WEBPACK_IMPORTED_MODULE_2__["WidgetHtml"]('789', 'HTML', 'html1', '321', '<p>Lorem ipsum</p>')
         ];
     }
     WidgetService.prototype.createWidget = function (pageId, widget) {
