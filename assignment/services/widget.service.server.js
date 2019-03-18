@@ -1,9 +1,8 @@
-
 module.exports = function (app) {
   var path = require('path');
   const multer = require('multer'); // npm install multer --save
   //const upload = multer({destination: __dirname + '/../../src/assets/uploads'});
-  const baseUrl = 'http://localhost:3200';
+  const baseUrl = 'https://luckyhusky.herokuapp.com';
   //'https://luckyhusky.herokuapp.com'
   //"http://localhost:3200"
 
