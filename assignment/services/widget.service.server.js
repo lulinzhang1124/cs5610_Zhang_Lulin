@@ -2,8 +2,9 @@
 module.exports = function (app) {
   var path = require('path');
   const multer = require('multer'); // npm install multer --save
-  const upload = multer({dest: __dirname + '/../../src/assets/uploads'});
-  const baseUrl = 'https://luckyhusky.herokuapp.com'; //"http://localhost:3200"
+  //const upload = multer({destination: __dirname + '/../../src/assets/uploads'});
+  const baseUrl = 'https://luckyhusky.herokuapp.com';
+  //"http://localhost:3200";
 
   app.post("/api/page/:pageId/widget", createWidget);
   app.get("/api/page/:pageId/widget", findAllWidgetsForPage);
@@ -13,8 +14,17 @@ module.exports = function (app) {
 
   app.put("/api/page/:pageId/widget?", reorderWidgets);
 
+  var storage = multer.diskStorage({
+    destination: __dirname + '/../../dist/web5610/assets/uploads/',
+    filename: function (req, file, cb) {
+      cb(null,  file.originalname);
+    }
+  });
+  const upload = multer({
+    storage: storage
+  }).single("myFile");
   //UPLOAD
-  app.post ("/api/upload", upload.single('myFile'), uploadImage);
+  app.post ("/api/upload", upload, uploadImage);
   app.get("/api/image/:imageName", findImage);
 
   var widgets = [
@@ -50,7 +60,7 @@ module.exports = function (app) {
     }
 
     var originalname = myFile.originalname; // file name on user's computer
-    var filename = myFile.filename + path.extname(originalname); // new file name in upload folder
+    var filename = myFile.filename; // new file name in upload folder
     //var filepath = myFile.path; // full path of uploaded file
     var destination = myFile.destination; // folder where file is saved to
     var size = myFile.size;
@@ -76,7 +86,7 @@ module.exports = function (app) {
       }
     }
 
-    widget.url = baseUrl+ '/uploads/' + filename+ path.extname(originalname);
+    widget.url = baseUrl+ '/uploads/' + filename;
     res.redirect(callbackUrl+ '/' + widgetId);
   }
 
