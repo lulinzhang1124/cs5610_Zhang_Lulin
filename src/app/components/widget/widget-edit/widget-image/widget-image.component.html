@@ -90,7 +90,7 @@
     <div class="form-group">
       <label>Upload</label>
     <form ngNoForm action="{{baseUrl}}/api/upload" method="post" enctype="multipart/form-data">
-      <input  name="myFile"   type="file" class="form-control"/>
+      <input  name="myFile"   type="file" accept="image/*" class="form-control"/>
       <input  name="widgetId" value="{{wgid ? '' : wgid}}"   style="display: none"/>
       <input  name="websiteId" value="{{websiteId}}"   style="display: none"/>
       <input  name="pageId" value="{{pageId}}"   style="display: none"/>

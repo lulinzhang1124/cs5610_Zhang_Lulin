@@ -3,7 +3,7 @@ module.exports = function (app) {
   var path = require('path');
   const multer = require('multer'); // npm install multer --save
   const upload = multer({dest: __dirname + '/../../src/assets/uploads'});
-  const baseUrl = "http://localhost:3200";
+  const baseUrl = 'https://luckyhusky.herokuapp.com'; //"http://localhost:3200"
 
   app.post("/api/page/:pageId/widget", createWidget);
   app.get("/api/page/:pageId/widget", findAllWidgetsForPage);
@@ -50,8 +50,8 @@ module.exports = function (app) {
     }
 
     var originalname = myFile.originalname; // file name on user's computer
-    var filename = myFile.filename; // new file name in upload folder
-    var path = myFile.path; // full path of uploaded file
+    var filename = myFile.filename + path.extname(originalname); // new file name in upload folder
+    //var filepath = myFile.path; // full path of uploaded file
     var destination = myFile.destination; // folder where file is saved to
     var size = myFile.size;
     var mimetype = myFile.mimetype;
@@ -59,7 +59,8 @@ module.exports = function (app) {
     if (widgetId === '') {
       var widget = {_id: '', widgetType: 'IMAGE', pageId: pageId, size: '', text: '', width: '', url: '', name: ''};
       widget._id = (new Date()).getTime().toString();
-      widget.url = 'uploads/' + filename;
+      widget.url = baseUrl + '/uploads/' + filename;
+
       console.log('create widget image: ' + widget._id);
       widgets.push(widget);
       res.redirect(callbackUrl + '/' + widget._id);
@@ -75,7 +76,7 @@ module.exports = function (app) {
       }
     }
 
-    widget.url = 'uploads/' + filename;
+    widget.url = baseUrl+ '/uploads/' + filename+ path.extname(originalname);
     res.redirect(callbackUrl+ '/' + widgetId);
   }
 
@@ -166,17 +167,6 @@ module.exports = function (app) {
             widgets[i].rows = "";
             widgets[i].placeholder = "";
             widgets[i].formatted = "";
-            res.status(200).send(widgets[i]);
-            return;
-          case 'TEXT':
-            widgets[i].name = widget.name;
-            widgets[i].text = widget.text;
-            widgets[i].rows = widget.rows;
-            widgets[i].placeholder = widget.placeholder;
-            widgets[i].formatted = widget.formatted;
-            widgets[i].size = "";
-            widgets[i].url = "";
-            widgets[i].width = "";
             res.status(200).send(widgets[i]);
             return;
           default:
