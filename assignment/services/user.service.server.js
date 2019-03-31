@@ -1,3 +1,5 @@
+var _ = require('lodash');
+
 module.exports = function (app) {
   app.post("/api/user", createUser);
   app.get("/api/user", findUser);
@@ -15,17 +17,17 @@ module.exports = function (app) {
   var userModel = require("../model/user/user.model.server.js");
 
   function createUser(req, res) {
-    var user = req.body;
+    var user = _.pick(req.body, ['username', 'password', 'firstName', 'lastName', 'email', 'phone']);
     userModel.createUser(user).then(
       function (user) {
         if (user) {
           res.json(user);
         } else {
-          res.sendStatus(400).send("Something went wrong");
+          res.status(400).send("Something went wrong");
         }
       },
       function (err) {
-        res.sendStatus(400).send(err);
+        res.status(400).send(err);
       }
     );
   };
@@ -45,11 +47,11 @@ module.exports = function (app) {
         if (user) {
           res.status(200).json(user);
         } else {
-          res.sendStatus(400).send("Cannot find user with the username");
+          res.status(200).send({});
         }
       },
       function (err) {
-        res.sendStatus(400).send(err);
+        res.status(400).send(err);
       }
     );
   };
@@ -62,11 +64,11 @@ module.exports = function (app) {
         if (user) {
           res.json(user);
         } else {
-          res.sendStatus(400).send("Cannot find user with the username and password");
+          res.status(400).send("Cannot find user with the username and password");
         }
       },
       function (err) {
-        res.sendStatus(400).send(err);
+        res.status(400).send(err);
       }
     );
   }
@@ -78,11 +80,11 @@ module.exports = function (app) {
         if (user) {
           res.json(user);
         } else {
-          res.sendStatus(400).send("Cannot find user with the userID");
+          res.status(400).send("Cannot find user with the userID");
         }
       },
       function (err) {
-        res.sendStatus(400).send(err);
+        res.status(400).send(err);
       }
     );
   };
@@ -95,11 +97,11 @@ module.exports = function (app) {
         if (user) {
           res.json(user);
         } else {
-          res.sendStatus(400).send("Cannot find user")
+          res.status(400).send("Cannot find user")
         }
       },
       function (err) {
-        res.sendStatus(400).send(err);
+        res.status(400).send(err);
       }
     );
   };
@@ -111,7 +113,7 @@ module.exports = function (app) {
         res.json(stats);
       },
       function (err) {
-        res.sendStatus(400).send(err);
+        res.status(400).send(err);
       }
     );
   };

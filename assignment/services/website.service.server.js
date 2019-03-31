@@ -25,11 +25,11 @@ module.exports = function(app){
         if (website) {
           res.json(website);
         } else {
-          res.sendStatus(400).send("Something went wrong");
+          send(400).send("Something went wrong");
         }
       },
       function (err) {
-        res.sendStatus(400).send(err);
+        send(400).send(err);
       }
     );
   }
@@ -41,7 +41,7 @@ module.exports = function(app){
         res.json(website);
       },
       function (err) {
-        res.sendStatus(400).send(err);
+        send(400).send(err);
       }
     );
   }
@@ -53,11 +53,11 @@ module.exports = function(app){
         if (website) {
           res.json(website);
         } else {
-          res.sendStatus(400).send("Cannot find website with corresponding Id");
+          send(400).send("Cannot find website with corresponding Id");
         }
       },
       function (err) {
-        res.sendStatus(400).send(err);
+        send(400).send(err);
       }
     );
   }
@@ -71,11 +71,11 @@ module.exports = function(app){
         if (website) {
           res.json(website);
         } else {
-          res.sendStatus(400).send("Cannot find website with corresponding Id");
+          send(400).send("Cannot find website with corresponding Id");
         }
       },
       function (err) {
-        res.sendStatus(400).send(err);
+        send(400).send(err);
       }
     );
   }
@@ -87,7 +87,7 @@ module.exports = function(app){
         res.json(website);
       },
       function (err) {
-        res.sendStatus(400).send(err);
+        send(400).send(err);
       }
     );
   }

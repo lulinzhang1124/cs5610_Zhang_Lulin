@@ -28,7 +28,7 @@ function findUserByCredentials(username, password) {
 }
 
 function updateUser(userId, user) {
-  return User.findByIdAndUpdate(userId, user);
+  return User.findByIdAndUpdate(userId, user, {new: true});
 }
 
 function deleteUser(userId) {
