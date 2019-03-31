@@ -43,7 +43,7 @@ module.exports = function(app){
         res.json(website);
       },
       function (err) {
-        send(400).send(err);
+        res.status(400).send(err);
       }
     );
   }
@@ -55,11 +55,11 @@ module.exports = function(app){
         if (website) {
           res.json(website);
         } else {
-          send(400).send("Cannot find website with corresponding Id");
+          res.status(400).send("Cannot find website with corresponding Id");
         }
       },
       function (err) {
-        send(400).send(err);
+        res.status(400).send(err);
       }
     );
   }

@@ -14,7 +14,8 @@ export class WidgetChooserComponent implements OnInit {
   widgetType: string;
 
   constructor(private  widgetService: WidgetService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private  router: Router) {
   }
 
   ngOnInit() {
@@ -32,6 +33,7 @@ export class WidgetChooserComponent implements OnInit {
 
   createWidget(widgetType: string) {
     this.widgetService.chooseNewType(widgetType);
+    //this.router.navigate(['../', this.widgetId], {relativeTo: this.route});
   }
 
 

@@ -1,3 +1,4 @@
+var _ = require('lodash');
 module.exports = function (app) {
   app.post("/api/website/:websiteId/page", createPage);
   app.get("/api/website/:websiteId/page", findAllPagesForWebsite);
@@ -9,17 +10,17 @@ module.exports = function (app) {
 
   function createPage(req, res) {
     var websiteId = req.params.websiteId;
-    var page = req.body;
+    var page = _.pick(req.body, ['name','websiteId','description']);
     pageModel.createPage(websiteId, page).then(
       function (page) {
         if (page) {
           res.json(page);
         } else {
-          send(400).send("Something went wrong");
+          res.status(200).send({});
         }
       },
       function (err) {
-        send(400).send(err);
+        res.status(400).send(err);
       }
     );
   }
@@ -31,7 +32,7 @@ module.exports = function (app) {
         res.json(page);
       },
       function (err) {
-        send(400).send(err);
+        res.status(400).send(err);
       }
     );
   }
@@ -43,11 +44,11 @@ module.exports = function (app) {
         if (page) {
           res.json(page);
         } else {
-          send(400).send("Cannot find page with corresponding Id");
+          res.status(400).send("Cannot find page with corresponding Id");
         }
       },
       function (err) {
-        send(400).send(err);
+        res.status(400).send(err);
       }
     );
   }
@@ -60,11 +61,11 @@ module.exports = function (app) {
         if (page) {
           res.json(page);
         } else {
-          send(400).send("Cannot find page with corresponding Id");
+          res.status(400).send("Cannot find page with corresponding Id");
         }
       },
       function (err) {
-        send(400).send(err);
+        res.status(400).send(err);
       }
     );
   }
@@ -76,7 +77,7 @@ module.exports = function (app) {
         res.json(page);
       },
       function (err) {
-        send(400).send(err);
+        res.status(400).send(err);
       }
     );
   }

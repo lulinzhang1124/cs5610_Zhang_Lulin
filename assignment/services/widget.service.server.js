@@ -1,3 +1,4 @@
+var _ = require('lodash');
 module.exports = function (app) {
   var widgetModel = require("../model/widget/widget.model.server.js");
   var path = require('path');
@@ -87,7 +88,7 @@ module.exports = function (app) {
           res.send(200);
         },
         function (err) {
-          send(404).send(err);
+          res.status(404).send(err);
         });
 
     //widget.url = baseUrl+ '/uploads/' + filename;
@@ -96,17 +97,19 @@ module.exports = function (app) {
 
   function createWidget(req, res) {
     var pageId = req.params.pageId;
-    var widget = req.body;
+    var widget = _.pick(req.body, ["widgetType", "name", "pageId", "size", "text", "url", "width", "height","rows"]);
+    console.log(widget);
+    console.log(req.body);
     widgetModel.createWidget(pageId, widget).then(
       function (widget) {
         if (widget) {
           res.json(widget);
         } else {
-          send(400).send("Something went wrong");
+          res.status(200).send({});
         }
       },
       function (err) {
-        send(400).send(err);
+        res.status(400).send(err);
       }
     );
   }
@@ -118,7 +121,7 @@ module.exports = function (app) {
         res.json(widget);
       },
       function (err) {
-        send(400).send(err);
+        res.status(400).send(err);
       }
     );
   }
@@ -133,7 +136,7 @@ module.exports = function (app) {
       .then(function (stats) {
         res.sendStatus(200);
       }, function (err) {
-        send(400).send(err);
+        res.status(400).send(err);
       });
   }
 
@@ -145,7 +148,7 @@ module.exports = function (app) {
           res.json(widget);
         },
         function (err) {
-          send(404).send(err);
+          res.status(404).send(err);
         });
   }
 
@@ -157,7 +160,7 @@ module.exports = function (app) {
           res.json(stats);
         },
         function (err) {
-          send(404).send(err);
+          res.status(404).send(err);
         });
   }
 
@@ -168,7 +171,7 @@ module.exports = function (app) {
         res.json(stats);
       },
       function (err) {
-        send(404).send(err);
+        res.status(404).send(err);
       }
     );
   }

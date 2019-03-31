@@ -1,4 +1,4 @@
-<body>
+
 <nav class="navbar fixed-top cl-grey-navbar">
   <div class="container-fluid">
     <div>
@@ -15,17 +15,19 @@
 <div class="container">
   <ul class="list-group cl-list-group-borderless">
     <li class="list-group-item cl-list-item-borderless">
-      <a [routerLink]="['../', widgetId]" (click)="createWidget('HEADING')"
+      <a  routerLink="." (click)="createWidget('HEADING')"
          class="cl-text-blue">Header</a>
     </li>
     <li class="list-group-item cl-list-item-borderless">
       <a class="cl-text-blue">Label</a>
     </li>
     <li class="list-group-item cl-list-item-borderless">
-      <a class="cl-text-blue">HTML</a>
+      <a [routerLink]="['../', widgetId]" (click)="createWidget('HTML')"
+        class="cl-text-blue">HTML</a>
     </li>
     <li class="list-group-item cl-list-item-borderless">
-      <a class="cl-text-blue">Text Input</a>
+      <a routerLink="." (click)="createWidget('TEXT')"
+        class="cl-text-blue">Text Input</a>
     </li>
     <li class="list-group-item cl-list-item-borderless">
       <a class="cl-text-blue">Link</a>
@@ -57,4 +59,4 @@
   </div>
 </nav>
 
-</body>
+

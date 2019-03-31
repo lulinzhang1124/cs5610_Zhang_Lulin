@@ -5,7 +5,7 @@ var WidgetSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Page'
   },
-  type: {
+  widgetType: {
     type: String,
     enum: ['HEADING', 'IMAGE', 'YOUTUBE', 'HTML', 'TEXT']
   },

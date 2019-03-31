@@ -19,7 +19,7 @@
 
 <div class="container cl-container-padding-more">
   <div appSortable (newIndexes) = "onNewIndexes($event)">
-    <div *ngFor="let widget of widgets">
+    <div *ngFor="let widget of widgets"><p>{{widget.widgetType}}</p>
       <div *ngIf="widget.widgetType === 'HEADING'">
         <div class="float-right">
           <a class="float-right cl-text-blue fa fa-bars"></a>
