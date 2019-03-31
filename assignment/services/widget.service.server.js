@@ -87,7 +87,7 @@ module.exports = function (app) {
           res.send(200);
         },
         function (err) {
-          res.sendStatus(404).send(err);
+          send(404).send(err);
         });
 
     //widget.url = baseUrl+ '/uploads/' + filename;
@@ -102,11 +102,11 @@ module.exports = function (app) {
         if (widget) {
           res.json(widget);
         } else {
-          res.sendStatus(400).send("Something went wrong");
+          send(400).send("Something went wrong");
         }
       },
       function (err) {
-        res.sendStatus(400).send(err);
+        send(400).send(err);
       }
     );
   }
@@ -118,7 +118,7 @@ module.exports = function (app) {
         res.json(widget);
       },
       function (err) {
-        res.sendStatus(400).send(err);
+        send(400).send(err);
       }
     );
   }
@@ -133,7 +133,7 @@ module.exports = function (app) {
       .then(function (stats) {
         res.sendStatus(200);
       }, function (err) {
-        res.sendStatus(400).send(err);
+        send(400).send(err);
       });
   }
 
@@ -145,7 +145,7 @@ module.exports = function (app) {
           res.json(widget);
         },
         function (err) {
-          res.sendStatus(404).send(err);
+          send(404).send(err);
         });
   }
 
@@ -157,7 +157,7 @@ module.exports = function (app) {
           res.json(stats);
         },
         function (err) {
-          res.sendStatus(404).send(err);
+          send(404).send(err);
         });
   }
 
@@ -168,7 +168,7 @@ module.exports = function (app) {
         res.json(stats);
       },
       function (err) {
-        res.sendStatus(404).send(err);
+        send(404).send(err);
       }
     );
   }

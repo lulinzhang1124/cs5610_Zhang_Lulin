@@ -15,11 +15,11 @@ module.exports = function (app) {
         if (page) {
           res.json(page);
         } else {
-          res.sendStatus(400).send("Something went wrong");
+          send(400).send("Something went wrong");
         }
       },
       function (err) {
-        res.sendStatus(400).send(err);
+        send(400).send(err);
       }
     );
   }
@@ -31,7 +31,7 @@ module.exports = function (app) {
         res.json(page);
       },
       function (err) {
-        res.sendStatus(400).send(err);
+        send(400).send(err);
       }
     );
   }
@@ -43,11 +43,11 @@ module.exports = function (app) {
         if (page) {
           res.json(page);
         } else {
-          res.sendStatus(400).send("Cannot find page with corresponding Id");
+          send(400).send("Cannot find page with corresponding Id");
         }
       },
       function (err) {
-        res.sendStatus(400).send(err);
+        send(400).send(err);
       }
     );
   }
@@ -60,11 +60,11 @@ module.exports = function (app) {
         if (page) {
           res.json(page);
         } else {
-          res.sendStatus(400).send("Cannot find page with corresponding Id");
+          send(400).send("Cannot find page with corresponding Id");
         }
       },
       function (err) {
-        res.sendStatus(400).send(err);
+        send(400).send(err);
       }
     );
   }
@@ -76,7 +76,7 @@ module.exports = function (app) {
         res.json(page);
       },
       function (err) {
-        res.sendStatus(400).send(err);
+        send(400).send(err);
       }
     );
   }
