@@ -1,3 +1,5 @@
+var _ = require('lodash');
+
 module.exports = function(app){
   app.post("/api/user/:userId/website", createWebsite);
   app.get("/api/user/:userId/website", findAllWebsitesForUser);
@@ -19,17 +21,17 @@ module.exports = function(app){
 
   function createWebsite(req, res) {
     var userId = req.params.userId;
-    var website = req.body;
+    var website = _.pick(req.body, ['name', 'developerId', 'description']);
     websiteModel.createWebsiteForUser(userId, website).then(
       function (website) {
         if (website) {
           res.json(website);
         } else {
-          send(400).send("Something went wrong");
+          res.status(200).send({});
         }
       },
       function (err) {
-        send(400).send(err);
+        res.status(400).send(err);
       }
     );
   }
