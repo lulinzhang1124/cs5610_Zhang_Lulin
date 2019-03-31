@@ -6,6 +6,13 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const app = express();
 
+// var db = mongoose.connect('mongodb://<dbuser>:<dbpassword>@ds263847.mlab.com:63847/heroku_khn0t993');
+
+var connectionString = 'mongodb://localhost:27017/web5610';
+var mongoose = require("mongoose");
+
+mongoose.createConnection(connectionString);
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

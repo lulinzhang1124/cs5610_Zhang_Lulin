@@ -17,6 +17,9 @@ import {PageListComponent} from './components/page/page-list/page-list.component
 import {WidgetHeaderComponent} from './components/widget/widget-edit/widget-header/widget-header.component';
 import {WidgetImageComponent} from './components/widget/widget-edit/widget-image/widget-image.component';
 import {WidgetYoutubeComponent} from './components/widget/widget-edit/widget-youtube/widget-youtube.component';
+import { WidgetHtmlComponent } from './components/widget/widget-edit/widget-html/widget-html.component';
+import { WidgetTextComponent } from './components/widget/widget-edit/widget-text/widget-text.component';
+
 
 import {Routing} from './app.routing';
 import {UserService} from './services/user.service.client';
@@ -24,8 +27,10 @@ import {WebsiteService} from './services/website.service.client';
 import {PageService} from './services/page.service.client';
 import {WidgetService} from './services/widget.service.client';
 import {HttpClientModule} from '@angular/common/http';
-import { SortableDirective} from './sortable.directive';
-// import {QuillEditorModule} from 'ngx-quill-editor/quillEditor.module';
+import {SortableDirective} from './sortable.directive';
+import {FlickrService} from './services/flickr.service.client';
+import {FlickrImageSearchComponent} from './components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
+import {QuillEditorModule} from 'ngx-quill-editor/quillEditor.module';
 
 
 
@@ -47,16 +52,19 @@ import { SortableDirective} from './sortable.directive';
     WidgetHeaderComponent,
     WidgetImageComponent,
     WidgetYoutubeComponent,
+    WidgetHtmlComponent,
+    WidgetTextComponent,
     SortableDirective,
+    FlickrImageSearchComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     Routing,
     FormsModule,
-    // QuillEditorModule
+    QuillEditorModule
   ],
-  providers: [UserService, WebsiteService, PageService, WidgetService],
+  providers: [UserService, WebsiteService, PageService, WidgetService, FlickrService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

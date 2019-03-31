@@ -5,80 +5,80 @@ module.exports = function (app) {
   app.put("/api/page/:pageId", updatePage);
   app.delete("/api/page/:pageId", deletePage);
 
-  const pages = [
-    {'_id': '321', name: 'Post 1', websiteId: '456', 'description': 'Lorem'},
-    {'_id': '432', name: 'Post 2', websiteId: '456', 'description': 'Lorem'},
-    {'_id': '543', name: 'Post 3', websiteId: '456', 'description': 'Lorem'}
-  ];
+  var pageModel = require("../model/page/page.model.server.js");
 
   function createPage(req, res) {
-    const new_page = {
-      _id: (new Date()).getTime().toString(),
-      name: req.body.name,
-      websiteId: req.params['websiteId'],
-      description: req.body.description
-    };
-
-    console.log('create new page: ' + new_page._id + ' ' + new_page.name);
-    pages.push(new_page);
-    res.json(new_page);
+    var websiteId = req.params.websiteId;
+    var page = req.body;
+    pageModel.createPage(websiteId, page).then(
+      function (page) {
+        if (page) {
+          res.json(page);
+        } else {
+          res.sendStatus(400).send("Something went wrong");
+        }
+      },
+      function (err) {
+        res.sendStatus(400).send(err);
+      }
+    );
   }
 
   function findAllPagesForWebsite(req, res) {
-    const websiteId = req.params['websiteId'];
-    const resultSet = pages.filter(function (page) {
-      return page.websiteId === websiteId;
-    });
-    if (resultSet) {
-      console.log('find pages for user: success');
-      res.json(resultSet);
-    } else {
-      console.log('find pages for user: not found');
-      res.json({});
-    }
+    var websiteId = req.params.websiteId;
+    pageModel.findAllPagesForWebsite(websiteId).then(
+      function (page) {
+        res.json(page);
+      },
+      function (err) {
+        res.sendStatus(400).send(err);
+      }
+    );
   }
 
   function findPageById(req, res) {
-    const pageId = req.params['pageId'];
-    const page = pages.find(function (page) {
-      return page._id === pageId;
-    });
-    if (page) {
-      console.log('find page by id: ' + page._id + ' ' + page.name);
-      res.json(page);
-    } else {
-      console.log('find page by id: not found');
-      res.json({});
-    }
+    var pageId = req.params.pageId;
+    pageModel.findPageById(pageId).then(
+      function (page) {
+        if (page) {
+          res.json(page);
+        } else {
+          res.sendStatus(400).send("Cannot find page with corresponding Id");
+        }
+      },
+      function (err) {
+        res.sendStatus(400).send(err);
+      }
+    );
   }
 
   function updatePage(req, res) {
-    const pageId = req.params['pageId'];
-    const page = req.body;
-
-    for (const i in pages) {
-      if (pages[i]._id === pageId) {
-        console.log(req.body);
-        console.log("update page: " + pageId + " " + page.name);
-
-        pages[i].name = page.name;
-        pages[i].description = page.description;
-        res.status(200).send(page);
-        return;
+    var pageId = req.params.pageId;
+    var updatedPage = req.body;
+    pageModel.updatePage(pageId, updatedPage).then(
+      function (page) {
+        if (page) {
+          res.json(page);
+        } else {
+          res.sendStatus(400).send("Cannot find page with corresponding Id");
+        }
+      },
+      function (err) {
+        res.sendStatus(400).send(err);
       }
-    }
-    res.status(404).send("not found!");
+    );
   }
 
   function deletePage(req, res) {
-    const pageId = req.params['pageId'];
-    for (const i in pages) {
-      const j = +i;
-      res.json(pages[i]);
-      console.log('delete page: ' + pageId);
-      pages.splice(j, 1);
-      return;
-    }
+    var pageId = req.params.pageId;
+    pageModel.deletePage(pageId).then(
+      function (page) {
+        res.json(page);
+      },
+      function (err) {
+        res.sendStatus(400).send(err);
+      }
+    );
   }
-
 };
+

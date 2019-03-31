@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs';
 import {User} from '../models/user.model.client';
-import {map} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
 
 
@@ -25,23 +24,23 @@ export class UserService {
     return this._http.post(this.baseUrl + '/api/user', user);
   }
 
-  findUserById(userId: string) {
+  findUserById(userId: String) {
     return this._http.get(this.baseUrl + '/api/user/' + userId);
   }
 
-  findUserByUsername(username: string) {
+  findUserByUsername(username: String) {
     return this._http.get(this.baseUrl + '/api/user?username=' + username);
   }
 
-  findUserByCredentials(username: string, password: string) {
+  findUserByCredentials(username: String, password: String) {
     return this._http.get<User>(this.baseUrl + '/api/user?username=' + username + '&password=' + password);
   }
 
-  updateUser(userId: string, user: User) {
+  updateUser(userId: String, user: User) {
     return this._http.put(this.baseUrl + '/api/user/' + userId, user);
   }
 
-  deleteUser(userId: string) {
+  deleteUser(userId: String) {
     return this._http.delete(this.baseUrl + '/api/user/' + userId);
   }
 }

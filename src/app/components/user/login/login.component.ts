@@ -12,13 +12,13 @@ import {User} from '../../../models/user.model.client';
 export class LoginComponent implements OnInit {
 
   @ViewChild('f') loginForm: NgForm;
-  username: string;
-  password: string;
+  username: String;
+  password: String;
   errorFlag: boolean;
   errorMsg = 'Invalid username or password !';
 
   constructor(private userService: UserService, private router: Router) {
-    this.username = 'hello world!';
+    // this.username = 'hello world!';
   }
 
   ngOnInit() {
@@ -29,8 +29,9 @@ export class LoginComponent implements OnInit {
     this.password = this.loginForm.value.password;
     this.userService.findUserByCredentials(this.username, this.password).subscribe(
       (user: User) => {
-        if (typeof user._id !== 'undefined') {
-          console.log(user);
+        console.log(user);
+        if (user) {
+          console.log('get user success! ' + user._id);
           this.router.navigate(['/user', user._id]);
         } else {
           this.errorFlag = true;
