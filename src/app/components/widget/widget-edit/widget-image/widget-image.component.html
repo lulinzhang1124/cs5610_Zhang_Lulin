@@ -88,23 +88,18 @@
   <!--</div>-->
 <!--</nav>-->
 <!--</body>-->
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid row">
-
-    <div class="navbar-text pull-left">
-      <a routerLink=".." class="cl-text-black cl-icon-padding">
-          <span class="glyphicon glyphicon-chevron-left">
-          </span>
+<nav class="navbar fixed-top cl-grey-navbar">
+  <div class="container-fluid">
+    <div>
+      <a [routerLink]="['../..']" class="navbar-brand cl-text-black cl-icon-padding">
+        <i class="fas fa-angle-left"></i>
       </a>
+      <h1 class="navbar-brand cl-text-black cl-text-bold cl-text-grey">
+        Image Edit
+      </h1>
     </div>
-    <div class="navbar-text pull-right">
-      <a routerLink=".." class="cl-icon-padding cl-text-black">
-          <span class="glyphicon glyphicon-ok">
-          </span>
-      </a>
-    </div>
-    <a class="navbar-brand cl-text-white cl-text-bold">
-      Image Edit
+    <a (click)="updateWidget()" class="navbar-brand cl-text-black float-right cl-icon-padding">
+      <i class="fas fa-check"></i>
     </a>
   </div>
 </nav>

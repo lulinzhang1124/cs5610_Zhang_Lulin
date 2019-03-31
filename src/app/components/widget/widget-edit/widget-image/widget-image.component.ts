@@ -101,15 +101,12 @@ export class WidgetImageComponent implements OnInit {
     this.url = this.imageForm.value.url;
     this.width = this.imageForm.value.width;
     this.type = 'IMAGE';
-
-    // const new_widget = new Widget(undefined, 'IMAGE', this.pageID,
-    //     '1', this.text.toString(), this.width.toString(), this.url.toString());
     const new_widget = {
       _id: '', widgetType: this.type, name: '', pageId: this.pageID, size: '1', text: this.text.toString(),
       url: this.url.toString(), width: this.width.toString(),
       height: 100, rows: 0, class: '', icon: '', deletable: false, formatted: false, placeholder: ''
     };
-    if (new_widget.widgetType === undefined) {
+    if (new_widget.widgetType ===  'undefined') {
       new_widget.widgetType = 'IMAGE';
     }
     this.widgetService.createWidget(this.pageID, new_widget).subscribe(
@@ -132,7 +129,7 @@ export class WidgetImageComponent implements OnInit {
         this.websiteId = params['wid'];
         this.pageID = params['pid'];
         this.wgid = params['wgid'];
-        if (this.wgid === undefined) {
+        if (this.wgid === 'undefined') {
           this.widget = {
             _id: '', widgetType: 'IMAGE', name: '', pageId: this.pageID, size: '1', text: '', url: '', width: '100%',
             height: 100, rows: 0, class: '', icon: '', deletable: false, formatted: false, placeholder: ''

@@ -45,6 +45,7 @@ export class WidgetHeaderComponent implements OnInit {
         (new_wgt: Widget) => {
           this.widget = new_wgt;
           console.log('create widget-heading success!');
+          this.router.navigate(['../'], {relativeTo: this.route});
         }
       );
     } else {
@@ -52,10 +53,10 @@ export class WidgetHeaderComponent implements OnInit {
       this.widgetService.updateWidget(this.widget._id, this.newWidget).subscribe(
         (new_wgt: Widget) => {
           console.log('update widget-heading success!');
+          this.router.navigate(['../'], {relativeTo: this.route});
         }
       );
     }
-    this.router.navigate(['../'], {relativeTo: this.route});
   }
 
   deleteWidget() {
