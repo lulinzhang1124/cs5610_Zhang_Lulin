@@ -15,7 +15,7 @@
 <div class="container">
   <ul class="list-group cl-list-group-borderless">
     <li class="list-group-item cl-list-item-borderless">
-      <a  routerLink="." (click)="createWidget('HEADING')"
+      <a [routerLink]="['../', widgetId]" (click)="createWidget('HEADING')"
          class="cl-text-blue">Header</a>
     </li>
     <li class="list-group-item cl-list-item-borderless">

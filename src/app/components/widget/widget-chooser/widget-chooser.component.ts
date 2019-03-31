@@ -33,7 +33,7 @@ export class WidgetChooserComponent implements OnInit {
 
   createWidget(widgetType: string) {
     this.widgetService.chooseNewType(widgetType);
-    //this.router.navigate(['../', this.widgetId], {relativeTo: this.route});
+    // this.router.navigate(['../', this.widgetId], {relativeTo: this.route});
   }
 
 

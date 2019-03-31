@@ -26,7 +26,7 @@ function findWidgetById(widgetId) {
 }
 
 function updateWidget(widgetId, widget) {
-  return Widget.findByIdAndUpdate(widgetId, widget);
+  return Widget.findByIdAndUpdate(widgetId, widget, {new: true});
 }
 
 function deleteWidget(widgetId) {

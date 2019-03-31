@@ -19,14 +19,14 @@
 
 <div class="container cl-container-padding-more">
   <div appSortable (newIndexes) = "onNewIndexes($event)">
-    <div *ngFor="let widget of widgets"><p>{{widget.widgetType}}</p>
+    <div *ngFor="let widget of widgets">
       <div *ngIf="widget.widgetType === 'HEADING'">
         <div class="float-right">
           <a class="float-right cl-text-blue fa fa-bars"></a>
           <a routerLink="{{widget._id}}"
              class="fa fa-cog cl-text-blue"></a>
         </div>
-        <font size="{{widget.size}}"> {{widget.text}}</font>
+        <font size="{{widget.size}}"> {{widget.name}}</font>
       </div>
 
       <div *ngIf="widget.widgetType === 'IMAGE'">
