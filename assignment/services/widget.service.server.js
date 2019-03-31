@@ -4,7 +4,7 @@ module.exports = function (app) {
   var path = require('path');
   const multer = require('multer'); // npm install multer --save
   //const upload = multer({destination: __dirname + '/../../src/assets/uploads'});
-  const baseUrl = "http://localhost:3200";
+  const baseUrl = "http://localhost:8080";
   //'https://luckyhusky.herokuapp.com'
   //"http://localhost:3200"
 
@@ -45,7 +45,6 @@ module.exports = function (app) {
   }
 
   function uploadImage(req, res) {
-
     var widgetId = req.body.widgetId;
     var width = req.body.width;
     var myFile = req.file;
@@ -69,19 +68,28 @@ module.exports = function (app) {
     var size = myFile.size;
     var mimetype = myFile.mimetype;
 
-    // if (widgetId === '') {
-    //   var widget = {_id: '', widgetType: 'IMAGE', pageId: pageId, size: '', text: '', width: '', url: '', name: ''};
-    //   widget._id = (new Date()).getTime().toString();
-    //   widget.url = baseUrl + '/assets/uploads/' + filename;
-    //
-    //   console.log('create widget image: ' + widget._id);
-    //   widgets.push(widget);
-    //   res.redirect(callbackUrl + '/' + widget._id);
-    //   return;
-    // }
+    if (widgetId === '') {
+      var widget = {_id: '', widgetType: 'IMAGE', pageId: pageId, size: '', text: '', width: '', url: '', name: ''};
+      widget._id = (new Date()).getTime().toString();
+      widget.url = baseUrl + '/assets/uploads/' + filename;
+
+      console.log('create widget image: ' + widget._id);
+      widgets.push(widget);
+      res.redirect(callbackUrl + '/' + widget._id);
+      return;
+    }
 
     // find widget by id
-    var imageUrl = baseUrl + "/api/image/" + filename;
+    // var widget;
+    // for (var i = 0; i < widgets.length; i++) {
+    //   if (widgets[i]._id === widgetId) {
+    //     widget = widgets[i];
+    //     break;
+    //   }
+    // }
+    //
+    // widget.url = baseUrl+ '/uploads/' + filename;
+    var imageUrl = baseUrl + "/assets/uploads/" + filename;
     var widget = { url: imageUrl };
     widgetModel
       .updateWidget(widgetId, widget)
@@ -89,12 +97,11 @@ module.exports = function (app) {
           res.send(200);
         },
         function (err) {
-          res.status(404).send(err);
+          res.sendStatus(404).send(err);
         });
-
-    //widget.url = baseUrl+ '/uploads/' + filename;
     res.redirect(callbackUrl+ '/' + widgetId);
   }
+
 
   function createWidget(req, res) {
     var pageId = req.params.pageId;
@@ -155,7 +162,7 @@ module.exports = function (app) {
 
   function updateWidget(req, res) {
     var widgetId = req.params.widgetId;
-    var updatedWidget = req.body;
+    var updatedWidget = _.pick(req.body, ["text","url", "width"]);
     widgetModel.updateWidget(widgetId, updatedWidget)
       .then(function (stats) {
           res.json(stats);

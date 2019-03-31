@@ -1,18 +1,13 @@
-
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar fixed-top cl-grey-navbar">
   <div class="container-fluid">
-    <p class="navbar-text pull-left">
-      <a routerLink="../.." class="navbar-link">
-        <span class="glyphicon glyphicon-chevron-left"></span>
+    <div>
+      <a [routerLink]="['..']" class="navbar-brand cl-text-black cl-icon-padding">
+        <i class="fas fa-angle-left"></i>
       </a>
-    </p>
-    <span>
-      <p class="navbar-header pull-left">
-        <a class="navbar-brand thick">
-          <b>Search Image</b>
-        </a>
-      </p>
-    </span>
+      <h1 class="navbar-brand cl-text-black cl-text-bold cl-text-grey">
+        Search Flickr
+      </h1>
+    </div>
   </div>
 </nav>
 
@@ -21,7 +16,7 @@
     <input [(ngModel)]="searchText" type="text" class="form-control">
     <span class="input-group-btn">
       <a (click)="searchPhotos()" class="btn btn-default" type="button">
-        <span class="glyphicon glyphicon-search"></span>
+        <span class="fas fa-search"></span>
       </a>
     </span>
   </div>
@@ -39,13 +34,10 @@
 </div>
 <!-- Footer -->
 
-<nav class="navbar navbar-default navbar-fixed-bottom">
-  <div class="container-fluid">
-    <p class="navbar-text pull-right">
-      <a routerLink="/user/{{userId}}">
-        <span class="glyphicon glyphicon-user"></span>
-      </a>
-    </p>
-
+<nav class="navbar fixed-bottom cl-grey-navbar">
+  <div class="container-fluid justify-content-end">
+    <a routerLink="/user/{{userId}}" class="navbar-brand cl-icon-padding cl-text-blue">
+      <span class="fas fa-user"></span>
+    </a>
   </div>
 </nav>

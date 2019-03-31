@@ -1,25 +1,19 @@
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid row">
-
-    <div class="navbar-text pull-left">
-      <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget" class="cl-text-black cl-icon-padding">
-          <span class="glyphicon glyphicon-chevron-left">
-          </span>
+<nav class="navbar fixed-top cl-grey-navbar">
+  <div class="container-fluid">
+    <div>
+      <a [routerLink]="['../..']" class="navbar-brand cl-text-black cl-icon-padding">
+        <i class="fas fa-angle-left"></i>
       </a>
+      <h1 class="navbar-brand cl-text-black cl-text-bold cl-text-grey">
+        Widgets Edit
+      </h1>
     </div>
-    <div class="navbar-text pull-right">
-      <a (click)="updateWidget(widget)" class="cl-icon-padding cl-text-black">
-          <span class="glyphicon glyphicon-ok">
-          </span>
-      </a>
-    </div>
-    <a class="navbar-brand cl-text-white cl-text-bold" routerLink="/#">
-      Widget Edit
+    <a (click)="updateWidget()" class="navbar-brand cl-text-black float-right cl-icon-padding">
+      <i class="fas fa-check"></i>
     </a>
   </div>
-</nav>
 
-<div class="container-fluid">
+  <div class="container-fluid">
   <!--<form>-->
     <div class="form-group">
       <label for="html-name">Name</label>
@@ -39,14 +33,10 @@
   <a class="btn btn-danger  btn-block" (click)="deleteWidget()">Delete</a>
 </div>
 
-<nav class="navbar navbar-default navbar-fixed-bottom">
-  <div class="container-fluid row">
-    <div class="pull-right navbar-text">
-
-      <a routerLink="/user/{{userId}}" class="cl-icon-padding">
-        <span class="glyphicon glyphicon-user"></span>
-      </a>
-
-    </div>
+<nav class="navbar fixed-bottom cl-grey-navbar">
+  <div class="container-fluid justify-content-end">
+    <a routerLink="/user/{{userId}}" class="navbar-brand cl-icon-padding cl-text-blue">
+      <span class="fas fa-user"></span>
+    </a>
   </div>
 </nav>

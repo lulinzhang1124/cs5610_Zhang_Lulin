@@ -49,6 +49,52 @@
           <iframe class="e2e-iframe-trusted-src" [src]="getSantizeUrl(widget.url)" frameborder="0"></iframe>
         </div>
       </div>
+
+      <div *ngIf="widget.type == 'HTML'">
+        <div class="pull-right">
+          <a routerLink="/#" class="pull-right">
+            <span class="glyphicon glyphicon-menu-hamburger cl-widget-toolbar-hamburger"></span>
+          </a>
+          <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
+            <span class="glyphicon glyphicon-cog cl-widget-toolbar-cog"></span>
+          </a>
+        </div>
+        <div [innerHTML]="widget.text"></div>
+      </div>
+
+      <div *ngIf="widget.type == 'TEXT'">
+        <div class="pull-right">
+          <a routerLink="/#" class="pull-right">
+            <span class="glyphicon glyphicon-menu-hamburger cl-widget-toolbar-hamburger"></span>
+          </a>
+          <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
+            <span class="glyphicon glyphicon-cog cl-widget-toolbar-cog"></span>
+          </a>
+        </div>
+        <!--<h1>TEXT: {{widget.text}}</h1>-->
+
+        <!--<div *ngIf="widget.formatted">-->
+        <!--<quill-editor [(ngModel)]="widget.text" name="text"></quill-editor>-->
+        <!--</div>-->
+
+        <!--<input *ngIf="!widget.formatted && (!widget.rows || widget.rows===1)"-->
+        <!--placeholder="{{widget.placeholder}}" class="form-control"/>-->
+
+        <!--<textarea *ngIf="!widget.formatted && (widget.rows > 1)"-->
+        <!--rows="{{widget.rows}}" placeholder="{{widget.placeholder}}"-->
+        <!--class="form-control">{{widget.text}}</textarea>-->
+        <!--</div>-->
+        <div *ngIf="widget.formatted">
+          <quill-editor [(ngModel)]="widget.text" name="text"></quill-editor>
+        </div>
+
+        <input *ngIf="!widget.formatted && (!widget.rows || widget.rows===1)"
+               placeholder="{{widget.placeholder}}" class="form-control"/>
+
+        <textarea *ngIf="!widget.formatted && (widget.rows > 1)"
+                  rows="{{widget.rows}}" placeholder="{{widget.placeholder}}"
+                  class="form-control">{{widget.text}}</textarea>
+      </div>
     </div>
   </div>
 </div>
