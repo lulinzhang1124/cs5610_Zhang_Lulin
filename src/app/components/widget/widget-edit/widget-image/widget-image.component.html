@@ -39,7 +39,7 @@
 
   <div class="form-group" *ngIf="widget">
     <label for="image-URL">URL</label>
-    <input type="text"
+    <input [(ngModel)]="widget.url" type="text"
            name="url"
            class="form-control"
            id="image-URL"

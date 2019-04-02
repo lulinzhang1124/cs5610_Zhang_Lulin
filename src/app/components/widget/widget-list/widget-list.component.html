@@ -35,7 +35,7 @@
           <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}"
              class="fa fa-cog cl-text-blue"></a>
         </div>
-        <img class="img-responsive img-rounded cl-widget-images" src="{{widget.url}}">
+        <img class="img-responsive img-rounded cl-widget-images" [style.width]="widget.width" src="{{widget.url}}">
       </div>
 
       <div *ngIf="widget.widgetType === 'YOUTUBE'">
