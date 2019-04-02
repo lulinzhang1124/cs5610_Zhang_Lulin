@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {Widget, WidgetHeading} from '../../../../models/widget.model.client';
+import {Widget} from '../../../../models/widget.model.client';
 import {WidgetService} from '../../../../services/widget.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
-
+// @ts-ignore
 @Component({
   selector: 'app-widget-header',
   templateUrl: './widget-header.component.html',
   styleUrls: ['./widget-header.component.css']
 })
 export class WidgetHeaderComponent implements OnInit {
-  widget = new WidgetHeading('', '', '', '', null, '');
+  widget: any = {}; // new Widget('', '', '', '', null, '');
   userId: string;
   pageId: string;
   widgetId: string;
@@ -30,7 +30,7 @@ export class WidgetHeaderComponent implements OnInit {
     if (this.widgetId !== 'undefined') {
       // @ts-ignore
       this.widget = this.widgetService.findWidgetById(this.widgetId).subscribe(
-        (widget: WidgetHeading) => {
+        (widget: Widget) => {
           this.widget = widget;
           console.log('loading widget-heading success!');
         }
@@ -40,22 +40,23 @@ export class WidgetHeaderComponent implements OnInit {
 
   updateWidget() {
     if (this.widgetId === 'undefined') {
-      this.newWidget = new WidgetHeading('', 'HEADING', this.widget.name, this.pageId, this.widget.size, this.widget.text);
+      this.newWidget = new Widget('', 'HEADING', this.widget.name, this.pageId, this.widget.size, this.widget.text);
       this.widgetService.createWidget(this.pageId, this.newWidget).subscribe(
-        (new_wgt: WidgetHeading) => {
+        (new_wgt: Widget) => {
           this.widget = new_wgt;
           console.log('create widget-heading success!');
+          this.router.navigate(['../'], {relativeTo: this.route});
         }
       );
     } else {
-      this.newWidget = new WidgetHeading(this.widgetId, 'HEADING', this.widget.name, this.pageId, this.widget.size, this.widget.text);
+      this.newWidget = new Widget(this.widgetId, 'HEADING', this.widget.name, this.pageId, this.widget.size, this.widget.text);
       this.widgetService.updateWidget(this.widget._id, this.newWidget).subscribe(
-        (new_wgt: WidgetHeading) => {
+        (new_wgt: Widget) => {
           console.log('update widget-heading success!');
+          this.router.navigate(['../'], {relativeTo: this.route});
         }
       );
     }
-    this.router.navigate(['../'], {relativeTo: this.route});
   }
 
   deleteWidget() {

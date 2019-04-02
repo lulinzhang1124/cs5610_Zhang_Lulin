@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Widget, WidgetHeading, WidgetHtml, WidgetImage, WidgetYoutube} from '../models/widget.model.client';
+import {Widget} from '../models/widget.model.client';
 import {BehaviorSubject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
@@ -12,15 +12,15 @@ export class WidgetService {
 
   private widgetChosen = new BehaviorSubject('DEFAULT');
   currentWidgetType = this.widgetChosen.asObservable();
-  widgets: Widget[] = [
-    new WidgetHeading('123', 'HEADING', 'heading1', '321', 2, 'GIZMODO'),
-    new WidgetHeading('234', 'HEADING',  'heading2', '321', 4, 'Lorem ipsum'),
-    new WidgetImage('345', 'IMAGE', 'Photo', '321', '100%', 'http://lorempixel.com/400/200'),
-    new WidgetHtml('456', 'HTML', 'html1', '321', '<p>Lorem ipsum</p>'),
-    new WidgetHeading('567', 'HEADING', 'heading3', '321', 4, 'Lorem ipsum'),
-    new WidgetYoutube('678', 'YOUTUBE', 'frozen', '321', 'frozen', '100%', 'https://www.youtube.com//embed/eSLe4HuKuK0'),
-    new WidgetHtml('789', 'HTML', 'html1', '321', '<p>Lorem ipsum</p>')
-  ];
+  // widgets: Widget[] = [
+  //   new WidgetHeading('123', 'HEADING', 'heading1', '321', 2, 'GIZMODO'),
+  //   new WidgetHeading('234', 'HEADING',  'heading2', '321', 4, 'Lorem ipsum'),
+  //   new WidgetImage('345', 'IMAGE', 'Photo', '321', '100%', 'http://lorempixel.com/400/200'),
+  //   new WidgetHtml('456', 'HTML', 'html1', '321', '<p>Lorem ipsum</p>'),
+  //   new WidgetHeading('567', 'HEADING', 'heading3', '321', 4, 'Lorem ipsum'),
+  //   new WidgetYoutube('678', 'YOUTUBE', 'frozen', '321', 'frozen', '100%', 'https://www.youtube.com//embed/eSLe4HuKuK0'),
+  //   new WidgetHtml('789', 'HTML', 'html1', '321', '<p>Lorem ipsum</p>')
+  // ];
 
   createWidget(pageId, widget) {
     return this._http.post(this.baseUrl + '/api/page/' + pageId + '/widget', widget);
@@ -49,5 +49,10 @@ export class WidgetService {
   reorderWidgets(pageId: String, startIndex: Number, endIndex: Number, widgets: Widget[]) {
     return this._http.put(this.baseUrl + '/api/page/' + pageId
       + '/widget?initial=' + startIndex + '&final=' + endIndex, widgets);
+  }
+
+  findImage(imageName: String) {
+    const url = this.baseUrl + '/api/image/' + imageName;
+    return this._http.get(url);
   }
 }

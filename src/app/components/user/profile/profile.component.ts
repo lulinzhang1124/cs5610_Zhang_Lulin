@@ -12,16 +12,16 @@ export class ProfileComponent implements OnInit {
   errorMsg = 'Invalid email address !';
 
   constructor(private userService: UserService, private route: ActivatedRoute, private router: Router) {
-    this.user = new User('', '', '');
+    this.user = new User('', '', '', '', '', '');
   }
 
-  userId: string;
+  userId: String;
   user: User;
-  username: string;
+  username: String;
   updateFlag: boolean;
-  updateMsg: string;
+  updateMsg: String;
   userErrorFlag: boolean;
-  userErrorMsg: string;
+  userErrorMsg: String;
 
   updateUser(user: User) {
     this.updateFlag = false;
@@ -45,6 +45,7 @@ export class ProfileComponent implements OnInit {
   updateProfile() {
     this.userService.updateUser(this.user._id, this.user).subscribe(
       (user: User) => {
+		console.log(user);
         this.user = user;
         this.updateFlag = true;
       },

@@ -12,11 +12,11 @@ import {User} from '../../../models/user.model.client';
 export class RegisterComponent implements OnInit {
 
   @ViewChild('form') signupForm: NgForm;
-  newUsername: string;
-  newPassword: string;
-  regVerifiedPassword: string;
-  user: User = {_id: '', username: '', password: '', firstName: '', lastName: '', email: ''};
-  userErrorMsg: string;
+  newUsername: String;
+  newPassword: String;
+  regVerifiedPassword: String;
+  user: User = {_id: '', username: '', password: '', firstName: '', lastName: '', email: '', phone: ''};
+  userErrorMsg: String;
   userErrorFlag: boolean;
 
   constructor(private userService: UserService, private router: Router) {
@@ -45,6 +45,6 @@ export class RegisterComponent implements OnInit {
   }
 
   onCancel() {
-    this.signupForm.reset();
+    this.router.navigate(['/login']);
   }
 }

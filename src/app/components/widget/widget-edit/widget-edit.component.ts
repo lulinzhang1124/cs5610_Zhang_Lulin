@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Widget} from '../../../models/widget.model.client';
 import {WidgetService} from '../../../services/widget.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ignore} from 'selenium-webdriver/testing';
 
 @Component({
   selector: 'app-widget-edit',
@@ -11,11 +12,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 export class WidgetEditComponent implements OnInit {
   widget: Widget;
-  userId: string;
-  websiteId: string;
-  pageId: string;
-  widgetId: string;
-  widgetChosen: string;
+  userId: String;
+  websiteId: String;
+  pageId: String;
+  widgetId: String;
+  widgetChosen: String;
 
   constructor(private  widgetService: WidgetService,
               private route: ActivatedRoute,
@@ -33,7 +34,7 @@ export class WidgetEditComponent implements OnInit {
     });
     this.widgetService.currentWidgetType
       .subscribe(
-        (widgetChosen: string) => {
+        (widgetChosen: String) => {
           this.widgetChosen = widgetChosen;
         }
       );

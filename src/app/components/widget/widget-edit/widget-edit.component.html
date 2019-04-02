@@ -1,6 +1,4 @@
-<!--<app-widget-header *ngIf="widget.widgetType === 'HEADING'"></app-widget-header>-->
-<!--<app-widget-image *ngIf="widget.widgetType === 'IMAGE'"></app-widget-image>-->
-<!--<app-widget-youtube *ngIf="widget.widgetType === 'YOUTUBE'"></app-widget-youtube>-->
+
 
 <script src="../../../services/user.service.client.ts"></script>
 <script src="../../../../../assignment/services/widget.service.server.js"></script>
@@ -18,6 +16,13 @@
     <app-widget-youtube></app-widget-youtube>
   </div>
 
+  <div *ngSwitchCase="'HTML'">
+    <app-widget-html></app-widget-html>
+  </div>
+  <div *ngSwitchCase="'TEXT'">
+    <app-widget-text></app-widget-text>
+  </div>
+
 </div>
 
 <div *ngIf="widget === undefined" [ngSwitch]="widgetChosen">
@@ -29,6 +34,12 @@
   </div>
   <div *ngSwitchCase="'YOUTUBE'">
     <app-widget-youtube></app-widget-youtube>
+  </div>
+  <div *ngSwitchCase="'HTML'">
+    <app-widget-html></app-widget-html>
+  </div>
+  <div *ngSwitchCase="'TEXT'">
+    <app-widget-text></app-widget-text>
   </div>
 </div>
 

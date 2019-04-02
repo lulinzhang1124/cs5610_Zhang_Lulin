@@ -18,6 +18,7 @@ export class WebsiteEditComponent implements OnInit {
 
   constructor(private websiteService: WebsiteService,
               private route: ActivatedRoute, private router: Router) {
+    this.web = new Website();
   }
 
   ngOnInit() {

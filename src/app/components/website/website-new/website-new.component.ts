@@ -41,6 +41,7 @@ export class WebsiteNewComponent implements OnInit {
       (website: Website) => {
         this.newWeb = website;
         console.log('created website: ' + this.newWeb._id + ', name: ' + this.newWeb.name);
+        this.router.navigate(['../'], { relativeTo: this.route });
       });
   }
 
