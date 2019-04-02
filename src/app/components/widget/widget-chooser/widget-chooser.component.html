@@ -26,7 +26,7 @@
         class="cl-text-blue">HTML</a>
     </li>
     <li class="list-group-item cl-list-item-borderless">
-      <a routerLink="." (click)="createWidget('TEXT')"
+      <a [routerLink]="['../', widgetId]" (click)="createWidget('TEXT')"
         class="cl-text-blue">Text Input</a>
     </li>
     <li class="list-group-item cl-list-item-borderless">

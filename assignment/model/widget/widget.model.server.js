@@ -49,6 +49,7 @@ function resetWidgets(index, pageId) {
 }
 
 function reorderWidgets(pageId, start, end) {
+  console.log(pageId, start, end);
   return Widget.find({ _page: pageId }, function (err, widgets) {
     widgets.forEach(function (widget) {
       if (start < end) {

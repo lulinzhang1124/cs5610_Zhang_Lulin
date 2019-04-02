@@ -43,26 +43,27 @@
         <div class="float-right">
           <a class="float-right cl-text-blue fa fa-bars"></a>
           <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}"
-             class="fa fa-cog cl-text-blue"></a>
+             class="fas fa-cog cl-text-blue"></a>
         </div>
         <div class="embed-responsive embed-responsive-16by9">
           <iframe class="e2e-iframe-trusted-src" [src]="getSantizeUrl(widget.url)" frameborder="0"></iframe>
         </div>
       </div>
 
-      <div *ngIf="widget.type == 'HTML'">
+      <div *ngIf="widget.widgetType == 'HTML'">
         <div class="pull-right">
           <a routerLink="/#" class="pull-right">
-            <span class="glyphicon glyphicon-menu-hamburger cl-widget-toolbar-hamburger"></span>
+            <span class="fas fa-menu-hamburger cl-widget-toolbar-hamburger"></span>
           </a>
           <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
-            <span class="glyphicon glyphicon-cog cl-widget-toolbar-cog"></span>
+            <span class="fas fa-cog cl-widget-toolbar-cog"></span>
           </a>
         </div>
+        <h2>{{widget.name}}</h2>
         <div [innerHTML]="widget.text"></div>
       </div>
 
-      <div *ngIf="widget.type == 'TEXT'">
+      <div *ngIf="widget.widgetType == 'TEXT'">
         <div class="pull-right">
           <a routerLink="/#" class="pull-right">
             <span class="glyphicon glyphicon-menu-hamburger cl-widget-toolbar-hamburger"></span>

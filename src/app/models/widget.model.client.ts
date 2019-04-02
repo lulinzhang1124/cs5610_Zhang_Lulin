@@ -100,6 +100,7 @@ export class Widget {
     this.name = name;
     this.pageId = pageId;
     this.size = size;
+    this.text = text;
     this.url = url;
     this.width = width;
     this.height = 0;

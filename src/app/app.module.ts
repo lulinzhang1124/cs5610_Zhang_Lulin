@@ -17,8 +17,8 @@ import {PageListComponent} from './components/page/page-list/page-list.component
 import {WidgetHeaderComponent} from './components/widget/widget-edit/widget-header/widget-header.component';
 import {WidgetImageComponent} from './components/widget/widget-edit/widget-image/widget-image.component';
 import {WidgetYoutubeComponent} from './components/widget/widget-edit/widget-youtube/widget-youtube.component';
-import { WidgetHtmlComponent } from './components/widget/widget-edit/widget-html/widget-html.component';
-import { WidgetTextComponent } from './components/widget/widget-edit/widget-text/widget-text.component';
+import {WidgetHtmlComponent} from './components/widget/widget-edit/widget-html/widget-html.component';
+import {WidgetTextComponent} from './components/widget/widget-edit/widget-text/widget-text.component';
 
 
 import {Routing} from './app.routing';

@@ -19,7 +19,7 @@ export class FlickrImageSearchComponent implements OnInit {
   pageId: string;
   userId: string;
   widgetId: string;
-  photos: any[] = [{photo: ''}];
+  photos: any = {photo: []};
   error: string;
   searchText: String = '';
   widget: any;
@@ -42,8 +42,8 @@ export class FlickrImageSearchComponent implements OnInit {
         this.pageId = params['pid'];
         this.widgetId = params['wgid'];
         console.log('wgid ' + this.widgetId);
-        if (this.widgetId === 'image') {
-          this.widget = new Widget(undefined, 'IMAGE', '', this.pageId);
+        if (this.widgetId === 'undefined') {
+          this.widget = new Widget('', 'IMAGE', '', this.pageId, '1', '', '100%', '');
         } else {
           this.widgetService.findWidgetById(this.widgetId).subscribe(
             (widget: any) => {
@@ -58,11 +58,15 @@ export class FlickrImageSearchComponent implements OnInit {
       .searchPhotos(this.searchText)
       .subscribe(
         (data: any) => {
-          let val = data._body;
+          // console.log(data);
+          let val = data;
+          // console.log(val);
           val = val.replace('jsonFlickrApi(', '');
           val = val.substring(0, val.length - 1);
+
           val = JSON.parse(val);
-          this.photos = val.photos;
+          this.photos = val['photos'];
+          console.log(this.photos);
         }
       );
   }
@@ -73,18 +77,37 @@ export class FlickrImageSearchComponent implements OnInit {
 
     this.widget.url = url;
 
-    this.widgetService
-      .updateWidget(this.widgetId, this.widget)
-      .subscribe(
-        (data: any) => {
-          const result = data;
-          if (result) {
-            this.router.navigate(['/user/' + this.userId + '/website/' + this.websiteId + '/page/' + this.pageId +
-            '/widget/' + this.widgetId]);
-          } else {
-            this.error = 'failed!';
-          }
-        }
+    // this.widgetService
+    //   .updateWidget(this.widgetId, this.widget)
+    //   .subscribe(
+    //     (data: any) => {
+    //       const result = data;
+    //       if (result) {
+    //         this.router.navigate(['/user/' + this.userId + '/website/' + this.websiteId + '/page/' + this.pageId +
+    //         '/widget/' + this.widgetId]);
+    //       } else {
+    //         this.error = 'failed!';
+    //       }
+    //     }
+    //   );
+    if (this.widgetId === 'undefined') {
+      // this.widget.type = 'IMAGE';
+      this.widget.pageId = this.pageId;
+      this.widgetService.createWidget(this.pageId, this.widget).subscribe(
+        (widget: Widget) => {
+          console.log('create widget image !');
+          this.router.navigate(['../../', widget._id], {relativeTo: this.activatedRoute});
+        },
+        (error: any) => console.log(error)
       );
+    } else {
+      this.widgetService.updateWidget(this.widget._id, this.widget).subscribe(
+        (widget: Widget) => {
+          console.log('update widget image !');
+          this.router.navigate(['../'], {relativeTo: this.activatedRoute});
+        },
+        (error: any) => console.log(error)
+      );
+    }
   }
 }

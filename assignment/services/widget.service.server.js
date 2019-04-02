@@ -162,7 +162,7 @@ module.exports = function (app) {
 
   function updateWidget(req, res) {
     var widgetId = req.params.widgetId;
-    var updatedWidget = _.pick(req.body, ["text","url", "width"]);
+    var updatedWidget = _.pick(req.body, ["widgetType","text","url", "width"]);
     widgetModel.updateWidget(widgetId, updatedWidget)
       .then(function (stats) {
           res.json(stats);

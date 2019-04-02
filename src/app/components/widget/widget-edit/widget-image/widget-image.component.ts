@@ -98,7 +98,7 @@ export class WidgetImageComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private widgetService: WidgetService, private route: Router) {}
 
   updateWidget() {
-    if (this.widget.url === undefined) {
+    if (this.widget.url === 'undefined') {
       this.errorFlag = true;
       return;
     }
