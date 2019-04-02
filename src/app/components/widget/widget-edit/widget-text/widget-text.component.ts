@@ -29,29 +29,38 @@ export class WidgetTextComponent implements OnInit {
                 this.websiteId = params['wid'];
             }
         );
-
-        // this.widget = this.widgetService.findWidgetById(this.widgetId);
-        this.widgetService.findWidgetById(this.widgetId).subscribe(
-            (widget: any) => {
-                this.widget = widget;
-            }
+      this.widget.widgetType = 'TEXT';
+      if (this.widgetId !== 'undefined') {
+        // @ts-ignore
+        this.widget = this.widgetService.findWidgetById(this.widgetId).subscribe(
+          (widget: Widget) => {
+            this.widget = widget;
+            console.log('loading widget-text success!');
+          }
         );
+      }
     }
 
-    updateWidget(updatedwidget: any) {
-        // this.widgetService.updateWidget(widget._id, widget);
-        // this.router.navigate(['/user/' + this.userId + '/website/' + this.websiteId + '/page/' + this.pageId + '/widget']);
-        this.widgetService.updateWidget(this.widgetId, updatedwidget).subscribe(
-            (widget: any) => {
-                const url: any = '/user/' + this.userId + '/website/' + this.websiteId + '/page/' + this.pageId + '/widget';
-                this.router.navigate([url]);
-            }
+    updateWidget() {
+      if (this.widgetId === 'undefined') {
+        this.widgetService.createWidget(this.pageId, this.widget).subscribe(
+          (new_wgt: Widget) => {
+            this.widget = new_wgt;
+            console.log('create widget-text success!');
+            this.router.navigate(['../'], {relativeTo: this.activatedRoute});
+          }
         );
+      } else {
+        this.widgetService.updateWidget(this.widget._id, this.widget).subscribe(
+          (new_wgt: Widget) => {
+            console.log('update widget-text success!');
+            this.router.navigate(['../'], {relativeTo: this.activatedRoute});
+          }
+        );
+      }
     }
 
     deleteWidget() {
-        // this.widgetService.deleteWidget(this.widgetId);
-        // this.router.navigate(['/user/' + this.userId + '/website/' + this.websiteId + '/page/' + this.pageId + '/widget']);
         this.widgetService.deleteWidget(this.widgetId).subscribe(
             (widget: any) => {
                 const url: any = '/user/' + this.userId + '/website/' + this.websiteId + '/page/' + this.pageId + '/widget';

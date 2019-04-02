@@ -1,7 +1,7 @@
 <nav class="navbar fixed-top cl-grey-navbar">
   <div class="container-fluid">
     <div>
-      <a [routerLink]="['../..']" class="navbar-brand cl-text-black cl-icon-padding">
+      <a [routerLink]="['..']" class="navbar-brand cl-text-black cl-icon-padding">
         <i class="fas fa-angle-left"></i>
       </a>
       <h1 class="navbar-brand cl-text-black cl-text-bold cl-text-grey">
@@ -14,22 +14,15 @@
   </div>
 
   <div class="container-fluid">
-  <!--<form>-->
     <div class="form-group">
       <label for="html-name">Name</label>
-      <!--<input type="text" class="form-control" id="heading-name" placeholder="Name">-->
       <input [(ngModel)]="widget.name" type="text" class="form-control" id="html-name" placeholder="Name"
              [ngModelOptions]="{standalone: true}">
     </div>
     <div class="form-group">
       <label for="html">HTML</label>
-      <!--<input [(ngModel)]="widget.text" type="text" class="form-control" id="heading-text" placeholder="Text"-->
-             <!--[ngModelOptions]="{standalone: true}">-->
-      <!--<quill-editor [(ngModel)]="widget.text" id="html"-->
-                    <!--[ngModelOptions]="{standalone: true}"></quill-editor>-->
       <quill-editor [(ngModel)]="widget.text" id="html"></quill-editor>
     </div>
-  <!--</form>-->
   <a class="btn btn-danger  btn-block" (click)="deleteWidget()">Delete</a>
 </div>
 

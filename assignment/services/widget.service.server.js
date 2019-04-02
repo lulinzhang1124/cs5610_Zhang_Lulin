@@ -101,11 +101,10 @@ module.exports = function (app) {
         });
     res.redirect(callbackUrl+ '/' + widgetId);
   }
-
-
+  // var pick = ["widgetType", "name", "pageId", "size", "text", "url", "width", "height","rows", "formatted"];
   function createWidget(req, res) {
     var pageId = req.params.pageId;
-    var widget = _.pick(req.body, ["widgetType", "name", "pageId", "size", "text", "url", "width", "height","rows"]);
+    var widget = _.pick(req.body, ["widgetType", "name", "pageId", "size", "text", "url", "width", "height","rows", "formatted"]);
     console.log(widget);
     console.log(req.body);
     widgetModel.createWidget(pageId, widget).then(
@@ -162,7 +161,7 @@ module.exports = function (app) {
 
   function updateWidget(req, res) {
     var widgetId = req.params.widgetId;
-    var updatedWidget = _.pick(req.body, ["widgetType","text","url", "width"]);
+    var updatedWidget = _.pick(req.body,["widgetType", "name", "pageId", "size", "text", "url", "width", "height","rows", "formatted"]);
     widgetModel.updateWidget(widgetId, updatedWidget)
       .then(function (stats) {
           res.json(stats);
