@@ -14,11 +14,12 @@ module.exports = Widget;
 
 function createWidget(pageId, widget) {
   widget._page = pageId;
+  widget.position = 999999;
   return Widget.create(widget);
 }
 
 function findAllWidgetsForPage(pageId) {
-  return Widget.find({ _page: pageId });
+  return Widget.find({ _page: pageId }).sort({ position: 1, dateCreated: 1});
 }
 
 function findWidgetById(widgetId) {
@@ -49,48 +50,14 @@ function resetWidgets(index, pageId) {
 }
 
 function reorderWidgets(pageId, start, end) {
-  console.log(pageId, start, end);
-  return Widget.find({ _page: pageId }, function (err, widgets) {
-    widgets.forEach(function (widget) {
-      if (start < end) {
-        if (widget.position === start) {
-          widget.position = end;
-          widget.save();
-        } else if (widget.position > start
-          && widget.position <= end) {
-          widget.position--;
-          widget.save();
-        } else {
-          if (widget.position === start) {
-            widget.position = end;
-            widget.save();
-          } else if (widget.position < start
-            && widget.position >= end) {
-            widget.position++;
-            widget.save();
-          }
-        }
-      }
-
-      if (start > end) {
-        if (widget.position === start) {
-          widget.position = end;
-          widget.save();
-        } else if (widget.position < start
-          && widget.position >= end) {
-          widget.position++;
-          widget.save();
-        } else {
-          if (widget.position === start) {
-            widget.position = end;
-            widget.save();
-          } else if (widget.position > start
-            && widget.position <= end) {
-            widget.position--;
-            widget.save();
-          }
-        }
-      }
-    })
-  })
+  return Widget.find({ _page: pageId }).sort({ position: 1, dateCreated: 1}).then(function (widgets) {
+    var x = widgets[start];
+    widgets.splice(start, 1);
+    widgets.splice(end, 0, x);
+    for (var i = 0; i < widgets.length; ++i) {
+      widgets[i].position = i;
+      widgets[i].save();
+    }
+    return {};
+  });
 }

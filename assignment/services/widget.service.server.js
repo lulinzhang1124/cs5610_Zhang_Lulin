@@ -142,7 +142,7 @@ module.exports = function (app) {
     widgetModel
       .reorderWidgets(pageId, startIndex, endIndex)
       .then(function (stats) {
-        res.sendStatus(200);
+        res.status(200).send({});
       }, function (err) {
         res.status(400).send(err);
       });
