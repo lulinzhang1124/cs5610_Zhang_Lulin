@@ -24,12 +24,16 @@ export class WidgetImageComponent implements OnInit {
   url: String;
   widget: any = {};
   baseUrl: String = environment.baseUrl;
-  errorFlag: Boolean;
-  errorMsg: string;
+  errorFlag: boolean;
+  errorMsg = "Widget name can't be empty!";
 
   constructor(private activatedRoute: ActivatedRoute, private widgetService: WidgetService, private route: Router) {}
 
   updateWidget() {
+    if (!this.widget.name) {
+      this.errorFlag = true;
+      return;
+    }
     if (this.widget.url === 'undefined') {
       this.errorFlag = true;
       return;
@@ -63,7 +67,6 @@ export class WidgetImageComponent implements OnInit {
 
   ngOnInit() {
     this.errorFlag = false;
-    this.errorMsg = 'Please enter valid URL!';
     this.activatedRoute.params.subscribe(
       (params: any) => {
         this.userId = params['uid'];

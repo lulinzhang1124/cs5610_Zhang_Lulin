@@ -1,3 +1,7 @@
+<div *ngIf="errorFlag"
+     class="alert alert-danger text-center">
+  {{errorMsg}}
+</div>
 <nav class="navbar fixed-top cl-grey-navbar">
   <div class="container-fluid">
     <div>
@@ -12,6 +16,7 @@
       <i class="fas fa-check"></i>
     </a>
   </div>
+</nav>
 
   <div class="container-fluid">
     <div class="form-group">

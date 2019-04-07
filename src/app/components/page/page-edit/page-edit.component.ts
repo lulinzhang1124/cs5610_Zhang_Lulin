@@ -12,6 +12,8 @@ export class PageEditComponent implements OnInit {
   page: Page;
   userId: string;
   websiteId: string;
+  errorFlag: boolean;
+  errorMsg = "Website name can't  be empty!";
 
   constructor(private  pageService: PageService,
               private route: ActivatedRoute,
@@ -33,12 +35,16 @@ export class PageEditComponent implements OnInit {
   }
 
   updatePage(page: Page) {
-    this.pageService.updatePage(this.page._id, page).subscribe(
-      (u_page: Page) => {
-        this.router.navigate(['../'], {relativeTo: this.route});
-        console.log('page-update success: page id = ' + this.page._id);
-      }
-    );
+    if (!this.page.name) {
+      this.errorFlag = true;
+    } else {
+      this.pageService.updatePage(this.page._id, page).subscribe(
+        (u_page: Page) => {
+          this.router.navigate(['../'], {relativeTo: this.route});
+          console.log('page-update success: page id = ' + this.page._id);
+        }
+      );
+    }
   }
 
   deletePage() {

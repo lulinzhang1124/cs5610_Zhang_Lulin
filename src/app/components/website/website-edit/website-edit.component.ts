@@ -14,7 +14,7 @@ export class WebsiteEditComponent implements OnInit {
   websites: Website[];
   web: Website;
   errorFlag: boolean;
-  errorMsg = 'Cannot create website !';
+  errorMsg = "Website name can't  be empty!";
 
   constructor(private websiteService: WebsiteService,
               private route: ActivatedRoute, private router: Router) {
@@ -36,12 +36,16 @@ export class WebsiteEditComponent implements OnInit {
 
   updateWeb(website: Website) {
     console.log(this.web);
-    this.websiteService.updateWebsite(this.web._id, this.web).subscribe(
-      (u_website: Website) => {
-        console.log('update web,' + u_website);
-        this.router.navigate((['/user', this.userId, 'website']));
-      }
-    );
+    if (!this.web.name) {
+      this.errorFlag = true;
+    } else {
+      this.websiteService.updateWebsite(this.web._id, this.web).subscribe(
+        (u_website: Website) => {
+          console.log('update web,' + u_website);
+          this.router.navigate((['/user', this.userId, 'website']));
+        }
+      );
+    }
   }
 
   deleteWeb() {
