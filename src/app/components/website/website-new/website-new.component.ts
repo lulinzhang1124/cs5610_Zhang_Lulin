@@ -17,7 +17,7 @@ export class WebsiteNewComponent implements OnInit {
   newWebsiteName: string;
   newWebsiteDescription: string;
   errorFlag: boolean;
-  errorMsg = 'Cannot create website !';
+  errorMsg = "Website name can't  be empty!";
 
   constructor(private userService: UserService,
               private websiteService: WebsiteService,
@@ -36,13 +36,17 @@ export class WebsiteNewComponent implements OnInit {
   }
 
   newWebsite() {
-    this.newWeb = {_id: '', name: this.newWebsiteName, developerId: this.userId, description: this.newWebsiteDescription};
-    this.websiteService.createWebsite(this.userId, this.newWeb).subscribe(
-      (website: Website) => {
-        this.newWeb = website;
-        console.log('created website: ' + this.newWeb._id + ', name: ' + this.newWeb.name);
-        this.router.navigate(['../'], { relativeTo: this.route });
-      });
+    if (!this.newWebsiteName) {
+      this.errorFlag = true;
+    } else {
+      this.newWeb = {_id: '', name: this.newWebsiteName, developerId: this.userId, description: this.newWebsiteDescription};
+      this.websiteService.createWebsite(this.userId, this.newWeb).subscribe(
+        (website: Website) => {
+          this.newWeb = website;
+          console.log('created website: ' + this.newWeb._id + ', name: ' + this.newWeb.name);
+          this.router.navigate(['../'], {relativeTo: this.route});
+        });
+    }
   }
 
 }
