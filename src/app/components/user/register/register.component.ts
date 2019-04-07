@@ -30,18 +30,23 @@ export class RegisterComponent implements OnInit {
   register() {
     this.user.username = this.newUsername;
     this.user.password = this.newPassword;
-    this.userService.findUserByUsername(this.newUsername).subscribe(
-      (user: User) => {
-        if (typeof user._id !== 'undefined') {
-          this.userErrorFlag = true;
-        } else {
-          return this.userService.createUser(this.user).subscribe(
-            (loginUser: User) => {
-              this.router.navigate(['/user', loginUser._id]);
-            }
-          );
+    this.userService.register(this.user.username, this.user.password)
+      .subscribe(
+        (data: any) => {
+          if (data) {
+            this.router.navigate(['/profile']);
+          } else {
+            this.userErrorFlag = true;
+            console.log(this.userErrorFlag);
+          }
+        },
+        (error: any) => {
+          if (error) {
+            console.log(error);
+          }
         }
-      });
+      );
+
   }
 
   onCancel() {

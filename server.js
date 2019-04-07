@@ -4,7 +4,20 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
+const passport = require('passport');
 const app = express();
+
+//app.use(passport.initialize());
+//app.use(passport.session());
+
+//add cookies
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+app.use(cookieParser());
+app.use(session({ secret: 'S3CR#T!' }));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // var db = mongoose.connect('mongodb://<dbuser>:<dbpassword>@ds263847.mlab.com:63847/heroku_khn0t993');
 
