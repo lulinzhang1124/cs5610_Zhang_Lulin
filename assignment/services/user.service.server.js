@@ -59,7 +59,7 @@ module.exports = function (app) {
 
   function localStrategy(username, password, done) {
     userModel
-      .findByUsername(username)
+      .findUserByUsername(username)
       .then(
         function (user) {
           if (user &&
@@ -86,6 +86,7 @@ module.exports = function (app) {
   function logout(req, res) {
     req.logOut();
     // res.send(200);
+    res.send({});
   }
 
   function loggedin(req, res) {

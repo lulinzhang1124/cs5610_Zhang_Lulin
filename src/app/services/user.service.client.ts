@@ -58,25 +58,25 @@ export class UserService {
       password: password
     };
 
-    return this._http.post(this.baseUrl + 'api/login', body, this.options);
+    return this._http.post(this.baseUrl + '/api/login', body, this.options);
   }
 
   logout() {
     this.options.withCredentials = true;
     return this._http
-      .post(this.baseUrl + 'api/logout', '', this.options);
+      .post(this.baseUrl + '/api/logout', '', this.options);
   }
 
   register(username: String, password: String) {
     this.options.withCredentials = true;
     const user = {username: username, password: password};
     return this._http
-      .post(this.baseUrl + 'api/register', user, this.options);
+      .post(this.baseUrl + '/api/register', user, this.options);
   }
 
   loggedIn() {
     return this._http
-      .post(this.baseUrl + 'api/loggedin', '', this.options)
+      .post(this.baseUrl + '/api/loggedin', '', this.options)
       .pipe(
         map((user) => {
             if (user !== 0) {

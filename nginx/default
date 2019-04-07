@@ -9,6 +9,9 @@ server {
 	location /api {
 		proxy_pass http://127.0.0.1:3200;
 	}
+	location //api {
+		proxy_pass http://127.0.0.1:3200;
+	}
 	location /public {
 		proxy_pass http://127.0.0.1:3200;
 	}

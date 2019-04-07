@@ -35,7 +35,7 @@
           <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}"
              class="fa fa-cog cl-text-blue"></a>
         </div>
-        <img class="img-responsive img-rounded cl-widget-images" src="{{widget.url}}">
+        <img class="img-responsive img-rounded cl-widget-images" [style.width]="widget.width" src="{{widget.url}}">
       </div>
 
       <div *ngIf="widget.widgetType === 'YOUTUBE'">
@@ -92,7 +92,7 @@
         <i class="fas fa-eye cl-text-grey"></i>
       </a>
     </div>
-    <a routerLink="/user/{{userId}}" class="navbar-brand cl-icon-padding cl-text-blue float-right">
+    <a routerLink="/profile" class="navbar-brand cl-icon-padding cl-text-blue float-right">
       <i class="fas fa-user cl-text-blue"></i>
     </a>
   </div>

@@ -3,9 +3,9 @@ module.exports = function (app) {
   var widgetModel = require("../model/widget/widget.model.server.js");
   var path = require('path');
   const multer = require('multer'); // npm install multer --save
-  const baseUrl = 'http://localhost:3200';
+  const baseUrl = 'http://localhost:8080';
   //'https://luckyhusky.herokuapp.com'
-  //"http://localhost:3200"
+  //"http://localhost:8080"
 
   app.post("/api/page/:pageId/widget", createWidget);
   app.get("/api/page/:pageId/widget", findAllWidgetsForPage);
