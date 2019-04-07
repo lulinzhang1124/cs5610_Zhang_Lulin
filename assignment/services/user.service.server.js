@@ -3,8 +3,8 @@ var _ = require('lodash');
 module.exports = function (app) {
 
   var passport = require('passport');
-  //const LocalStrategy = require('passport-local').Strategy;
-  //const FacebookStrategy = require('passport-facebook').Strategy;
+  const LocalStrategy = require('passport-local').Strategy;
+  const FacebookStrategy = require('passport-facebook').Strategy;
   var userModel = require("../model/user/user.model.server");
   const bcrypt = require('bcrypt-nodejs');
 
@@ -29,24 +29,12 @@ module.exports = function (app) {
     callbackURL: '123',
   }
 
-  // var facebookConfig = {
-  //   clientID : process.env.FACEBOOK_CLIENT_ID,
-  //   clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
-  //   callbackURL : process.env.FACEBOOK_CALLBACK_URL
-  // };
-
-  /*passport.serializeUser(serializeUser);
-  passport.deserializeUser(deserializeUser);
-  passport.use(new LocalStrategy(localStrategy));
-  passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));*/
-
-  // Authentication
   function serializeUser(user, done) {
-    done(null, user);
+    done(null, user.username);
   }
 
-  function deserializeUser(user, done) {
-    userModel.findUserById(user._id).then(
+  function deserializeUser(username, done) {
+    userModel.findUserByUsername(username).then(
       function (user) {
         done(null, user);
       },
@@ -54,6 +42,20 @@ module.exports = function (app) {
         done(err, null);
       });
   }
+
+  passport.serializeUser(serializeUser);
+  passport.deserializeUser(deserializeUser);
+
+  // var facebookConfig = {
+  //   clientID : process.env.FACEBOOK_CLIENT_ID,
+  //   clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
+  //   callbackURL : process.env.FACEBOOK_CALLBACK_URL
+  // };
+
+  passport.use(new LocalStrategy(localStrategy));
+  passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+
+  // Authentication
 
   function localStrategy(username, password, done) {
     userModel

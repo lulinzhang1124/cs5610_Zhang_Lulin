@@ -7,9 +7,6 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const app = express();
 
-//app.use(passport.initialize());
-//app.use(passport.session());
-
 //add cookies
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
