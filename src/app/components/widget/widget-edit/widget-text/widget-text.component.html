@@ -1,3 +1,7 @@
+<div *ngIf="errorFlag"
+     class="alert alert-danger text-center">
+  {{errorMsg}}
+</div>
 <nav class="navbar fixed-top cl-grey-navbar">
   <div class="container-fluid">
     <div>
@@ -15,7 +19,7 @@
 </nav>
 
 
-<div class="container-fluid">
+<div class="container">
   <form>
     <div class="form-group">
       <label for="text-text">Text</label>
@@ -43,14 +47,10 @@
       <input [(ngModel)]="widget.placeholder" class="form-control" id="text-placeholder" placeholder="Placeholder" required
              [ngModelOptions]="{standalone: true}"/>
       <p></p>
-      <div class="input-group">
-        <input type="text"
-               readonly
-               value="Formatted"
-               class="form-control"/>
-        <span class="input-group-addon">
-     <input [(ngModel)]="widget.formatted" type="checkbox" [ngModelOptions]="{standalone: true}"/>
-      </span>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1" [(ngModel)]="widget.formatted"
+               [ngModelOptions]="{standalone: true}">
+        <label class="form-check-label" for="exampleCheck1">Formatted</label>
       </div>
     </div>
   </form>
@@ -59,7 +59,7 @@
 
 <nav class="navbar fixed-bottom cl-grey-navbar">
   <div class="container-fluid justify-content-end">
-    <a routerLink="/user/{{userId}}" class="navbar-brand cl-icon-padding cl-text-blue">
+    <a routerLink="/profile" class="navbar-brand cl-icon-padding cl-text-blue">
       <span class="fas fa-user"></span>
     </a>
   </div>

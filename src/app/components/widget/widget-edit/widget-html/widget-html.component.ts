@@ -14,7 +14,8 @@ export class WidgetHtmlComponent implements OnInit {
     websiteId: String;
     pageId: String;
     widgetId: String;
-    //text: String;
+  errorFlag: boolean;
+  errorMsg = "Widget name can't be empty!";
 
     constructor(
         private widgetService: WidgetService, private activatedRoute: ActivatedRoute,
@@ -43,6 +44,10 @@ export class WidgetHtmlComponent implements OnInit {
     }
 
     updateWidget() {
+      if (!this.widget.name) {
+        this.errorFlag = true;
+        return;
+      }
       console.log(this.widget);
       if (this.widgetId === 'undefined') {
         this.widget = new Widget('', 'HTML', this.widget.name, this.pageId, this.widget.size, this.widget.text, '100%', '');

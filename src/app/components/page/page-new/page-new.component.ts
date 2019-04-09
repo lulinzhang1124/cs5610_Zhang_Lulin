@@ -14,6 +14,8 @@ export class PageNewComponent implements OnInit {
   websiteId: string;
   newPageName: string;
   newPageDescrption: string;
+  errorFlag: boolean;
+  errorMsg = "Page name can't  be empty!";
 
   constructor(private  pageService: PageService,
               private route: ActivatedRoute,
@@ -29,14 +31,18 @@ export class PageNewComponent implements OnInit {
   }
 
   createPage() {
-    this.newpage = new Page('', this.newPageName, this.websiteId, this.newPageDescrption);
-    this.pageService.createPage(this.websiteId, this.newpage).subscribe(
-      (page: Page) => {
-        this.newpage = page;
-        this.router.navigate(['../'], {relativeTo: this.route});
-        console.log('create new page', this.newpage._id);
-      }
-    );
+    if (! this.newPageName) {
+      this.errorFlag = true;
+    } else {
+      this.newpage = new Page('', this.newPageName, this.websiteId, this.newPageDescrption);
+      this.pageService.createPage(this.websiteId, this.newpage).subscribe(
+        (page: Page) => {
+          this.newpage = page;
+          this.router.navigate(['../'], {relativeTo: this.route});
+          console.log('create new page', this.newpage._id);
+        }
+      );
+    }
   }
 
 }

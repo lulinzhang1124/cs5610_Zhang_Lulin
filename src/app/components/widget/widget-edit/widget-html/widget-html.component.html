@@ -1,3 +1,7 @@
+<div *ngIf="errorFlag"
+     class="alert alert-danger text-center">
+  {{errorMsg}}
+</div>
 <nav class="navbar fixed-top cl-grey-navbar">
   <div class="container-fluid">
     <div>
@@ -12,6 +16,7 @@
       <i class="fas fa-check"></i>
     </a>
   </div>
+</nav>
 
   <div class="container-fluid">
     <div class="form-group">
@@ -28,7 +33,7 @@
 
 <nav class="navbar fixed-bottom cl-grey-navbar">
   <div class="container-fluid justify-content-end">
-    <a routerLink="/user/{{userId}}" class="navbar-brand cl-icon-padding cl-text-blue">
+    <a routerLink="/profile" class="navbar-brand cl-icon-padding cl-text-blue">
       <span class="fas fa-user"></span>
     </a>
   </div>

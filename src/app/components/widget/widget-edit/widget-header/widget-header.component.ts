@@ -14,7 +14,8 @@ export class WidgetHeaderComponent implements OnInit {
   pageId: string;
   widgetId: string;
   newWidget: Widget;
-  // name: string;
+  errorFlag: boolean;
+  errorMsg = "Widget name can't be empty!";
 
   constructor(private  widgetService: WidgetService,
               private route: ActivatedRoute,
@@ -39,6 +40,10 @@ export class WidgetHeaderComponent implements OnInit {
   }
 
   updateWidget() {
+    if (!this.widget.name) {
+      this.errorFlag = true;
+      return;
+    }
     if (this.widgetId === 'undefined') {
       this.newWidget = new Widget('', 'HEADING', this.widget.name, this.pageId, this.widget.size, this.widget.text);
       this.widgetService.createWidget(this.pageId, this.newWidget).subscribe(

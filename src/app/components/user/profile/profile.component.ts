@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../services/user.service.client';
 import {User} from '../../../models/user.model.client';
+import {SharedService} from '../../../services/shared.service.client';
 
 @Component({
   selector: 'app-profile',
@@ -11,7 +12,10 @@ import {User} from '../../../models/user.model.client';
 export class ProfileComponent implements OnInit {
   errorMsg = 'Invalid email address !';
 
-  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router) {
+  constructor(private userService: UserService,
+              private route: ActivatedRoute,
+              private router: Router,
+              private sharedService: SharedService) {
     this.user = new User('', '', '', '', '', '');
   }
 
@@ -45,7 +49,7 @@ export class ProfileComponent implements OnInit {
   updateProfile() {
     this.userService.updateUser(this.user._id, this.user).subscribe(
       (user: User) => {
-		console.log(user);
+        console.log(user);
         this.user = user;
         this.updateFlag = true;
       },
@@ -56,15 +60,16 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.user = this.sharedService.user;
+    this.userId = this.sharedService.user._id;
     this.route.params.subscribe(params => {
       this.updateFlag = false;
       this.userErrorFlag = false;
       this.updateMsg = 'Profile updated!';
       this.userErrorMsg = 'The username already exists! Please use a different name.';
-
-      this.userId = params['uid'];
-      this.userService.findUserById(params['uid']).subscribe(
+      this.userService.findUserById(this.userId).subscribe(
         (user: User) => {
+          console.log((user));
           this.user = user;
           this.username = this.user.username;
         },
@@ -81,5 +86,12 @@ export class ProfileComponent implements OnInit {
       },
       (error: any) => console.log(error)
     );
+  }
+
+  logout() {
+    this.userService.logout().subscribe((data: any) => {
+      this.sharedService.user = null;
+      this.router.navigate(['/login']);
+    });
   }
 }

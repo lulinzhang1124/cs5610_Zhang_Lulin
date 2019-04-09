@@ -3,6 +3,8 @@ import {NgForm} from '@angular/forms';
 import {UserService} from '../../../services/user.service.client';
 import {Router} from '@angular/router';
 import {User} from '../../../models/user.model.client';
+import {SharedService} from '../../../services/shared.service.client';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -16,8 +18,9 @@ export class LoginComponent implements OnInit {
   password: String;
   errorFlag: boolean;
   errorMsg = 'Invalid username or password !';
+  baseUrl = environment.baseUrl;
 
-  constructor(private userService: UserService, private router: Router) {
+  constructor(private userService: UserService, private router: Router, private sharedService: SharedService) {
     // this.username = 'hello world!';
   }
 
@@ -27,20 +30,16 @@ export class LoginComponent implements OnInit {
   login() {
     this.username = this.loginForm.value.username;
     this.password = this.loginForm.value.password;
-    this.userService.findUserByCredentials(this.username, this.password).subscribe(
-      (user: User) => {
-        console.log(user);
-        if (user) {
-          console.log('get user success! ' + user._id);
-          this.router.navigate(['/user', user._id]);
-        } else {
-          this.errorFlag = true;
-        }
-      },
-      (error: any) => {
-        console.log(error);
-      }
-    );
+    console.log('data', this.username);
+    this.userService.login(this.username, this.password).subscribe(
+      (data: any) => {
+        this.sharedService.user = data;
+        this.router.navigate(['/profile']);
+      }, (error: any) => {
+        this.errorFlag = true;
+        // this.errorMsg = error;
+        // console.log(this.errorMsg);
+      } );
   }
 
 

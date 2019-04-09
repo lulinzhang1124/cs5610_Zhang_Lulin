@@ -3,6 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import 'rxjs';
 import {User} from '../models/user.model.client';
 import {environment} from '../../environments/environment';
+import {Router} from '@angular/router';
+import {SharedService} from './shared.service.client';
+import {map} from 'rxjs/operators';
+// import {RequestOptions, Request, RequestMethod} from '@angular/http';
+
 
 
 // injecting service into module
@@ -10,8 +15,9 @@ import {environment} from '../../environments/environment';
 @Injectable()
 export class UserService {
 
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient, private sharedService: SharedService, private router: Router) {}
    baseUrl = environment.baseUrl;
+  options = {withCredentials: false};
 
   // users: User[] = [
   //   {_id: '123', username: 'alice', password: 'alice', firstName: 'Alice', lastName: 'Wonder'},
@@ -42,6 +48,46 @@ export class UserService {
 
   deleteUser(userId: String) {
     return this._http.delete(this.baseUrl + '/api/user/' + userId);
+  }
+
+  login(username: String, password: String) {
+    this.options.withCredentials = true; // jga
+
+    const body = {
+      username: username,
+      password: password
+    };
+
+    return this._http.post(this.baseUrl + '/api/login', body, this.options);
+  }
+
+  logout() {
+    this.options.withCredentials = true;
+    return this._http
+      .post(this.baseUrl + '/api/logout', '', this.options);
+  }
+
+  register(username: String, password: String) {
+    this.options.withCredentials = true;
+    const user = {username: username, password: password};
+    return this._http
+      .post(this.baseUrl + '/api/register', user, this.options);
+  }
+
+  loggedIn() {
+    return this._http
+      .post(this.baseUrl + '/api/loggedin', '', this.options)
+      .pipe(
+        map((user) => {
+            if (user !== 0) {
+              this.sharedService.user = user;
+              return true;
+            } else {
+              this.router.navigate(['/login']);
+              return false;
+            }
+          }
+        ));
   }
 }
 

@@ -31,6 +31,8 @@ import {SortableDirective} from './sortable.directive';
 import {FlickrService} from './services/flickr.service.client';
 import {FlickrImageSearchComponent} from './components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
 import {QuillEditorModule} from 'ngx-quill-editor/quillEditor.module';
+import {SharedService} from './services/shared.service.client';
+import {AuthGuard} from './services/auth-guard.service';
 
 
 
@@ -64,7 +66,7 @@ import {QuillEditorModule} from 'ngx-quill-editor/quillEditor.module';
     FormsModule,
     QuillEditorModule
   ],
-  providers: [UserService, WebsiteService, PageService, WidgetService, FlickrService],
+  providers: [UserService, WebsiteService, PageService, WidgetService, FlickrService, SharedService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

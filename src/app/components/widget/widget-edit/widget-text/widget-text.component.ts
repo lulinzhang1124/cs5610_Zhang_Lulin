@@ -14,6 +14,8 @@ export class WidgetTextComponent implements OnInit {
     websiteId: String;
     pageId: String;
     widgetId: String;
+  errorFlag: boolean;
+  errorMsg = "Widget name can't  be empty!";
 
     constructor(
         private widgetService: WidgetService, private activatedRoute: ActivatedRoute,
@@ -42,22 +44,27 @@ export class WidgetTextComponent implements OnInit {
     }
 
     updateWidget() {
-      if (this.widgetId === 'undefined') {
-        this.widgetService.createWidget(this.pageId, this.widget).subscribe(
-          (new_wgt: Widget) => {
-            this.widget = new_wgt;
-            console.log('create widget-text success!');
-            this.router.navigate(['../'], {relativeTo: this.activatedRoute});
-          }
-        );
-      } else {
-        this.widgetService.updateWidget(this.widget._id, this.widget).subscribe(
-          (new_wgt: Widget) => {
-            console.log('update widget-text success!');
-            this.router.navigate(['../'], {relativeTo: this.activatedRoute});
-          }
-        );
+      if (! this.widget.name) {
+        this.errorFlag = true;
+        return;
       }
+        if (this.widgetId === 'undefined') {
+          this.widgetService.createWidget(this.pageId, this.widget).subscribe(
+            (new_wgt: Widget) => {
+              this.widget = new_wgt;
+              console.log('create widget-text success!');
+              this.router.navigate(['../'], {relativeTo: this.activatedRoute});
+            }
+          );
+        } else {
+          this.widgetService.updateWidget(this.widget._id, this.widget).subscribe(
+            (new_wgt: Widget) => {
+              console.log('update widget-text success!');
+              this.router.navigate(['../'], {relativeTo: this.activatedRoute});
+            }
+          );
+        }
+
     }
 
     deleteWidget() {

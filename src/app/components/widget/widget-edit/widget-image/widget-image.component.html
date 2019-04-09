@@ -1,4 +1,7 @@
-
+<div *ngIf="errorFlag"
+     class="alert alert-danger text-center">
+  {{errorMsg}}
+</div>
 <nav class="navbar fixed-top cl-grey-navbar">
   <div class="container-fluid">
     <div>
@@ -39,7 +42,8 @@
 
   <div class="form-group" *ngIf="widget">
     <label for="image-URL">URL</label>
-    <input [(ngModel)]="widget.url" type="text"
+    <input [(ngModel)]="widget.url"
+           type="text"
            name="url"
            class="form-control"
            id="image-URL"
@@ -77,7 +81,7 @@
 
 <nav class="navbar fixed-bottom cl-grey-navbar">
   <div class="container-fluid justify-content-end">
-    <a routerLink="/user/{{userId}}" class="navbar-brand cl-icon-padding cl-text-blue">
+    <a routerLink="/profile" class="navbar-brand cl-icon-padding cl-text-blue">
       <span class="fas fa-user"></span>
     </a>
   </div>
