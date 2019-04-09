@@ -30,11 +30,11 @@ module.exports = function (app) {
   };
 
   function serializeUser(user, done) {
-    done(null, user.username);
+    done(null, user._id);
   }
 
-  function deserializeUser(username, done) {
-    userModel.findUserByUsername(username).then(
+  function deserializeUser(uid, done) {
+    userModel.findUserById(uid).then(
       function (user) {
         done(null, user);
       },
@@ -96,7 +96,7 @@ module.exports = function (app) {
       .then(
         function (newUser) {
           if (newUser) {
-            req.login(user, function (error) {
+            req.login(newUser, function (error) {
               if (error) {
                 res.status(400).send(error);
               } else {
@@ -108,37 +108,23 @@ module.exports = function (app) {
       );
   }
 
-  function facebookStrategy(token, refreshToken, profile, done) {
-    userModel
-      .findUserByFacebookId(profile.id)
-      .then(
-        function (user) {
-          if (user) {
-            return user;
-          } else {
-            const names = profile.displayName.split(" ");
-            const newFacebookUser = {
-              lastName: names[1],
-              firstName: names[0],
-              email: profile.emails ? profile.emails[0].value : "",
-              facebook: {id: profile.id, token: token}
-            };
-            return userModel.createUser(newFacebookUser);
-          }
-        },
-        function (err) {
-          if (err) {
-            return done(err);
-          }
-        })
-      .then(
-        function (user) {
-          return done(null, user);
-        }, function (err) {
-          if (err) {
-            return done(err);
-          }
-        });
+  async function facebookStrategy(token, refreshToken, profile, done) {
+    try {
+      var user = await userModel.findUserByFacebookId(profile.id);
+      if (!user) {
+        const names = profile.displayName.split(" ");
+        const newFacebookUser = {
+          lastName: names[1],
+          firstName: names[0],
+          email: profile.emails ? profile.emails[0].value : "",
+          facebook: {id: profile.id, token: token}
+        };
+        user = await userModel.createUser(newFacebookUser);
+      }
+      done(null, user);
+    } catch (e) {
+      done(e);
+    }
   }
 
     // var users = [
