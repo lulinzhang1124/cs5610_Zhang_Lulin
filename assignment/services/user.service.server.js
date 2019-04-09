@@ -131,18 +131,14 @@ module.exports = function (app) {
             };
             return userModel.createUser(newFacebookUser);
           }
-        },
-        function (err) {
-          if (err) {
-            return done(err);
-          }
-        }).then(function (user) {
-      return done(null, user);
-    }, function (err) {
-      if (err) {
-        return done(err);
-      }
-    });
+        })
+      .then(
+        function (user) {
+          return done(null, user);
+        }, function (err) {
+          console.log(err);
+          return done(err);
+        });
   }
 
     // var users = [
