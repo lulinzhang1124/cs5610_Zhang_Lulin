@@ -23,12 +23,6 @@ module.exports = function (app) {
     failureRedirect: '/#/login'
   }));
 
-  // const facebookConfig = {
-  //   clientID: '283460912577285',
-  //   clientSecret: 'b8c1bf0146cfedf0b115502ccf4142f5',
-  //   callbackURL: '/auth/facebook/callback',
-  // }
-
   var facebookConfig = {
     clientID : process.env.FACEBOOK_CLIENT_ID,
     clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
@@ -120,7 +114,7 @@ module.exports = function (app) {
       .then(
         function (user) {
           if (user) {
-            return done(null, user);
+            return user;
           } else {
             const names = profile.displayName.split(" ");
             const newFacebookUser = {
