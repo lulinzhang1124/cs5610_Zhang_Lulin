@@ -1,7 +1,7 @@
 var _ = require('lodash');
 
 module.exports = function (app) {
-
+  var randomstring = require("randomstring");
   var passport = require('passport');
   const LocalStrategy = require('passport-local').Strategy;
   const FacebookStrategy = require('passport-facebook').Strategy;
@@ -114,6 +114,7 @@ module.exports = function (app) {
       if (!user) {
         const names = profile.displayName.split(" ");
         const newFacebookUser = {
+          username: randomstring.generate(12),
           lastName: names[1],
           firstName: names[0],
           email: profile.emails ? profile.emails[0].value : "",
