@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
  var url = 'mongodb://localhost:27017/web5610';
  //var url = 'mongodb://normaluser:web5610@ds221416.mlab.com:21416/heroku_wc90b4tr';
- var mongo_url = process.env.MONGO_URL || "mongodb://localhost:27017/web5610";
+ var mongo_url = process.env.MONGODB_URI || "mongodb://localhost:27017/web5610";
 var client = mongoose.connect(url, { useNewUrlParser: true });
 
 //Get the default connection

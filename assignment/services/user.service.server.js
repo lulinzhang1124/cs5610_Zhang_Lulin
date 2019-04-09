@@ -17,17 +17,23 @@ module.exports = function (app) {
   app.post("/api/logout", logout);
   app.post("/api/register", register);
   app.post("/api/loggedin", loggedin);
-  app.get('/facebook/login', passport.authenticate('facebook', {scope: 'email'}));
+  app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
   app.get('/auth/facebook/callback', passport.authenticate('facebook', {
     successRedirect: '/#/profile',
     failureRedirect: '/#/login'
   }));
 
-  const facebookConfig = {
-    clientID: '123',
-    clientSecret: '123',
-    callbackURL: '123',
-  }
+  // const facebookConfig = {
+  //   clientID: '283460912577285',
+  //   clientSecret: 'b8c1bf0146cfedf0b115502ccf4142f5',
+  //   callbackURL: '/auth/facebook/callback',
+  // }
+
+  var facebookConfig = {
+    clientID : process.env.FACEBOOK_CLIENT_ID,
+    clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
+    callbackURL : process.env.FACEBOOK_CALLBACK_URL
+  };
 
   function serializeUser(user, done) {
     done(null, user.username);
@@ -45,12 +51,6 @@ module.exports = function (app) {
 
   passport.serializeUser(serializeUser);
   passport.deserializeUser(deserializeUser);
-
-  // var facebookConfig = {
-  //   clientID : process.env.FACEBOOK_CLIENT_ID,
-  //   clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
-  //   callbackURL : process.env.FACEBOOK_CALLBACK_URL
-  // };
 
   passport.use(new LocalStrategy(localStrategy));
   passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));

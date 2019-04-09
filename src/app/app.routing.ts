@@ -43,5 +43,5 @@ export class AppRoutingModule {
 
 
 
-export const Routing = RouterModule.forRoot(APP_ROUTES);
+export const Routing = RouterModule.forRoot(APP_ROUTES, {useHash: true});
 // export const Routing: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);

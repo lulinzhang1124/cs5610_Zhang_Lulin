@@ -5,7 +5,6 @@
 export const environment = {
   production: false,
   baseUrl: 'http://localhost:8080',
-  MONGO_URL: 'mongodb://normaluser:web5610@ds221416.mlab.com:21416/heroku_wc90b4tr'
 };
 
 /*
