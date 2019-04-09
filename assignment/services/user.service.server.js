@@ -30,9 +30,9 @@ module.exports = function (app) {
   // }
 
   var facebookConfig = {
-    clientID : process.env.FACEBOOK_CLIENT_ID,
-    clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
-    callbackURL : process.env.FACEBOOK_CALLBACK_URL
+    clientID: process.env.FACEBOOK_CLIENT_ID,
+    clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+    callbackURL: process.env.FACEBOOK_CALLBACK_URL
   };
 
   function serializeUser(user, done) {
@@ -129,126 +129,132 @@ module.exports = function (app) {
               email: profile.emails ? profile.emails[0].value : "",
               facebook: {id: profile.id, token: token}
             };
-            return userModel.createUser(newFacebookUser);
+            return done(null, userModel.createUser(newFacebookUser));
           }
-        })
-      .then(
-        function (user) {
-          return done(null, user);
-        }, function (err) {
-          console.log(err);
-          return done(err);
+        },
+        function (err) {
+          if (err) {
+            return done(err);
+          }
         });
+      // .then(
+      //   function (user) {
+      //     return done(null, user);
+      //   }, function (err) {
+      //     if (err) {
+      //       return done(err);
+      //     }
+      //   });
   }
 
-    // var users = [
-    //  //        { _id: "123", username: "alice", password: "alice", firstName: "Alice", lastName: "Wonderland" },
-    //  //        { _id: "234", username: "bob", password: "bob", firstName: "Bob", lastName: "Marley" },
-    //  //        { _id: "345", username: "charly", password: "charly", firstName: "Charly", lastName: "Garcia" },
-    //  //        { _id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose", lastName: "Annunzi" }
-    //  //    ];
+  // var users = [
+  //  //        { _id: "123", username: "alice", password: "alice", firstName: "Alice", lastName: "Wonderland" },
+  //  //        { _id: "234", username: "bob", password: "bob", firstName: "Bob", lastName: "Marley" },
+  //  //        { _id: "345", username: "charly", password: "charly", firstName: "Charly", lastName: "Garcia" },
+  //  //        { _id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose", lastName: "Annunzi" }
+  //  //    ];
 
 
-    function createUser(req, res) {
-      var user = _.pick(req.body, ['username', 'password', 'firstName', 'lastName', 'email', 'phone']);
-      userModel.createUser(user).then(
-        function (user) {
-          if (user) {
-            res.json(user);
-          } else {
-            res.status(400).send("Something went wrong");
-          }
-        },
-        function (err) {
-          res.status(400).send(err);
+  function createUser(req, res) {
+    var user = _.pick(req.body, ['username', 'password', 'firstName', 'lastName', 'email', 'phone']);
+    userModel.createUser(user).then(
+      function (user) {
+        if (user) {
+          res.json(user);
+        } else {
+          res.status(400).send("Something went wrong");
         }
-      );
-    };
-
-    function findUser(req, res) {
-      if (req.query["password"]) {
-        findUserByCredentials(req, res);
-      } else {
-        findUserByUsername(req, res);
+      },
+      function (err) {
+        res.status(400).send(err);
       }
+    );
+  };
+
+  function findUser(req, res) {
+    if (req.query["password"]) {
+      findUserByCredentials(req, res);
+    } else {
+      findUserByUsername(req, res);
     }
-
-    function findUserByUsername(req, res) {
-      var username = req.query["username"];
-      userModel.findUserByUsername(username).then(
-        function (user) {
-          if (user) {
-            res.status(200).json(user);
-          } else {
-            res.status(200).send({});
-          }
-        },
-        function (err) {
-          res.status(400).send(err);
-        }
-      );
-    };
-
-    function findUserByCredentials(req, res) {
-      var username = req.query["username"];
-      var password = req.query["password"];
-      userModel.findUserByCredentials(username, password).then(
-        function (user) {
-          if (user) {
-            res.json(user);
-          } else {
-            res.status(400).send("Cannot find user with the username and password");
-          }
-        },
-        function (err) {
-          res.status(400).send(err);
-        }
-      );
-    }
-
-    function findUserById(req, res) {
-      var userId = req.params["userId"];
-      userModel.findUserById(userId).then(
-        function (user) {
-          if (user) {
-            res.json(user);
-          } else {
-            res.status(400).send("Cannot find user with the userID");
-          }
-        },
-        function (err) {
-          res.status(400).send(err);
-        }
-      );
-    };
-
-    function updateUser(req, res) {
-      var userId = req.params["userId"];
-      var updatedUser = req.body;
-      userModel.updateUser(userId, updatedUser).then(
-        function (user) {
-          if (user) {
-            res.json(user);
-          } else {
-            res.status(400).send("Cannot find user")
-          }
-        },
-        function (err) {
-          res.status(400).send(err);
-        }
-      );
-    };
-
-    function deleteUser(req, res) {
-      var userId = req.params["userId"];
-      userModel.deleteUser(userId).then(
-        function (stats) {
-          res.json(stats);
-        },
-        function (err) {
-          res.status(400).send(err);
-        }
-      );
-    };
-
   }
+
+  function findUserByUsername(req, res) {
+    var username = req.query["username"];
+    userModel.findUserByUsername(username).then(
+      function (user) {
+        if (user) {
+          res.status(200).json(user);
+        } else {
+          res.status(200).send({});
+        }
+      },
+      function (err) {
+        res.status(400).send(err);
+      }
+    );
+  };
+
+  function findUserByCredentials(req, res) {
+    var username = req.query["username"];
+    var password = req.query["password"];
+    userModel.findUserByCredentials(username, password).then(
+      function (user) {
+        if (user) {
+          res.json(user);
+        } else {
+          res.status(400).send("Cannot find user with the username and password");
+        }
+      },
+      function (err) {
+        res.status(400).send(err);
+      }
+    );
+  }
+
+  function findUserById(req, res) {
+    var userId = req.params["userId"];
+    userModel.findUserById(userId).then(
+      function (user) {
+        if (user) {
+          res.json(user);
+        } else {
+          res.status(400).send("Cannot find user with the userID");
+        }
+      },
+      function (err) {
+        res.status(400).send(err);
+      }
+    );
+  };
+
+  function updateUser(req, res) {
+    var userId = req.params["userId"];
+    var updatedUser = req.body;
+    userModel.updateUser(userId, updatedUser).then(
+      function (user) {
+        if (user) {
+          res.json(user);
+        } else {
+          res.status(400).send("Cannot find user")
+        }
+      },
+      function (err) {
+        res.status(400).send(err);
+      }
+    );
+  };
+
+  function deleteUser(req, res) {
+    var userId = req.params["userId"];
+    userModel.deleteUser(userId).then(
+      function (stats) {
+        res.json(stats);
+      },
+      function (err) {
+        res.status(400).send(err);
+      }
+    );
+  };
+
+}
